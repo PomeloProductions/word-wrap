@@ -8,14 +8,16 @@
 
 namespace MagicTimeline;
 
+use DateTime;
+
 
 /**
  * Base class for building models.
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  */
-abstract class BaseModel implements ModelInterface
-{
+abstract class BaseModel implements ModelInterface {
+
     /**
      * Get the column used as the primary key, defaults to 'id'.
      *
@@ -30,14 +32,18 @@ abstract class BaseModel implements ModelInterface
      * Constructor.
      *
      * @param array $properties
+     * @param array $datetimeFields all the fields that will need to be auto converted to DateTime
      */
-    public function __construct(array $properties = array())
+    public function __construct(array $properties = array(), array $datetimeFields = array())
     {
         $model_props = $this->properties();
         $properties  = array_intersect_key($properties, $model_props);
 
         foreach ($properties as $property => $value) {
-            $this->{$property} = maybe_unserialize($value);
+            if(in_array($property, $datetimeFields))
+                $this->{$property} = new DateTime($value);
+            else
+                $this->{$property} = maybe_unserialize($value);
         }
     }
 
