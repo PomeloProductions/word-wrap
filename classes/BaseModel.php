@@ -53,10 +53,10 @@ abstract class BaseModel implements ModelInterface {
         $properties  = array_intersect_key($properties, $model_props);
 
         foreach ($properties as $property => $value) {
-            if(in_array($property, $datetimeFields))
-                $this->{$property} = new DateTime($value);
-            else
+            if(!in_array($property, $datetimeFields))
                 $this->{$property} = maybe_unserialize($value);
+            elseif($value && $value != null)
+                $this->{$property} = new DateTime($value);
         }
     }
 
