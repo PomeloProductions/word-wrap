@@ -18,8 +18,7 @@
     along with Contact Form to Database Extension.
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
-
-include_once('MagicTimeline_ShortCodeLoader.php');
+namespace MagicTimeline;
 
 /**
  * Adapted from this excellent article:
@@ -28,7 +27,7 @@ include_once('MagicTimeline_ShortCodeLoader.php');
  * The idea is you have a shortcode that needs a script loaded, but you only
  * want to load it if the shortcode is actually called.
  */
-abstract class MagicTimeline_ShortCodeScriptLoader extends MagicTimeline_ShortCodeLoader {
+abstract class ShortCodeScriptLoader extends ShortCodeLoader {
 
     var $doAddScript;
 

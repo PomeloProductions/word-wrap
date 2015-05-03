@@ -19,10 +19,11 @@
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
 
+use MagicTimeline\Plugin;
+
 function MagicTimeline_init($file) {
 
-    require_once('MagicTimeline_Plugin.php');
-    $aPlugin = new MagicTimeline_Plugin();
+    $aPlugin = new Plugin();
 
     // Install the plugin
     // NOTE: this file gets run each time you *activate* the plugin.

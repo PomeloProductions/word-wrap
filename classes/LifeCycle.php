@@ -19,9 +19,9 @@
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-include_once('MagicTimeline_InstallIndicator.php');
+namespace MagicTimeline;
 
-class MagicTimeline_LifeCycle extends MagicTimeline_InstallIndicator {
+class LifeCycle extends InstallIndicator {
 
     public function install() {
 

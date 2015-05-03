@@ -1,9 +1,7 @@
 <?php
+namespace MagicTimeline;
 
-
-include_once('MagicTimeline_LifeCycle.php');
-
-class MagicTimeline_Plugin extends MagicTimeline_LifeCycle {
+class Plugin extends LifeCycle {
 
     /**
      * See: http://plugin.michael-simpson.com/?page_id=31

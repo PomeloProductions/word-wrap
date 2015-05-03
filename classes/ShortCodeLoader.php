@@ -18,8 +18,9 @@
     along with Contact Form to Database Extension.
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
+namespace MagicTimeline;
 
-abstract class MagicTimeline_ShortCodeLoader {
+abstract class ShortCodeLoader {
 
     /**
      * @param  $shortcodeName mixed either string name of the shortcode

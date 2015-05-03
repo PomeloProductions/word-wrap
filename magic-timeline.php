@@ -9,6 +9,16 @@
    License: GPLv3
   */
 
+namespace MagicTimeline;
+
+function autoload($className) {
+    $fileName = str_replace("MagicTimeline\\", "", $className);
+    if(file_exists(__DIR__ . "/classes/" . $fileName . ".php"))
+        require(__DIR__ . "/classes/" . $fileName . ".php");
+}
+
+spl_autoload_register(__NAMESPACE__ . "\\autoload");
+
 /*
     "WordPress Plugin Template" Copyright (C) 2015 Michael Simpson  (email : michael.d.simpson@gmail.com)
 

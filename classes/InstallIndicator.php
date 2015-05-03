@@ -18,10 +18,9 @@
     along with Contact Form to Database Extension.
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
+namespace MagicTimeline;
 
-include_once('MagicTimeline_OptionsManager.php');
-
-class MagicTimeline_InstallIndicator extends MagicTimeline_OptionsManager {
+class InstallIndicator extends OptionsManager {
 
     const optionInstalled = '_installed';
     const optionVersion = '_version';
