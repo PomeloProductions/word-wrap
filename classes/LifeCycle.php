@@ -168,7 +168,7 @@ class LifeCycle extends InstallIndicator {
      * The plugin prefix is lower-cases as a best practice that all DB table names are lower case to
      * avoid issues on some platforms
      */
-    protected function prefixTableName($name) {
+    public function prefixTableName($name) {
         global $wpdb;
         return $wpdb->prefix .  strtolower($this->prefix($name));
     }

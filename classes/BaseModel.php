@@ -28,6 +28,19 @@ abstract class BaseModel implements ModelInterface {
         return 'id';
     }
 
+    public static function install_table(LifeCycle $plugin) {
+        $SQL = "CREATE TABLE IF NOT EXISTS `" . $plugin->prefixTableName( static::get_table() ). "` (";
+        $SQL.= "`" . static::get_primary_key() . "` int(11) unsigned NOT NULL AUTO_INCREMENT,";
+        foreach(static::get_fields() as $key => $value) {
+            $SQL.= "`" . $key . "` " . $value. ",";
+        }
+        $SQL.= "PRIMARY KEY (`" . static::get_primary_key(). "`)";
+        $SQL.= ") ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+        global $wpdb;
+        $wpdb->query($SQL);
+    }
+
     /**
      * Constructor.
      *
