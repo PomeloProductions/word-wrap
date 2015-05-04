@@ -39,7 +39,7 @@ spl_autoload_register(__NAMESPACE__ . "\\autoload");
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-$MagicTimeline_minimalRequiredPhpVersion = '5.4';
+$WordWrap_minimalRequiredPhpVersion = '5.4';
 
 /**
  * Check the PHP version and give a useful error message if the user's version is less than the required version
@@ -47,10 +47,10 @@ $MagicTimeline_minimalRequiredPhpVersion = '5.4';
  * an error message on the Admin page
  */
 function WordWrap_noticePhpVersionWrong() {
-    global $MagicTimeline_minimalRequiredPhpVersion;
+    global $WordWrap_minimalRequiredPhpVersion;
     echo '<div class="updated fade">' .
       __('Error: plugin "Word Wrap" requires a newer version of PHP to be running.',  'word-wrap').
-            '<br/>' . __('Minimal version of PHP required: ', 'word-wrap') . '<strong>' . $MagicTimeline_minimalRequiredPhpVersion . '</strong>' .
+            '<br/>' . __('Minimal version of PHP required: ', 'word-wrap') . '<strong>' . $WordWrap_minimalRequiredPhpVersion . '</strong>' .
             '<br/>' . __('Your server\'s PHP version: ', 'word-wrap') . '<strong>' . phpversion() . '</strong>' .
          '</div>';
 }
