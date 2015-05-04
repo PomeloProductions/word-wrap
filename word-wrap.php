@@ -1,11 +1,11 @@
 <?php
 /*
-   Plugin Name: Magic Timeline
-   Plugin URI: http://wordpress.org/extend/plugins/magic-timeline/
+   Plugin Name: Word Wrap
+   Plugin URI: http://wordpress.org/extend/plugins/word-wrap/
    Version: 0.1
    Author: Axolotl Interactive
    Description: 
-   Text Domain: magic-timeline
+   Text Domain: word-wrap
    License: GPLv3
   */
 
