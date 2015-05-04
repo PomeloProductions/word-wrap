@@ -39,14 +39,14 @@ spl_autoload_register(__NAMESPACE__ . "\\autoload");
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-$MagicTimeline_minimalRequiredPhpVersion = '5.0';
+$MagicTimeline_minimalRequiredPhpVersion = '5.4';
 
 /**
  * Check the PHP version and give a useful error message if the user's version is less than the required version
  * @return boolean true if version check passed. If false, triggers an error which WP will handle, by displaying
  * an error message on the Admin page
  */
-function MagicTimeline_noticePhpVersionWrong() {
+function WordWrap_noticePhpVersionWrong() {
     global $MagicTimeline_minimalRequiredPhpVersion;
     echo '<div class="updated fade">' .
       __('Error: plugin "Magic Timeline" requires a newer version of PHP to be running.',  'magic-timeline').
@@ -56,7 +56,7 @@ function MagicTimeline_noticePhpVersionWrong() {
 }
 
 
-function MagicTimeline_PhpVersionCheck() {
+function WordWrap_PhpVersionCheck() {
     global $MagicTimeline_minimalRequiredPhpVersion;
     if (version_compare(phpversion(), $MagicTimeline_minimalRequiredPhpVersion) < 0) {
         add_action('admin_notices', 'MagicTimeline_noticePhpVersionWrong');
@@ -73,7 +73,7 @@ function MagicTimeline_PhpVersionCheck() {
  *      http://www.wdmac.com/how-to-create-a-po-language-translation#more-631
  * @return void
  */
-function MagicTimeline_i18n_init() {
+function WordWrap_i18n_init() {
     $pluginDir = dirname(plugin_basename(__FILE__));
     load_plugin_textdomain('magic-timeline', false, $pluginDir . '/languages/');
 }
@@ -84,13 +84,13 @@ function MagicTimeline_i18n_init() {
 /////////////////////////////////
 
 // First initialize i18n
-MagicTimeline_i18n_init();
+WordWrap_i18n_init();
 
 
 // Next, run the version check.
 // If it is successful, continue with initialization for this plugin
-if (MagicTimeline_PhpVersionCheck()) {
+if (WordWrap_PhpVersionCheck()) {
     // Only load and run the init function if we know PHP version can parse it
-    include_once('magic-timeline_init.php');
+    include_once('word-wrap_init.php');
     MagicTimeline_init(__FILE__);
 }

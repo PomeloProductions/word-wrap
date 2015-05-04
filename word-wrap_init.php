@@ -19,9 +19,9 @@
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-use MagicTimeline\Plugin;
+use WordWrap\Plugin;
 
-function MagicTimeline_init($file) {
+function WordWrap_init($file) {
 
     $aPlugin = new Plugin();
 
