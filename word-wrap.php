@@ -49,17 +49,17 @@ $MagicTimeline_minimalRequiredPhpVersion = '5.4';
 function WordWrap_noticePhpVersionWrong() {
     global $MagicTimeline_minimalRequiredPhpVersion;
     echo '<div class="updated fade">' .
-      __('Error: plugin "Magic Timeline" requires a newer version of PHP to be running.',  'magic-timeline').
-            '<br/>' . __('Minimal version of PHP required: ', 'magic-timeline') . '<strong>' . $MagicTimeline_minimalRequiredPhpVersion . '</strong>' .
-            '<br/>' . __('Your server\'s PHP version: ', 'magic-timeline') . '<strong>' . phpversion() . '</strong>' .
+      __('Error: plugin "Word Wrap" requires a newer version of PHP to be running.',  'word-wrap').
+            '<br/>' . __('Minimal version of PHP required: ', 'word-wrap') . '<strong>' . $MagicTimeline_minimalRequiredPhpVersion . '</strong>' .
+            '<br/>' . __('Your server\'s PHP version: ', 'word-wrap') . '<strong>' . phpversion() . '</strong>' .
          '</div>';
 }
 
 
 function WordWrap_PhpVersionCheck() {
-    global $MagicTimeline_minimalRequiredPhpVersion;
-    if (version_compare(phpversion(), $MagicTimeline_minimalRequiredPhpVersion) < 0) {
-        add_action('admin_notices', 'MagicTimeline_noticePhpVersionWrong');
+    global $WordWrap_minimalRequiredPhpVersion;
+    if (version_compare(phpversion(), $WordWrap_minimalRequiredPhpVersion) < 0) {
+        add_action('admin_notices', 'WordWrap_noticePhpVersionWrong');
         return false;
     }
     return true;
@@ -75,7 +75,7 @@ function WordWrap_PhpVersionCheck() {
  */
 function WordWrap_i18n_init() {
     $pluginDir = dirname(plugin_basename(__FILE__));
-    load_plugin_textdomain('magic-timeline', false, $pluginDir . '/languages/');
+    load_plugin_textdomain('word-wrap', false, $pluginDir . '/languages/');
 }
 
 
