@@ -92,5 +92,5 @@ WordWrap_i18n_init();
 if (WordWrap_PhpVersionCheck()) {
     // Only load and run the init function if we know PHP version can parse it
     include_once('word-wrap_init.php');
-    MagicTimeline_init(__FILE__);
+    WordWrap_init(__FILE__);
 }
