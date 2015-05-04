@@ -19,9 +19,10 @@
     If not, see http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-use WordWrap\Plugin;
 
-function WordWrap_init($file) {
+function WordWrap_init($pluginDirectory) {
+
+
 
     $aPlugin = new Plugin();
 
