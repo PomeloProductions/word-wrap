@@ -9,10 +9,10 @@
    License: GPLv3
   */
 
-namespace MagicTimeline;
+namespace WordWrap;
 
 function autoload($className) {
-    $fileName = str_replace("MagicTimeline\\", "", $className);
+    $fileName = str_replace("WordWrap\\", "", $className);
     if(file_exists(__DIR__ . "/classes/" . $fileName . ".php"))
         require(__DIR__ . "/classes/" . $fileName . ".php");
 }

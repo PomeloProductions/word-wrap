@@ -1,5 +1,5 @@
 <?php
-namespace MagicTimeline;
+namespace WordWrap;
 
 class Plugin extends LifeCycle {
 

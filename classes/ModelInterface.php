@@ -6,7 +6,7 @@
  * Time: 2:55 AM
  */
 
-namespace MagicTimeline;
+namespace WordWrap;
 
 /**
  * Interface for ORM models.

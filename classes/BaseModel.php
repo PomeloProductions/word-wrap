@@ -6,7 +6,7 @@
  * Time: 2:52 AM
  */
 
-namespace MagicTimeline;
+namespace WordWrap;
 
 use DateTime;
 
