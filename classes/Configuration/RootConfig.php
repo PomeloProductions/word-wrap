@@ -15,6 +15,11 @@ namespace WordWrap\Configuration;
 class Root extends Base{
 
     /**
+     * @var Root
+     */
+    public static $instance;
+
+    /**
      * @var string the name of this plugin
      */
     public $pluginName;
@@ -28,4 +33,6 @@ class Root extends Base{
      * @var LifeCycle the configuration that details the lifecycle declaration of this plugin
      */
     public $LifeCycle;
+
+
 }
