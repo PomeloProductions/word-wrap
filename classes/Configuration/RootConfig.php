@@ -12,7 +12,7 @@ namespace WordWrap\Configuration;
  * Class Root the root of all info.json files
  * @package WordWrap\Configuration
  */
-class Root extends Base{
+class RootConfig extends Base{
 
     /**
      * @var Root
