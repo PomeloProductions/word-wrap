@@ -20,11 +20,17 @@
 */
 
 
+use WordWrap\Configuration\ConfigFactory;
+use WordWrap\Configuration\RootConfig;
+
 function WordWrap_init($pluginDirectory) {
 
 
+    RootConfig::$instance =  ConfigFactory::inflate($pluginDirectory);
 
-    $aPlugin = new Plugin();
+    $lifeCycleClass = RootConfig::$instance->rootNameSpace. "\\" . RootConfig::$instance->LifeCycle->className;
+
+    $aPlugin = new $lifeCycleClass;
 
     // Install the plugin
     // NOTE: this file gets run each time you *activate* the plugin.
