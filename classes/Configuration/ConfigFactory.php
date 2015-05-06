@@ -5,18 +5,17 @@
  * Date: 5/3/15
  * Time: 10:27 PM
  */
-
 namespace WordWrap\Configuration;
 
 use \Exception;
 /**
  * This class is what will handle the parsing of the configuration json, and storing of it
  *
- * Class Factory
+ * Class ConfigFactory
  * @package WordWrap\Configuration
  */
 
-class Factory {
+class ConfigFactory {
 
 
     /**
@@ -26,7 +25,7 @@ class Factory {
      * @return RootConfig We will be constructing an instance of our Root configuration and returning it
      */
     static function inflate($pluginName) {
-        $path = get_home_path() . "wp-content/plugins/" . $pluginName . "/info.json";
+        $path = ABSPATH . "wp-content/plugins/" . $pluginName . "/info.json";
         if(!file_exists($path))
             throw new Exception("Unable to find plugin configuration. Please make sure that you have a info.json included in the root of your plugin");
 
