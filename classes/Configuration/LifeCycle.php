@@ -9,7 +9,7 @@
 namespace WordWrap\Configuration;
 
 
-class LifeCycle {
+class LifeCycle extends Base {
 
     /**
      * @var string the class name of this plugins LifeCycle
