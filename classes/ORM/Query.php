@@ -6,7 +6,7 @@
  * Time: 2:57 AM
  */
 
-namespace WordWrap;
+namespace WordWrap\ORM;
 
 
 /**

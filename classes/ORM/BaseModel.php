@@ -6,9 +6,10 @@
  * Time: 2:52 AM
  */
 
-namespace WordWrap;
+namespace WordWrap\ORM;
 
 use DateTime;
+use WordWrap\LifeCycle;
 
 
 /**

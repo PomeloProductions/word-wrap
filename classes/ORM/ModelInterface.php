@@ -6,7 +6,7 @@
  * Time: 2:55 AM
  */
 
-namespace WordWrap;
+namespace WordWrap\ORM;
 
 /**
  * Interface for ORM models.
