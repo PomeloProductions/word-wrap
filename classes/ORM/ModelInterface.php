@@ -13,8 +13,7 @@ namespace WordWrap\ORM;
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  */
-interface ModelInterface
-{
+interface ModelInterface {
     /**
      * Overwrite this in your concrete class. Returns the table name used to
      * store models of this class.

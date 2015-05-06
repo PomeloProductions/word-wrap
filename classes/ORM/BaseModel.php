@@ -24,8 +24,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return string
      */
-    public static function get_primary_key()
-    {
+    public static function get_primary_key() {
         return 'id';
     }
 
@@ -48,8 +47,7 @@ abstract class BaseModel implements ModelInterface {
      * @param array $properties
      * @param array $datetimeFields all the fields that will need to be auto converted to DateTime
      */
-    public function __construct(array $properties = array(), array $datetimeFields = array())
-    {
+    public function __construct(array $properties = array(), array $datetimeFields = array()) {
         $model_props = $this->properties();
         $properties  = array_intersect_key($properties, $model_props);
 
@@ -68,8 +66,7 @@ abstract class BaseModel implements ModelInterface {
      * @param  array  $arguments
      * @return mixed
      */
-    public function __call($function, $arguments)
-    {
+    public function __call($function, $arguments) {
         // Getters following the pattern 'get_{$property}'
         if (substr($function, 0, 4) == 'get_') {
             $model_props = $this->properties();
@@ -96,8 +93,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return integer
      */
-    public function primary_key()
-    {
+    public function primary_key() {
         return $this->{static::get_primary_key()};
     }
 
@@ -106,8 +102,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return array
      */
-    public function to_array()
-    {
+    public function to_array() {
         return $this->properties();
     }
 
@@ -117,8 +112,7 @@ abstract class BaseModel implements ModelInterface {
      * @param  array $props
      * @return array
      */
-    public function flatten_props($props)
-    {
+    public function flatten_props($props) {
         foreach ($props as $property => $value) {
             if (is_object($value) && get_class($value) == 'DateTime') {
                 $props[$property] = $value->format('Y-m-d H:i:s');
@@ -138,8 +132,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return array
      */
-    public function properties()
-    {
+    public function properties() {
         return get_object_vars($this);
     }
 
@@ -150,8 +143,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return integer
      */
-    public function save()
-    {
+    public function save() {
         global $wpdb;
 
         // Get the model's properties
@@ -177,8 +169,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return self
      */
-    public static function create($properties)
-    {
+    public static function create($properties) {
         return new static($properties);
     }
 
@@ -188,8 +179,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return boolean
      */
-    public function delete()
-    {
+    public function delete() {
         global $wpdb;
 
         return $wpdb->delete(static::get_table(), array(static::get_primary_key() => $this->{static::get_primary_key()}));
@@ -202,8 +192,7 @@ abstract class BaseModel implements ModelInterface {
      * @param  string $value
      * @return false|self
      */
-    public static function find_one_by($property, $value)
-    {
+    public static function find_one_by($property, $value) {
         global $wpdb;
 
         // Escape the value
@@ -225,8 +214,7 @@ abstract class BaseModel implements ModelInterface {
      * @param  integer $id
      * @return false|self
      */
-    public static function find_one($id)
-    {
+    public static function find_one($id) {
         return static::find_one_by(static::get_primary_key(), (int) $id);
     }
 
@@ -235,8 +223,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return Query
      */
-    public static function query()
-    {
+    public static function query() {
         $query = new Query(get_called_class());
         $query->set_searchable_fields(static::get_searchable_fields());
         $query->set_primary_key(static::get_primary_key());
@@ -249,8 +236,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return array
      */
-    public static function all()
-    {
+    public static function all() {
         global $wpdb;
 
         // Get the table name
@@ -270,8 +256,7 @@ abstract class BaseModel implements ModelInterface {
      * Return configured table prefix.
      * @return string
      */
-    public function get_table_prefix()
-    {
+    public function get_table_prefix() {
         global $wpdb;
         return $wpdb->prefix;
     }

@@ -15,8 +15,7 @@ namespace WordWrap\ORM;
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  */
-class Query
-{
+class Query {
     /**
      * @var string
      */
@@ -75,8 +74,7 @@ class Query
     /**
      * @param string $model
      */
-    public function __construct($model)
-    {
+    public function __construct($model) {
         $this->model = $model;
     }
 
@@ -85,8 +83,7 @@ class Query
      *
      * @return string
      */
-    public function __toString()
-    {
+    public function __toString() {
         return $this->compose_query();
     }
 
@@ -95,8 +92,7 @@ class Query
      *
      * @param  array $fields
      */
-    public function set_searchable_fields(array $fields)
-    {
+    public function set_searchable_fields(array $fields) {
         $this->search_fields = $fields;
     }
 
@@ -105,8 +101,7 @@ class Query
      *
      * @param string $primary_key
      */
-    public function set_primary_key($primary_key)
-    {
+    public function set_primary_key($primary_key) {
         $this->primary_key = $primary_key;
         $this->sort_by     = $primary_key;
     }
@@ -117,8 +112,7 @@ class Query
      * @param  integer $limit
      * @return self
      */
-    public function limit($limit)
-    {
+    public function limit($limit) {
         $this->limit = (int) $limit;
 
         return $this;
@@ -130,8 +124,7 @@ class Query
      * @param  integer $offset
      * @return self
      */
-    public function offset($offset)
-    {
+    public function offset($offset) {
         $this->offset = (int) $offset;
 
         return $this;
@@ -143,8 +136,7 @@ class Query
      * @param  string $sort_by
      * @return self
      */
-    public function sort_by($sort_by)
-    {
+    public function sort_by($sort_by) {
         $this->sort_by = $sort_by;
 
         return $this;
@@ -156,8 +148,7 @@ class Query
      * @param  string $order
      * @return self
      */
-    public function order($order)
-    {
+    public function order($order) {
         $this->order = $order;
 
         return $this;
@@ -170,8 +161,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where($column, $value)
-    {
+    public function where($column, $value) {
         $this->where[] = array('type' => 'where', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -184,8 +174,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_not($column, $value)
-    {
+    public function where_not($column, $value) {
         $this->where[] = array('type' => 'not', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -198,8 +187,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_like($column, $value)
-    {
+    public function where_like($column, $value) {
         $this->where[] = array('type' => 'like', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -212,8 +200,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_not_like($column, $value)
-    {
+    public function where_not_like($column, $value) {
         $this->where[] = array('type' => 'not_like', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -226,8 +213,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_lt($column, $value)
-    {
+    public function where_lt($column, $value) {
         $this->where[] = array('type' => 'lt', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -240,8 +226,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_lte($column, $value)
-    {
+    public function where_lte($column, $value) {
         $this->where[] = array('type' => 'lte', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -254,8 +239,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_gt($column, $value)
-    {
+    public function where_gt($column, $value) {
         $this->where[] = array('type' => 'gt', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -268,8 +252,7 @@ class Query
      * @param  string $value
      * @return self
      */
-    public function where_gte($column, $value)
-    {
+    public function where_gte($column, $value) {
         $this->where[] = array('type' => 'gte', 'column' => $column, 'value' => $value);
 
         return $this;
@@ -282,8 +265,7 @@ class Query
      * @param  array  $value
      * @return self
      */
-    public function where_in($column, array $in)
-    {
+    public function where_in($column, array $in) {
         $this->where[] = array('type' => 'in', 'column' => $column, 'value' => $in);
 
         return $this;
@@ -296,8 +278,7 @@ class Query
      * @param  array  $value
      * @return self
      */
-    public function where_not_in($column, array $not_in)
-    {
+    public function where_not_in($column, array $not_in) {
         $this->where[] = array('type' => 'not_in', 'column' => $column, 'value' => $not_in);
 
         return $this;
@@ -310,8 +291,7 @@ class Query
      * @param  array $where
      * @return self
      */
-    public function where_any(array $where)
-    {
+    public function where_any(array $where) {
         $this->where[] = array('type' => 'any', 'where' => $where);
 
         return $this;
@@ -324,8 +304,7 @@ class Query
      * @param  array $where
      * @return self
      */
-    public function where_all(array $where)
-    {
+    public function where_all(array $where) {
         $this->where[] = array('type' => 'all', 'where' => $where);
 
         return $this;
@@ -337,8 +316,7 @@ class Query
      * @param  string $search_term
      * @return self
      */
-    public function search($search_term)
-    {
+    public function search($search_term) {
         $this->search_term = $search_term;
 
         return $this;
@@ -350,8 +328,7 @@ class Query
      *
      * @return integer
      */
-    public function total_count()
-    {
+    public function total_count() {
         return $this->find(true);
     }
 
@@ -361,8 +338,7 @@ class Query
      * @param  boolean $only_count Whether to only return the row count
      * @return array
      */
-    public function find($only_count = false)
-    {
+    public function find($only_count = false) {
         global $wpdb;
 
         $model = $this->model;
@@ -389,8 +365,7 @@ class Query
      * @param  boolean $only_count Whether to only return the row count
      * @return string
      */
-    public function compose_query($only_count = false)
-    {
+    public function compose_query($only_count = false) {
         $model  = $this->model;
         $table  = $model::get_table();
         $where  = '';
