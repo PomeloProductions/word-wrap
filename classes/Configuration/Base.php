@@ -25,7 +25,8 @@ abstract class Base {
     public function __construct($data) {
         foreach($data as $key => $value) {
             if(is_array($value)) {
-                $this->{$key} = new $key($value);
+                $className = "WordWrap\\Configuration\\".$key;
+                $this->{$key} = new $className($value);
             }
             else {
                 $this->{$key} = $value;
