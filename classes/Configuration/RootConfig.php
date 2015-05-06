@@ -9,13 +9,13 @@
 namespace WordWrap\Configuration;
 
 /**
- * Class Root the root of all info.json files
+ * Class RootConfig the root of all info.json files
  * @package WordWrap\Configuration
  */
 class RootConfig extends Base{
 
     /**
-     * @var Root
+     * @var RootConfig
      */
     public static $instance;
 
