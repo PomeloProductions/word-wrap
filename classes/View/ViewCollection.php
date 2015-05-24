@@ -6,6 +6,8 @@
  * Time: 5:28 PM
  */
 
+namespace WordWrap\View;
+
 class ViewCollection {
 
 }
