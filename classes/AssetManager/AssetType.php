@@ -15,19 +15,32 @@ abstract class AssetType {
      * @var string the location of all the assets of this asset type
      */
     private $assetLocation;
+    /**
+     * @var string the extension of these assets
+     */
+    private $fileExtension;
 
     /**
      * @param $assetLocation string the locations of the assets for this type
+     * @param $fileExtension string the extension of these assets
      */
-    function __construct($assetLocation) {
+    function __construct($assetLocation, $fileExtension) {
         $this->assetLocation = $assetLocation;
+        $this->fileExtension = $fileExtension;
     }
 
     /**
-     * @return string the locations
+     * @return string the location of all assets for this type
      */
     public function getAssetLocation() {
         return $this->assetLocation;
+    }
+
+    /**
+     * @return string the file extension of all assets of this type
+     */
+    public function getFileExtension() {
+        return $this->fileExtension;
     }
 
     /**
