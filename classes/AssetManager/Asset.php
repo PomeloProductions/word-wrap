@@ -13,52 +13,44 @@ use \Exception;
 class Asset {
 
     /**
-     * @var string the type of assets we will be using
+     * @var string the location where our assets will be
      */
-    protected $assetType;
+    protected $assetLocation;
 
     /**
-     * @var string the root location where all of our assets will be
+     * @var string the file contents the asset contained
      */
-    protected $assetLocations;
+    protected $assetContents;
 
-    /**
-     * @var string[][] of all our assets that have been loaded
-     */
-    protected $loadedAssets = [];
+    function __construct($assetLocation) {
+        $this->$assetLocation = $assetLocation;
 
-    function __construct($assetType, $assetLocations) {
-        $this->assetType = $assetType;
-        $this->assetLocations = $assetLocations;
+        $this->inflateAsset();
     }
 
     /**
-     * @param $assetName
-     * @param array $replaceValues
-     * @param null $fileExtension the extension of the files we are looking for, this will default to
+     * loads the asset into memory from the file system
      * @throws Exception if the asset we are looking for is not found
      */
-    public function addAsset($assetName, $replaceValues = [], $fileExtension = null) {
+    protected function inflateAsset() {
+        if(!file_exists($this->assetLocation ))
+            throw new Exception("Unable to find asset at path " . $this->assetLocation);
 
-        $fileExtension = $fileExtension == null ? $this->assetType : $fileExtension;
-        $assetPath = $this->assetLocations . $assetName . "." . $fileExtension;
-        if(!file_exists($assetPath ))
-            throw new Exception("Unable to find asset " . $assetName . " at path " . $assetPath);
-
-        $assetContents = file_get_contents($assetPath);
-        foreach($replaceValues as $key => $value)
-            $assetContents = str_replace('{{' . $key . '}}', $value, $assetContents);
-
-        $this->loadedAssets[] = ['name' => $assetName, "contents" => $assetContents];
+        $this->assetContents = file_get_contents($this->assetLocation);
     }
 
     /**
-     * This will dump all assets out to the browser window
+     * This function will replace all of the values of this assets keys and return the result
+     * @param $placeHolders string[] key values which we are going to replace the contents of
+     * @return string the asset with all keys replaced
      */
-    public function dumpAssets() {
-        foreach($this->loadedAssets as $asset) {
-            echo $asset["contents"];
-        }
+    public function replacePlaceholders($placeHolders) {
+        $processedContents = $this->assetContents;
+
+        foreach($placeHolders as $key => $value)
+            $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
+
+        return $processedContents;
     }
 
 }
