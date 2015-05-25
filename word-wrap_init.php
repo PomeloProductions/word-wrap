@@ -49,13 +49,10 @@ function WordWrap_init($pluginDirectory) {
     // Add callbacks to hooks
     $aPlugin->addActionsAndFilters();
 
-    if (!$file) {
-        $file = __FILE__;
-    }
     // Register the Plugin Activation Hook
-    register_activation_hook($file, array(&$aPlugin, 'activate'));
+    register_activation_hook(__FILE__, array(&$aPlugin, 'activate'));
 
 
     // Register the Plugin Deactivation Hook
-    register_deactivation_hook($file, array(&$aPlugin, 'deactivate'));
+    register_deactivation_hook(__FILE__, array(&$aPlugin, 'deactivate'));
 }
