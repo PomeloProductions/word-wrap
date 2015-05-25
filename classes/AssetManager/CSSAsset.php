@@ -9,16 +9,26 @@
 namespace WordWrap\AssetManager;
 
 
-class CSSAsset extends Asset{
+class CSSAsset extends AssetType{
 
+    /**
+     * @param string $assetLocations the location where all css assets will be located
+     */
     public function __construct($assetLocations) {
-        parent::__construct("css", $assetLocations);
+        parent::__construct($assetLocations, "css");
     }
 
-    public function dumpAssets() {
+    /**
+     * We will need to echo out an opening css tag here
+     */
+    public function onPreDump() {
         echo '<style type="text/css">';
-        parent::dumpAssets();
+    }
+
+    /**
+     * We will need to echo out a closing css tag here
+     */
+    public function onPostDump(){
         echo '</style>';
     }
-
 }
