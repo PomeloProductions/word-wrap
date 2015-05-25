@@ -38,7 +38,7 @@ class View {
 
         $this->lifeCycle->assetManager->loadAsset("html", $templateName);
 
-        $this->$template = $this->lifeCycle->assetManager->getAsset("html", $templateName);
+        $this->template = $this->lifeCycle->assetManager->getAsset("html", $templateName);
 
         $this->templateVars = [];
     }
