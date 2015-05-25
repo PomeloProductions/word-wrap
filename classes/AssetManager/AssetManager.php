@@ -15,12 +15,12 @@ class AssetManager {
 
 
     /**
-     * @var AssetType[string] all asset types that we have loaded into our application
+     * @var AssetType[] all asset types that we have loaded into our application
      */
     private $assetTypes;
 
     /**
-     * @var Asset[string][string] all assets that have been loaded.
+     * @var Asset[][] all assets that have been loaded.
      *                      The assetType is the first key.
      *                      The assetName is the second key.
      */
@@ -56,14 +56,24 @@ class AssetManager {
                     throw new Exception("Unable to register type. You must either use one of the predefined asset types or pass in your own asset type object");
             }
         }
+        $this->assets[$assetType] = [];
         $this->assetTypes[$assetType] = $assetTypeObject;
     }
 
     /**
-     * @param $assetType
-     * @param $assetName
+     * @param $assetType string
+     * @param $assetName string
+     * @throws Exception if we are attempting to load an asset before the asset type is loaded.
      */
     public function loadAsset($assetType, $assetName) {
+        if(!isset($this->assetTypes[$assetType]))
+            throw new Exception("You must register your asset type before you can begin loading assets of that type.");
 
+        if(isset($this->assets[$assetType][$assetName]))
+            return;
+
+        $assetTypeObject = $this->assetTypes[$assetType];
+        $assetPath = $assetTypeObject->getAssetLocation() . $assetName . "." . $assetTypeObject->getFileExtension();
+        $this->assets[$assetType][$assetName] = new Asset($assetPath);
     }
 }
