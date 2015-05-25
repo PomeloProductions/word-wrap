@@ -28,7 +28,7 @@ class LifeCycle extends InstallIndicator {
     /**
      * @var AssetManager the asset manager for this plugin
      */
-    protected $assetManager;
+    public $assetManager;
 
     function __construct() {
         $this->assetManager = new AssetManager();

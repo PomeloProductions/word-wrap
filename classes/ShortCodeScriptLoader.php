@@ -29,7 +29,19 @@ namespace WordWrap;
  */
 abstract class ShortCodeScriptLoader extends ShortCodeLoader {
 
+    /**
+     * @var LifeCycle the lifecycle of the plugin
+     */
+    var $lifeCycle;
+
     var $doAddScript;
+
+    /**
+     * @param LifeCycle $lifeCycle the current running plugin lifecycle
+     */
+    public function __construct(LifeCycle $lifeCycle) {
+        $this->lifeCycle = $lifeCycle;
+    }
 
     public function register($shortcodeName) {
         $this->registerShortcodeToFunction($shortcodeName, 'handleShortcodeWrapper');
