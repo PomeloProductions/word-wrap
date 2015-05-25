@@ -23,7 +23,7 @@ class Asset {
     protected $assetContents;
 
     function __construct($assetLocation) {
-        $this->$assetLocation = $assetLocation;
+        $this->assetLocation = $assetLocation;
 
         $this->inflateAsset();
     }
