@@ -76,4 +76,20 @@ class AssetManager {
         $assetPath = $assetTypeObject->getAssetLocation() . $assetName . "." . $assetTypeObject->getFileExtension();
         $this->assets[$assetType][$assetName] = new Asset($assetPath);
     }
+
+    /**
+     * @param $type string the type of asset we are trying to get
+     * @param $name string the name of the asset we are trying to get
+     * @return Asset The already created asset
+     * @throws Exception if we try to get an asset before we load it
+     */
+    public function getAsset($type, $name) {
+        if(!isset($this->assetTypes[$type]))
+            throw new Exception("You must register and load your asset before you can get it.");
+
+        if(!isset($this->assets[$type][$name]))
+            throw new Exception("You must load your asset before you can get it.");
+
+        return $this->assets[$type][$name];
+    }
 }
