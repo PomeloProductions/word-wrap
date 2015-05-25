@@ -22,7 +22,7 @@ class View {
     /**
      * @var Asset the template this view uses
      */
-    private $templateContent;
+    private $template;
 
     /**
      * @var string[] all template variables this view will use
@@ -38,7 +38,7 @@ class View {
 
         $this->lifeCycle->assetManager->loadAsset("html", $templateName);
 
-        $this->templateContent = $this->lifeCycle->assetManager->getAsset("html", $templateName);
+        $this->$template = $this->lifeCycle->assetManager->getAsset("html", $templateName);
 
         $this->templateVars = [];
     }
@@ -51,7 +51,15 @@ class View {
         $this->templateVars[$key] = $value;
     }
 
+    /**
+     * @return string the exported view html
+     */
     public function export() {
+        $processedContents = $this->template->getAssetContents();
 
+        foreach($this->templateVars as $key => $value)
+            $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
+
+        return $processedContents;
     }
 }
