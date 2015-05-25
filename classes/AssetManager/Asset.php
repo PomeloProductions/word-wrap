@@ -40,17 +40,10 @@ class Asset {
     }
 
     /**
-     * This function will replace all of the values of this assets keys and return the result
-     * @param $placeHolders string[] key values which we are going to replace the contents of
-     * @return string the asset with all keys replaced
+     * @return string the asset contents
      */
-    public function replacePlaceholders($placeHolders) {
-        $processedContents = $this->assetContents;
-
-        foreach($placeHolders as $key => $value)
-            $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
-
-        return $processedContents;
+    public function getAssetContents() {
+        return $this->assetContents;
     }
 
 }
