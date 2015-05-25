@@ -12,10 +12,10 @@ namespace WordWrap\AssetManager;
 class CSSAsset extends AssetType{
 
     /**
-     * @param string $assetLocations the location where all css assets will be located
+     * @param string $assetLocation the location where all css assets will be located
      */
-    public function __construct($assetLocations) {
-        parent::__construct($assetLocations, "css");
+    public function __construct($assetLocation) {
+        parent::__construct($assetLocation, "css");
     }
 
     /**
