@@ -3,7 +3,7 @@
 namespace WordWrap\ORM\Model;
 
 use DateTime;
-use WordPress\ORM\BaseModel;
+use WordWrap\ORM\BaseModel;
 
 /**
  * WordPress user model.

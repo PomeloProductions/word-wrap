@@ -1,6 +1,7 @@
 <?php
 
 namespace WordWrap\ORM\Model;
+use WordWrap\ORM\Query;
 
 /**
  * WordPress page model.
@@ -17,7 +18,7 @@ class Page extends Post
     /**
      * Start a query to find models matching specific criteria.
      *
-     * @return ModelQuery
+     * @return Query
      */
     public static function query()
     {
