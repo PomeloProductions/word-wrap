@@ -21,7 +21,18 @@
 
 namespace WordWrap;
 
+use WordWrap\AssetManager\AssetManager;
+
 class LifeCycle extends InstallIndicator {
+
+    /**
+     * @var AssetManager the asset manager for this plugin
+     */
+    public $assetManager;
+
+    function __construct() {
+        $this->assetManager = new AssetManager();
+    }
 
     public function install() {
 
