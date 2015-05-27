@@ -29,11 +29,4 @@ interface ModelInterface {
      */
     public static function get_searchable_fields();
 
-    /**
-     * Get an array of all fields for this Model with a key and a value
-     * The key should be the name of the column in the database and the value should be the structure of it
-     *
-     * @return array
-     */
-    public static function get_fields();
 }
