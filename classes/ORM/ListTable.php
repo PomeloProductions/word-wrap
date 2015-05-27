@@ -3,6 +3,7 @@
 namespace WordWrap\ORM;
 
 /**
+ * TODO needs to be cleaned into views
  * Base class for displaying a list of items in an HTML table. Intended to mimic
  * the internal class WP_List_Table which was not designed for non-core code to
  * use. The purpose of this class is to allow users to make custom list table
