@@ -1,6 +1,6 @@
 <?php
 
-namespace WordPress\ORM\Model;
+namespace WordWrap\ORM\Model;
 
 /**
  * WordPress page model.

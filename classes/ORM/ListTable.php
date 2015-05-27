@@ -1,6 +1,6 @@
 <?php
 
-namespace WordPress\ORM\Admin;
+namespace WordWrap\ORM;
 
 /**
  * Base class for displaying a list of items in an HTML table. Intended to mimic

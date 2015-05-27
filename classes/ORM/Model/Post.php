@@ -1,16 +1,16 @@
 <?php
 
-namespace WordPress\ORM\Model;
+namespace WordWrap\ORM\Model;
 
 use DateTime;
 use WordPress\ORM\BaseModel;
 
 /**
- * WordPress user model.
+ * WordPress post model.
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  */
-class User extends BaseModel
+class Post extends BaseModel
 {
     /**
      * @var integer
@@ -18,49 +18,114 @@ class User extends BaseModel
     protected $ID;
 
     /**
-     * @var string
+     * @var integer
      */
-    protected $user_login;
-
-    /**
-     * @var string
-     */
-    protected $user_pass;
-
-    /**
-     * @var string
-     */
-    protected $user_nicename;
-
-    /**
-     * @var string
-     */
-    protected $user_email;
-
-    /**
-     * @var string
-     */
-    protected $user_url;
+    protected $post_author;
 
     /**
      * @var DateTime
      */
-    protected $user_registered;
+    protected $post_date;
+
+    /**
+     * @var DateTime
+     */
+    protected $post_date_gmt;
 
     /**
      * @var string
      */
-    protected $user_activation_key;
+    protected $post_content;
 
     /**
      * @var string
      */
-    protected $user_status;
+    protected $post_title;
 
     /**
      * @var string
      */
-    protected $display_name;
+    protected $post_excerpt;
+
+    /**
+     * @var string
+     */
+    protected $post_status;
+
+    /**
+     * @var string
+     */
+    protected $comment_status;
+
+    /**
+     * @var string
+     */
+    protected $ping_status;
+
+    /**
+     * @var string
+     */
+    protected $post_password;
+
+    /**
+     * @var string
+     */
+    protected $post_name;
+
+    /**
+     * @var string
+     */
+    protected $to_ping;
+
+    /**
+     * @var string
+     */
+    protected $pinged;
+
+    /**
+     * @var DateTime
+     */
+    protected $post_modified;
+
+    /**
+     * @var DateTime
+     */
+    protected $post_modified_gmt;
+
+    /**
+     * @var string
+     */
+    protected $post_content_filtered;
+
+    /**
+     * @var integer
+     */
+    protected $post_parent;
+
+    /**
+     * @var string
+     */
+    protected $guid;
+
+    /**
+     * @var integer
+     */
+    protected $menu_order;
+
+    /**
+     * @var string
+     */
+    protected $post_type;
+
+    /**
+     * @var string
+     */
+    protected $post_mime_type;
+
+    /**
+     * @var integer
+     */
+    protected $comment_count;
 
     /**
      * @var array
@@ -77,22 +142,34 @@ class User extends BaseModel
         global $wpdb;
 
         if (isset($properties['ID'])) {
-            $metadata = $wpdb->get_results("SELECT * FROM `{$wpdb->usermeta}` WHERE `user_id` = {$properties['ID']}");
+            $metadata = $wpdb->get_results("SELECT * FROM `{$wpdb->postmeta}` WHERE `post_id` = {$properties['ID']}");
 
             foreach ($metadata as $data) {
                 $this->meta[$data->meta_key] = maybe_unserialize($data->meta_value);
             }
         }
 
-        if (isset($properties['user_registered'])) {
-            $properties['user_registered'] = new DateTime($properties['user_registered']);
+        if (isset($properties['post_date'])) {
+            $properties['post_date'] = new DateTime($properties['post_date']);
+        }
+
+        if (isset($properties['post_date_gmt'])) {
+            $properties['post_date_gmt'] = new DateTime($properties['post_date_gmt']);
+        }
+
+        if (isset($properties['post_modified'])) {
+            $properties['post_modified'] = new DateTime($properties['post_modified']);
+        }
+
+        if (isset($properties['post_modified_gmt'])) {
+            $properties['post_modified_gmt'] = new DateTime($properties['post_modified_gmt']);
         }
 
         parent::__construct($properties);
     }
 
     /**
-     * Get the user's meta data.
+     * Get the post's meta data.
      *
      * @param  string $meta_key
      * @param  mixed  $default
@@ -104,7 +181,7 @@ class User extends BaseModel
     }
 
     /**
-     * Update the user's meta data.
+     * Update the post's meta data.
      *
      * @param string $meta_key
      * @param mixed  $meta_value
@@ -113,11 +190,11 @@ class User extends BaseModel
     {
         $this->meta[$meta_key] = $meta_value;
 
-        update_user_meta($this->ID, $meta_key, $meta_value);
+        update_post_meta($this->ID, $meta_key, $meta_value);
     }
 
     /**
-     * Delete the user's meta data.
+     * Delete the post's meta data.
      *
      * @param string $meta_key
      */
@@ -125,7 +202,7 @@ class User extends BaseModel
     {
         unset($this->meta[$meta_key]);
 
-        delete_user_meta($this->ID, $meta_key);
+        delete_post_meta($this->ID, $meta_key);
     }
 
     /**
@@ -160,7 +237,7 @@ class User extends BaseModel
     {
         global $wpdb;
 
-        return $wpdb->users;
+        return $wpdb->posts;
     }
 
     /**
@@ -170,6 +247,6 @@ class User extends BaseModel
      */
     public static function get_searchable_fields()
     {
-        return array('user_login', 'user_nicename', 'user_email', 'display_name');
+        return array('post_title', 'post_content', 'post_excerpt');
     }
 }
