@@ -28,8 +28,8 @@ abstract class BaseModel implements ModelInterface {
         return 'id';
     }
 
-    public static function install_table(LifeCycle $plugin) {
-        $SQL = "CREATE TABLE IF NOT EXISTS `" . $plugin->prefixTableName( static::get_table() ). "` (";
+    public static function install_table() {
+        $SQL = "CREATE TABLE IF NOT EXISTS `" .  static::get_table() . "` (";
         $SQL.= "`" . static::get_primary_key() . "` int(11) unsigned NOT NULL AUTO_INCREMENT,";
         foreach(static::get_fields() as $key => $value) {
             $SQL.= "`" . $key . "` " . $value. ",";
