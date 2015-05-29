@@ -11,8 +11,7 @@ namespace WordWrap\ORM;
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  */
-abstract class ListTable
-{
+abstract class ListTable {
     /**
      * @var array
      */
@@ -48,8 +47,7 @@ abstract class ListTable
      *
      * @param array $args
      */
-    public function __construct(array $args = array())
-    {
+    public function __construct(array $args = array()) {
         $args = wp_parse_args($args, array(
             'plural'   => '',
             'singular' => '',
@@ -95,8 +93,7 @@ abstract class ListTable
      *
      * @param array $args
      */
-    protected function set_pagination_args(array $args)
-    {
+    protected function set_pagination_args(array $args) {
         $args = wp_parse_args($args, array(
             'total_items' => 0,
             'total_pages' => 0,
@@ -122,8 +119,7 @@ abstract class ListTable
      * @param  string $key
      * @return array
      */
-    public function get_pagination_arg($key)
-    {
+    public function get_pagination_arg($key) {
         if ('page' == $key) {
             return $this->get_pagenum();
         }
@@ -138,24 +134,21 @@ abstract class ListTable
      *
      * @return bool
      */
-    public function has_items()
-    {
+    public function has_items() {
         return !empty($this->items);
     }
 
     /**
      * Message to be displayed when there are no items.
      */
-    public function no_items()
-    {
+    public function no_items() {
         _e('No items found.');
     }
 
     /**
      * Cause the real one doesn't work.
      */
-    public function get_search_query($escaped = true)
-    {
+    public function get_search_query($escaped = true) {
         $s     = isset($_REQUEST['s']) ? $_REQUEST['s'] : '';
         $query = apply_filters('get_search_query', $s);
 
@@ -172,8 +165,7 @@ abstract class ListTable
      * @param string $text
      * @param string $input_id
      */
-    public function search_box($text, $input_id)
-    {
+    public function search_box($text, $input_id) {
         if (empty($_REQUEST['s']) && !$this->has_items()) {
             return;
         }
@@ -210,16 +202,14 @@ abstract class ListTable
      *
      * @return array
      */
-    protected function get_views()
-    {
+    protected function get_views() {
         return array();
     }
 
     /**
      * Display the list of views available on this table.
      */
-    public function views()
-    {
+    public function views() {
         $views = $this->get_views();
         $views = apply_filters('views_' . $this->screen->id, $views);
 
@@ -243,16 +233,14 @@ abstract class ListTable
      *
      * @return array
      */
-    protected function get_bulk_actions()
-    {
+    protected function get_bulk_actions() {
         return array();
     }
 
     /**
      * Display the bulk actions dropdown.
      */
-    public function bulk_actions()
-    {
+    public function bulk_actions() {
         if (is_null($this->actions)) {
             $this->actions = $this->get_bulk_actions();
             $this->actions = apply_filters('bulk_actions-' . $this->screen->id, $this->actions);
@@ -285,8 +273,7 @@ abstract class ListTable
      *
      * @return string|bool
      */
-    public function current_action()
-    {
+    public function current_action() {
         if (isset($_REQUEST['action']) && -1 != $_REQUEST['action']) {
             return $_REQUEST['action'];
         }
@@ -305,8 +292,7 @@ abstract class ListTable
      * @param  bool $always_visible
      * @return string
      */
-    protected function row_actions($actions, $always_visible = false)
-    {
+    protected function row_actions($actions, $always_visible = false) {
         $action_count = count($actions);
         $i = 0;
 
@@ -330,8 +316,7 @@ abstract class ListTable
     /**
      * Display a monthly dropdown for filtering items
      */
-    protected function months_dropdown($post_type)
-    {
+    protected function months_dropdown($post_type) {
         global $wpdb, $wp_locale;
 
         $months = $wpdb->get_results($wpdb->prepare("
@@ -374,8 +359,7 @@ abstract class ListTable
     /**
      * Display a view switcher
      */
-    protected function view_switcher($current_mode)
-    {
+    protected function view_switcher($current_mode) {
         $modes = array(
             'list'    => __('List View'),
             'excerpt' => __('Excerpt View')
@@ -400,8 +384,7 @@ abstract class ListTable
      * @param integer $post_id
      * @param integer $pending_comments
      */
-    protected function comments_bubble($post_id, $pending_comments)
-    {
+    protected function comments_bubble($post_id, $pending_comments) {
         $pending_phrase = sprintf(__('%s pending'), number_format($pending_comments));
 
         if ($pending_comments) {
@@ -420,8 +403,7 @@ abstract class ListTable
      *
      * @return integer
      */
-    public function get_pagenum()
-    {
+    public function get_pagenum() {
         $pagenum = isset($_REQUEST['paged']) ? absint($_REQUEST['paged']) : 0;
 
         if (isset($this->pagination_args['total_pages']) && $pagenum > $this->pagination_args['total_pages']) {
@@ -436,8 +418,7 @@ abstract class ListTable
      *
      * @return integer
      */
-    protected function get_items_per_page($option, $default = 20)
-    {
+    protected function get_items_per_page($option, $default = 20) {
         $per_page = (int) get_user_option($option);
 
         if (empty($per_page) || $per_page < 1) {
@@ -450,8 +431,7 @@ abstract class ListTable
     /**
      * Display the pagination.
      */
-    protected function pagination($which)
-    {
+    protected function pagination($which) {
         if (empty($this->pagination_args)) {
             return;
         }
@@ -548,8 +528,7 @@ abstract class ListTable
      *
      * @return array
      */
-    protected function get_sortable_columns()
-    {
+    protected function get_sortable_columns() {
         return array();
     }
 
@@ -558,8 +537,7 @@ abstract class ListTable
      *
      * @return array
      */
-    protected function get_column_info()
-    {
+    protected function get_column_info() {
         if (isset($this->column_headers)) {
             return $this->column_headers;
         }
@@ -593,8 +571,7 @@ abstract class ListTable
      *
      * @return int
      */
-    public function get_column_count()
-    {
+    public function get_column_count() {
         list($columns, $hidden) = $this->get_column_info();
 
         $hidden = array_intersect(array_keys($columns), array_filter($hidden));
@@ -606,8 +583,7 @@ abstract class ListTable
      *
      * @param bool $with_id
      */
-    protected function print_column_headers($with_id = true)
-    {
+    protected function print_column_headers($with_id = true) {
         list($columns, $hidden, $sortable) = $this->get_column_info();
 
         $current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
@@ -678,8 +654,7 @@ abstract class ListTable
     /**
      * Display the table.
      */
-    public function display()
-    {
+    public function display() {
         extract($this->args);
 
         $this->display_tablenav('top');
@@ -711,16 +686,14 @@ abstract class ListTable
      *
      * @return array
      */
-    protected function get_table_classes()
-    {
+    protected function get_table_classes() {
         return array('widefat', 'fixed', $this->args['plural']);
     }
 
     /**
      * Generate the table navigation above or below the table.
      */
-    protected function display_tablenav($which)
-    {
+    protected function display_tablenav($which) {
         if ('top' == $which) {
             wp_nonce_field('bulk-' . $this->args['plural']);
         }
@@ -743,16 +716,14 @@ abstract class ListTable
     /**
      * Extra controls to be displayed between bulk actions and pagination.
      */
-    protected function extra_tablenav($which)
-    {
+    protected function extra_tablenav($which) {
 
     }
 
     /**
      * Generate the <tbody> part of the table.
      */
-    protected function display_rows_or_placeholder()
-    {
+    protected function display_rows_or_placeholder() {
         if ($this->has_items()) {
             $this->display_rows();
         } else {
@@ -766,8 +737,7 @@ abstract class ListTable
     /**
      * Generate the table rows.
      */
-    protected function display_rows()
-    {
+    protected function display_rows() {
         foreach ($this->items as $item) {
             $this->single_row($item);
         }
@@ -778,8 +748,7 @@ abstract class ListTable
      *
      * @param object $item The current item
      */
-    protected function single_row($item)
-    {
+    protected function single_row($item) {
         static $row_class = '';
         $row_class = ($row_class == '' ? ' class="alternate"' : '');
 
@@ -793,8 +762,7 @@ abstract class ListTable
      *
      * @param object $item The current item
      */
-    protected function single_row_columns($item)
-    {
+    protected function single_row_columns($item) {
         list($columns, $hidden) = $this->get_column_info();
 
         foreach ($columns as $column_name => $column_display_name) {
@@ -826,8 +794,7 @@ abstract class ListTable
     /**
      * Handle an incoming ajax request (called from admin-ajax.php).
      */
-    public function ajax_response()
-    {
+    public function ajax_response() {
         $this->prepare_items();
 
         extract($this->args);
@@ -858,8 +825,7 @@ abstract class ListTable
     /**
      * Send required variables to JavaScript land.
      */
-    protected function js_vars()
-    {
+    protected function js_vars() {
         $args = array(
             'class'  => get_class($this),
             'screen' => array(

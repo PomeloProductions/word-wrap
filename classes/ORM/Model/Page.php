@@ -8,8 +8,7 @@ use WordWrap\ORM\Query;
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  */
-class Page extends Post
-{
+class Page extends Post {
     /**
      * @var string
      */
@@ -20,8 +19,7 @@ class Page extends Post
      *
      * @return Query
      */
-    public static function query()
-    {
+    public static function query() {
         $query = parent::query();
         $query->where('post_type', 'page');
 
