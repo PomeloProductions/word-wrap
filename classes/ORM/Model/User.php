@@ -172,4 +172,14 @@ class User extends BaseModel
     {
         return array('user_login', 'user_nicename', 'user_email', 'display_name');
     }
+
+    /**
+     * Get an array of all fields for this Model with a key and a value
+     * The key should be the name of the column in the database and the value should be the structure of it
+     *
+     * @return array
+     */
+    public static function get_fields() {
+        // Not needed, build in word press table
+    }
 }
