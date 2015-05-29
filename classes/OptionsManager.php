@@ -20,10 +20,12 @@
 */
 namespace WordWrap;
 
+use WordWrap\Configuration\RootConfig;
+
 class OptionsManager {
 
     public function getOptionNamePrefix() {
-        return get_class($this) . '_';
+        return RootConfig::$instance->optionsPrefix;
     }
 
 
