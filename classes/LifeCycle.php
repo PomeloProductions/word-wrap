@@ -22,6 +22,7 @@
 namespace WordWrap;
 
 use WordWrap\AssetManager\AssetManager;
+use WordWrap\Configuration\RootConfig;
 
 class LifeCycle extends InstallIndicator {
 
@@ -147,7 +148,7 @@ class LifeCycle extends InstallIndicator {
      * (i.e. the page for setting options)
      */
     protected function getSettingsSlug() {
-        return get_class($this) . 'Settings';
+        return urlencode(RootConfig::$instance->pluginName) . 'Settings';
     }
 
     protected function addSettingsSubMenuPageToPluginsMenu() {
