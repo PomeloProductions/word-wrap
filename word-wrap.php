@@ -13,6 +13,7 @@ namespace WordWrap;
 
 function autoload($className) {
     $fileName = str_replace("WordWrap\\", "", $className);
+    $fileName = str_replace("\\", "/", $fileName);
     if(file_exists(__DIR__ . "/classes/" . $fileName . ".php"))
         require(__DIR__ . "/classes/" . $fileName . ".php");
 }
