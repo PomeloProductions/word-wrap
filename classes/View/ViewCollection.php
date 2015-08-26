@@ -40,6 +40,17 @@ class ViewCollection extends View{
     }
 
     /**
+     * @param $collection string the name of the collection we are adding to
+     * @param View[] $views a new child to add to the collection
+     */
+    public function addChildViews($collection, array $views) {
+        if(!isset($this->childViews[$collection]))
+            $this->childViews[$collection] = [];
+
+        $this->childViews[$collection] = array_merge($this->childViews[$collection], $views);
+    }
+
+    /**
      * @return string processes all child views into exported html
      */
     public function export() {
