@@ -35,7 +35,7 @@ abstract class BaseModel implements ModelInterface {
             $SQL.= "`" . $key . "` " . $value. ",";
         }
         $SQL.= "PRIMARY KEY (`" . static::get_primary_key(). "`)";
-        $SQL.= ") ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+        $SQL.= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
         global $wpdb;
         $wpdb->query($SQL);
