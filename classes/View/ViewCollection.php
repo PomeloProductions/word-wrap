@@ -66,6 +66,16 @@ class ViewCollection extends View{
             $processedContents = str_replace("[[" . $collection . "]]", $processedViews, $processedContents);
         }
 
+        $processedContents = $this->stripEmptyBrackets($processedContents);
+
         return $processedContents;
+    }
+
+    private function stripEmptyBrackets($contents) {
+
+        $contents = preg_replace('/\[{2}.*\]{2}/', '', $contents);
+        $contents = preg_replace('/\{{2}.*\}{2}/', '', $contents);
+
+        return $contents;
     }
 }
