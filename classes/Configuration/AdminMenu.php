@@ -30,4 +30,16 @@ class AdminMenu extends Base{
      * @var int the position of this menu in the word press menu
      */
     public $position;
+
+    /**
+     * @var Task[] the tasks that this menu handles
+     */
+    public $Task;
+
+    /**
+     * @return string the slug for this menu
+     */
+    public function getSlug() {
+        return strtolower( str_replace(" ", "_", $this->name) );
+    }
 }
