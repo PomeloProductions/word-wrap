@@ -25,4 +25,9 @@ class AdminMenu {
      * @var string the capability of the admin menu
      */
     public $capability;
+
+    /**
+     * @var int the position of this menu in the word press menu
+     */
+    public $position;
 }
