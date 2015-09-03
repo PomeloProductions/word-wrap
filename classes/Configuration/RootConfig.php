@@ -39,5 +39,10 @@ class RootConfig extends Base{
      */
     public $optionsPrefix;
 
+    /**
+     * @var Admin the configuration for the admin section of the site
+     */
+    public $Admin;
+
 
 }
