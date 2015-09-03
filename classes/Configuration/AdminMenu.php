@@ -9,7 +9,7 @@
 namespace WordWrap\Configuration;
 
 
-class AdminMenu {
+class AdminMenu extends Base{
 
     /**
      * @var string the name of the menu element that shows in the backend admin

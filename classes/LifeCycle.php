@@ -21,6 +21,7 @@
 
 namespace WordWrap;
 
+use WordWrap\Admin\AdminController;
 use WordWrap\AssetManager\AssetManager;
 use WordWrap\Configuration\RootConfig;
 
@@ -36,11 +37,18 @@ class LifeCycle extends InstallIndicator {
      */
     public $rootConfig;
 
+    /**
+     * @var AdminController the controller that runs on admin pages
+     */
+    public $adminController;
 
     final function __construct(RootConfig $config) {
         $this->rootConfig = $config;
 
         $this->assetManager = new AssetManager();
+
+        if(is_admin())
+            $this->adminController = new AdminController($config->Admin);
     }
 
     public function install() {
