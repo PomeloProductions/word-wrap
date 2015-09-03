@@ -20,11 +20,12 @@ class ViewCollection extends View{
     protected $childViews;
 
     /**
-     * @param LifeCycle $lifeCycle
-     * @param string $templateName
+     * @param $lifeCycle LifeCycle the current running LifeCycle
+     * @param $templateName string the name of the template we are loading
+     * @param $templateType string the type of template we are using, defaults to HTML
      */
-    function __construct($lifeCycle, $templateName) {
-        parent::__construct($lifeCycle, $templateName);
+    function __construct($lifeCycle, $templateName, $templateType = "html") {
+        parent::__construct($lifeCycle, $templateName, $templateType);
         $this->childViews = [];
     }
 
