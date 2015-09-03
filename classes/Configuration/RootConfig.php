@@ -16,6 +16,7 @@ class RootConfig extends Base{
 
     /**
      * @var RootConfig
+     * @deprecated replace usages with instance reference in LifeCycle
      */
     public static $instance;
 

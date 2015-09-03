@@ -26,11 +26,14 @@ use WordWrap\Configuration\RootConfig;
 function WordWrap_init($pluginDirectory) {
 
 
-    RootConfig::$instance =  ConfigFactory::inflate($pluginDirectory);
 
-    $lifeCycleClass = RootConfig::$instance->rootNameSpace. "\\" . RootConfig::$instance->LifeCycle->className;
+    $configInstance =  ConfigFactory::inflate($pluginDirectory);
+    //TODO remove once variable is removed
+    RootConfig::$instance = $configInstance;
 
-    $aPlugin = new $lifeCycleClass;
+    $lifeCycleClass = $configInstance->rootNameSpace. "\\" . RootConfig::$instance->LifeCycle->className;
+
+    $aPlugin = new $lifeCycleClass($configInstance);
 
     // Install the plugin
     // NOTE: this file gets run each time you *activate* the plugin.

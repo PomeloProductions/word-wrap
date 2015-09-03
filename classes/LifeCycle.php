@@ -31,7 +31,15 @@ class LifeCycle extends InstallIndicator {
      */
     public $assetManager;
 
-    function __construct() {
+    /**
+     * @var RootConfig the configuration for this plugin
+     */
+    public $rootConfig;
+
+
+    final function __construct(RootConfig $config) {
+        $this->rootConfig = $config;
+
         $this->assetManager = new AssetManager();
     }
 
