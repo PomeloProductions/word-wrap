@@ -27,6 +27,11 @@ class Task extends Base {
     public $sidebar;
 
     /**
+     * @var bool whether or not this is the default task, or we will list all other tasks
+     */
+    public $default;
+
+    /**
      * @return string the slug for this menu
      */
     public function getSlug() {
