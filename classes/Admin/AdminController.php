@@ -11,6 +11,7 @@ namespace WordWrap\Admin;
 
 use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\AdminMenu;
+use WordWrap\Configuration\Task;
 use WordWrap\LifeCycle;
 
 class AdminController {
@@ -23,6 +24,11 @@ class AdminController {
      * @var Admin the configuration for this controllers configuration
      */
     private $admin;
+
+    /**
+     * @var AdminMenu the current page that is being used
+     */
+    public $currentPage;
 
     public function __construct(LifeCycle $lifeCycle, Admin $admin) {
         $this->lifeCycle = $lifeCycle;
@@ -48,15 +54,37 @@ class AdminController {
 
         $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../assets/html/");
 
-        $currentPage = isset($_GET["page"]) ? $_GET["page"] : "";
+        if($this->currentPage == null) {
+            //TODO render default page
+        }
+        else {
 
-        foreach ($this->admin->AdminMenu as $menu) {
-            if ($menu->getSlug() == $currentPage) {
-                $defaultTask = null;
+            $defaultTask = null;
 
-                $currentTask = isset($_GET["task"]) ? $_GET["task"] : "";
-                //TODO trigger task to run find default if task is not in get show list of available tasks if no default is defined
-            }
+            $requestedTask = isset($_GET["task"]) ? $_GET["task"] : "";
+
+            //TODO find task to run, and then run it
+        }
+
+
+    }
+
+    /**
+     * @param $name string name of property called
+     * @return mixed
+     */
+    public function __get($name) {
+
+        switch($name)  {
+            case "currentPage" :
+                $requestedPage = isset($_GET["page"]) ? $_GET["page"] : "";
+
+                foreach( $this->admin->AdminMenu as $menu) {
+                    if($menu->getSlug() == $requestedPage) {
+                        $this->currentPage = $menu;
+                        return $this->currentPage;
+                    }
+                }
         }
 
     }
