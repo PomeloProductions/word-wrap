@@ -58,9 +58,9 @@ abstract class TaskController {
         $hasSidebar = $this->task != null && $this->task->sidebar;
 
         if($hasSidebar)
-            $pageContentContainer = new View($this->lifeCycle, "admin_page_with_sidebar");
+            $pageContentContainer = new View($this->lifeCycle, "admin_page_with_sidebar", "admin_html");
         else
-            $pageContentContainer = new View($this->lifeCycle, "admin_page_without_sidebar");
+            $pageContentContainer = new View($this->lifeCycle, "admin_page_without_sidebar", "admin_html");
 
 
         $pageContentContainer->setTemplateVar("content", $this->renderMainContent());

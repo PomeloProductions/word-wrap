@@ -40,7 +40,7 @@ class AvailableTasks extends TaskController {
      * override to render the main page
      */
     protected function renderMainContent() {
-        $viewCollection = new ViewCollection($this->lifeCycle, "available_task/container");
+        $viewCollection = new ViewCollection($this->lifeCycle, "available_task/container", "admin_html");
 
         foreach($this->availableTask as $task) {
             $anchor = new Anchor($this->lifeCycle);

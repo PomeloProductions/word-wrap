@@ -56,7 +56,7 @@ class AdminController {
 
         $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../assets/html/");
 
-        $pageContainer = new View($this->lifeCycle, "admin_container");
+        $pageContainer = new View($this->lifeCycle, "admin_container", "admin_html");
 
         if($this->currentPage == null) {
 
