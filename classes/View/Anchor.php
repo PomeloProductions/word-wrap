@@ -9,6 +9,8 @@
 namespace WordWrap\View;
 
 
+use WordWrap\LifeCycle;
+
 class Anchor extends View {
 
     /**
@@ -25,6 +27,18 @@ class Anchor extends View {
      * @var bool whether or not we want to open this link in a new tab/window
      */
     public $openWindow = false;
+
+    /**
+     * @var array string of classes to attach to this anchor
+     */
+    public $classes = [];
+
+    /**
+     * @param LifeCycle $lifeCycle the life cycle for this class
+     */
+    public function __constructor(LifeCycle $lifeCycle) {
+        parent::__construct($lifeCycle);
+    }
 
     /**
      * @param $href string the url for this link
@@ -48,10 +62,19 @@ class Anchor extends View {
     }
 
     /**
+     * @param $class string adds a class to this link
+     */
+    public function addClass($class) {
+        $this->classes[] = $class;
+    }
+
+    /**
      * @return string of the content of this link
      */
     public function export() {
+        $class = implode(" ", $this->classes);
         $target = ($this->openWindow ? "_blank" : "");
-        return "<a href='$this->href' target='$target'>$this->content</a>";
+
+        return "<a href='$this->href' target='$target' class='$class'>$this->content</a>";
     }
 }

@@ -31,15 +31,17 @@ class View {
 
     /**
      * @param $lifeCycle LifeCycle the current running LifeCycle
-     * @param $templateName string the name of the template we are loading
+     * @param $templateName string|null the name of the template we are loading
      * @param $templateType string the type of template we are using, defaults to HTML
      */
-    function __construct($lifeCycle, $templateName, $templateType = "html") {
+    function __construct($lifeCycle, $templateName = null, $templateType = "html") {
         $this->lifeCycle = $lifeCycle;
 
-        $this->lifeCycle->assetManager->loadAsset($templateType, $templateName);
+        if($templateName == null) {
+            $this->lifeCycle->assetManager->loadAsset($templateType, $templateName);
 
-        $this->template = $this->lifeCycle->assetManager->getAsset($templateType, $templateName);
+            $this->template = $this->lifeCycle->assetManager->getAsset($templateType, $templateName);
+        }
 
         $this->templateVars = [];
     }
