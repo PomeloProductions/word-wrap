@@ -55,6 +55,7 @@ class View {
     }
 
     /**
+     * @param bool @strip whether or not to strip out empty variables right away
      * @return string the exported view html
      */
     public function export($strip = true) {
