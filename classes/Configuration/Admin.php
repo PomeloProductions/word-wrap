@@ -12,8 +12,8 @@ namespace WordWrap\Configuration;
 class Admin extends Base {
 
     /**
-     * @var AdminMenu[] all admin menu's associated with this plugin
+     * @var Page[] all admin menu's associated with this plugin
      */
-    public $AdminMenu;
+    public $Page;
 
 }

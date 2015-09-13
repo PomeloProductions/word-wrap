@@ -9,7 +9,7 @@
 namespace WordWrap\Admin;
 
 
-use WordWrap\Configuration\AdminMenu;
+use WordWrap\Configuration\Page;
 use WordWrap\Configuration\Task;
 use WordWrap\LifeCycle;
 use WordWrap\View\View;

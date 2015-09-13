@@ -10,7 +10,7 @@
 namespace WordWrap\Admin;
 
 use WordWrap\Configuration\Admin;
-use WordWrap\Configuration\AdminMenu;
+use WordWrap\Configuration\Page;
 use WordWrap\Configuration\Task;
 use WordWrap\LifeCycle;
 
@@ -26,7 +26,7 @@ class AdminController {
     private $admin;
 
     /**
-     * @var AdminMenu the current page that is being used
+     * @var Page the current page that is being used
      */
     public $currentPage;
 
@@ -42,8 +42,8 @@ class AdminController {
      */
     public function addMenus() {
 
-        foreach($this->admin->AdminMenu as $menu) {
-            \add_menu_page('Theme Page Title', $menu->name, $menu->capability, $menu->getSlug(), [$this, 'renderPage'], $menu->icon, $menu->position);
+        foreach($this->admin->Page as $page) {
+            \add_menu_page('Theme Page Title', $page->name, $page->capability, $page->getSlug(), [$this, 'renderPage'], $page->icon, $page->position);
         }
     }
 
@@ -79,9 +79,9 @@ class AdminController {
             case "currentPage" :
                 $requestedPage = isset($_GET["page"]) ? $_GET["page"] : "";
 
-                foreach( $this->admin->AdminMenu as $menu) {
-                    if($menu->getSlug() == $requestedPage) {
-                        $this->currentPage = $menu;
+                foreach( $this->admin->Page as $page) {
+                    if($page->getSlug() == $requestedPage) {
+                        $this->currentPage = $page;
                         return $this->currentPage;
                     }
                 }
