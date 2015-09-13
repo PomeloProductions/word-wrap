@@ -13,6 +13,7 @@ use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\Page;
 use WordWrap\Configuration\Task;
 use WordWrap\LifeCycle;
+use WordWrap\View\View;
 
 class AdminController {
 
@@ -54,16 +55,31 @@ class AdminController {
 
         $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../assets/html/");
 
+        $pageContainer = new View($this->lifeCycle, "admin_container");
+
         if($this->currentPage == null) {
+
+            $pageContainer->setTemplateVar("page_title", "Page Not Found");
+
             //TODO render default page
         }
         else {
 
             $defaultTask = null;
+            $currentTask = null;
 
             $requestedTask = isset($_GET["task"]) ? $_GET["task"] : "";
 
-            //TODO find task to run, and then run it
+            $pageContainer->setTemplateVar("page_title", $this->currentPage->name);
+
+            foreach ($this->currentPage->Task as $task) {
+                if($task->getSlug() == $requestedTask) {
+                    $currentTask = $task;
+                    break;
+                }
+            }
+
+            //TODO rendered Task
         }
 
 
