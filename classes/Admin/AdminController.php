@@ -12,7 +12,6 @@ namespace WordWrap\Admin;
 use WordWrap\Admin\Tasks\AvailableTasks;
 use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\Page;
-use WordWrap\Configuration\Task;
 use WordWrap\LifeCycle;
 use WordWrap\View\View;
 
@@ -90,8 +89,13 @@ class AdminController {
             if($currentTask == null) {
                 $taskController = new AvailableTasks($this->lifeCycle, $this);
             }
-            else
-                $taskController = new $currentTask->className($this->lifeCycle, $this, $currentTask);
+            else {
+                if(strstr($currentTask->className, "\\") === 0)
+                    $taskClass = $this->lifeCycle->rootConfig->rootNameSpace . $currentTask->className;
+                else
+                    $taskClass = $currentTask->className;
+                $taskController = new $taskClass($this->lifeCycle, $this, $currentTask);
+            }
 
             $pageContainer->setTemplateVar("task_title", $taskController->getTaskName());
             $pageContainer->setTemplateVar("task_content", $taskController->renderPageContent());
