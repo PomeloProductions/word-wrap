@@ -90,7 +90,7 @@ class AdminController {
                 $taskController = new AvailableTasks($this->lifeCycle, $this);
             }
             else {
-                if(strstr($currentTask->className, "\\") === 0)
+                if(strpos($currentTask->className, "\\") === 0)
                     $taskClass = $this->lifeCycle->rootConfig->rootNameSpace . $currentTask->className;
                 else
                     $taskClass = $currentTask->className;
