@@ -55,7 +55,20 @@ abstract class TaskController {
      */
     public final function renderPageContent() {
 
-        //TODO build task page content
+        $hasSidebar = $this->task != null && $this->task->sidebar;
+
+        if($hasSidebar)
+            $pageContentContainer = new View($this->lifeCycle, "admin_page_with_sidebar");
+        else
+            $pageContentContainer = new View($this->lifeCycle, "admin_page_without_sidebar");
+
+
+        $pageContentContainer->setTemplateVar("content", $this->renderMainContent());
+
+        if($hasSidebar)
+            $pageContentContainer->setTemplateVar("sidebar", $this->renderSidebarContent());
+
+        return $pageContentContainer->export();
     }
 
     /**
