@@ -37,7 +37,7 @@ class View {
     function __construct($lifeCycle, $templateName = null, $templateType = "html") {
         $this->lifeCycle = $lifeCycle;
 
-        if($templateName == null) {
+        if($templateName != null) {
             $this->lifeCycle->assetManager->loadAsset($templateType, $templateName);
 
             $this->template = $this->lifeCycle->assetManager->getAsset($templateType, $templateName);
