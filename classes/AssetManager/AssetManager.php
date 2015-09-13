@@ -50,6 +50,7 @@ class AssetManager {
                     $assetTypeObject = new CSSAsset($assetLocation);
                     break;
                 case "html":
+                case "admin_html":
                     $assetTypeObject = new HTMLAsset($assetLocation);
                     break;
                 default:
