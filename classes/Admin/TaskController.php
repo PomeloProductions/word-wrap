@@ -68,4 +68,15 @@ abstract class TaskController {
      * override to render the main page
      */
     public abstract function renderSidebarContent();
+
+    /**
+     * Override this in child controllers in order to specify a different task name
+     * @return null|string checks to see if a task name is set and returns null if it is not
+     */
+    public function getTaskName() {
+        if($this->task != null)
+            return $this->task->name;
+
+        return null;
+    }
 }
