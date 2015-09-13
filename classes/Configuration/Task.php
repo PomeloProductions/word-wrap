@@ -17,19 +17,19 @@ class Task extends Base {
     public $name;
 
     /**
-     * @var string the full class name of the task, which needs to include the full name space
+     * @var string the full class name of the task, which needs to include any name space beyond the current one
      */
     public $className;
 
     /**
-     * @var bool whether or not to render the sidebar for this task
+     * @var bool whether or not to render the sidebar for this task defaults to false
      */
-    public $sidebar;
+    public $sidebar = false;
 
     /**
      * @var bool whether or not this is the default task, or we will list all other tasks
      */
-    public $default;
+    public $default = false;
 
     /**
      * @return string the slug for this menu
