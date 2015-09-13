@@ -55,7 +55,7 @@ class ViewCollection extends View{
      * @return string processes all child views into exported html
      */
     public function export() {
-        $processedContents = parent::export();
+        $processedContents = parent::export(false);
 
         foreach($this->childViews as $collection => $views) {
             $processedViews = "";
@@ -70,13 +70,5 @@ class ViewCollection extends View{
         $processedContents = $this->stripEmptyBrackets($processedContents);
 
         return $processedContents;
-    }
-
-    private function stripEmptyBrackets($contents) {
-
-        $contents = preg_replace('/\[{2}.*\]{2}/', '', $contents);
-        $contents = preg_replace('/\{{2}.*\}{2}/', '', $contents);
-
-        return $contents;
     }
 }

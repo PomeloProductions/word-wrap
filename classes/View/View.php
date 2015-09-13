@@ -57,12 +57,23 @@ class View {
     /**
      * @return string the exported view html
      */
-    public function export() {
+    public function export($strip = true) {
         $processedContents = $this->template->getAssetContents();
 
         foreach($this->templateVars as $key => $value)
             $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
 
+        if($strip)
+            $processedContents = $this->stripEmptyBrackets($processedContents);
+
         return $processedContents;
+    }
+
+    protected function stripEmptyBrackets($contents) {
+
+        $contents = preg_replace('/\[{2}.*\]{2}/', '', $contents);
+        $contents = preg_replace('/\{{2}.*\}{2}/', '', $contents);
+
+        return $contents;
     }
 }
