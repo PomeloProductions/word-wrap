@@ -32,10 +32,14 @@ class AvailableTasks extends TaskController {
         $this->pageSlug = $this->adminController->currentPage->getSlug();
     }
 
+    public function getTaskName() {
+        return "Available Tasks";
+    }
+
     /**
      * override to render the main page
      */
-    public function renderMainContent() {
+    protected function renderMainContent() {
         $viewCollection = new ViewCollection($this->lifeCycle, "available_task/container");
 
         foreach($this->availableTask as $task) {
@@ -56,7 +60,7 @@ class AvailableTasks extends TaskController {
     /**
      * override to render the main page
      */
-    public function renderSidebarContent() {
+    protected function renderSidebarContent() {
         // TODO: Implement renderSidebarContent() method.
     }
 }

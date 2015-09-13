@@ -74,13 +74,13 @@ abstract class TaskController {
     /**
      * override to render the main page
      */
-    public abstract function renderMainContent();
+    protected abstract function renderMainContent();
 
 
     /**
      * override to render the main page
      */
-    public abstract function renderSidebarContent();
+    protected abstract function renderSidebarContent();
 
     /**
      * Override this in child controllers in order to specify a different task name

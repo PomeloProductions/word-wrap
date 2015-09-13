@@ -9,6 +9,7 @@
 
 namespace WordWrap\Admin;
 
+use WordWrap\Admin\Task\AvailableTasks;
 use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\Page;
 use WordWrap\Configuration\Task;
@@ -67,21 +68,36 @@ class AdminController {
 
             $defaultTask = null;
             $currentTask = null;
+            $taskController = null;
 
             $requestedTask = isset($_GET["task"]) ? $_GET["task"] : "";
+
 
             $pageContainer->setTemplateVar("page_title", $this->currentPage->name);
 
             foreach ($this->currentPage->Task as $task) {
+                if($task->default)
+                    $defaultTask = $task;
                 if($task->getSlug() == $requestedTask) {
                     $currentTask = $task;
                     break;
                 }
             }
 
-            //TODO rendered Task
+            if($currentTask == null && $defaultTask != null)
+                $currentTask = $defaultTask;
+
+            if($currentTask == null) {
+                $taskController = new AvailableTasks($this->lifeCycle, $this);
+            }
+            else
+                $taskController = new $currentTask->className($this->lifeCycle, $this, $currentTask);
+
+            $pageContainer->setTemplateVar("task_title", $taskController->getTaskName());
+            $pageContainer->setTemplateVar("task_content", $taskController->renderPageContent());
         }
 
+        echo $pageContainer->export();
 
     }
 
