@@ -2,6 +2,8 @@
 namespace WordWrap\Admin\Task;
 use WordWrap\Admin\TaskController;
 use WordWrap\Configuration\Task;
+use WordWrap\View\Anchor;
+use WordWrap\View\ViewCollection;
 
 /**
  * Created by PhpStorm.
@@ -18,17 +20,37 @@ class AvailableTasks extends TaskController {
     private $availableTask;
 
     /**
+     * @var string the slug of this page
+     */
+    private $pageSlug;
+
+    /**
      * override this to setup anything that needs to be done before
      */
     public function setup() {
-        $availableTask = $this->adminController->currentPage->Task;
+        $this->availableTask = $this->adminController->currentPage->Task;
+        $this->pageSlug = $this->adminController->currentPage->getSlug();
     }
 
     /**
      * override to render the main page
      */
     public function renderMainContent() {
-        //TODO render all tasks in a list
+        $viewCollection = new ViewCollection($this->lifeCycle, "available_task/container");
+
+        foreach($this->availableTask as $task) {
+            $anchor = new Anchor($this->lifeCycle);
+
+            $href = "?page=$this->pageSlug&task=" . $task->getSlug();
+
+            $anchor->setContent($task->name);
+            $anchor->setHref($href);
+            $anchor->addClass("block_link");
+
+            $viewCollection->addChildView("task_link", $anchor);
+        }
+
+        return $viewCollection->export();
     }
 
     /**
