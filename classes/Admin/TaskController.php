@@ -27,11 +27,6 @@ abstract class TaskController {
     protected $adminController;
 
     /**
-     * @var string the name of this page
-     */
-    protected $pageName;
-
-    /**
      * @var Task the task that this controller is represented by
      */
     protected $task;
