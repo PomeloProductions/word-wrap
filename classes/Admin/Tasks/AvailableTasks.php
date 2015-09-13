@@ -1,5 +1,5 @@
 <?php
-namespace WordWrap\Admin\Task;
+namespace WordWrap\Admin\Tasks;
 use WordWrap\Admin\TaskController;
 use WordWrap\Configuration\Task;
 use WordWrap\View\Anchor;
@@ -28,8 +28,8 @@ class AvailableTasks extends TaskController {
      * override this to setup anything that needs to be done before
      */
     public function setup() {
-        $this->availableTask = $this->adminController->currentPage->Task;
-        $this->pageSlug = $this->adminController->currentPage->getSlug();
+        $this->availableTask = $this->adminController->getCurrentPage()->Task;
+        $this->pageSlug = $this->adminController->getCurrentPage()->getSlug();
     }
 
     public function getTaskName() {

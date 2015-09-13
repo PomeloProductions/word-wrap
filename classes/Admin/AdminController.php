@@ -9,7 +9,7 @@
 
 namespace WordWrap\Admin;
 
-use WordWrap\Admin\Task\AvailableTasks;
+use WordWrap\Admin\Tasks\AvailableTasks;
 use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\Page;
 use WordWrap\Configuration\Task;
@@ -30,7 +30,7 @@ class AdminController {
     /**
      * @var Page the current page that is being used
      */
-    public $currentPage;
+    private $currentPage;
 
     public function __construct(LifeCycle $lifeCycle, Admin $admin) {
         $this->lifeCycle = $lifeCycle;
@@ -58,7 +58,7 @@ class AdminController {
 
         $pageContainer = new View($this->lifeCycle, "admin_container", "admin_html");
 
-        if($this->currentPage == null) {
+        if($this->getCurrentPage() == null) {
 
             $pageContainer->setTemplateVar("page_title", "Page Not Found");
 
@@ -75,7 +75,7 @@ class AdminController {
 
             $pageContainer->setTemplateVar("page_title", $this->currentPage->name);
 
-            foreach ($this->currentPage->Task as $task) {
+            foreach ($this->getCurrentPage()->Task as $task) {
                 if($task->default)
                     $defaultTask = $task;
                 if($task->getSlug() == $requestedTask) {
@@ -102,23 +102,22 @@ class AdminController {
     }
 
     /**
-     * @param $name string name of property called
-     * @return mixed
+     * @return Page|null
      */
-    public function __get($name) {
+    public function getCurrentPage() {
 
-        switch($name)  {
-            case "currentPage" :
-                $requestedPage = isset($_GET["page"]) ? $_GET["page"] : "";
+        if($this->currentPage == null) {
+            $requestedPage = isset($_GET["page"]) ? $_GET["page"] : "";
 
-                foreach( $this->admin->Page as $page) {
-                    if($page->getSlug() == $requestedPage) {
-                        $this->currentPage = $page;
-                        return $this->currentPage;
-                    }
+            foreach ($this->admin->Page as $page) {
+                if ($page->getSlug() == $requestedPage) {
+                    $this->currentPage = $page;
+                    break;
                 }
+            }
         }
 
+        return $this->currentPage;
     }
 
 }
