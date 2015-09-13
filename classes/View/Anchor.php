@@ -16,22 +16,22 @@ class Anchor extends View {
     /**
      * @var string href to open when link is clicked
      */
-    public $href;
+    private $href;
 
     /**
      * @var string content to put in the link
      */
-    public $content;
+    private $content;
 
     /**
      * @var bool whether or not we want to open this link in a new tab/window
      */
-    public $openWindow = false;
+    private $openWindow = false;
 
     /**
      * @var array string of classes to attach to this anchor
      */
-    public $classes = [];
+    private $classes = [];
 
     /**
      * @param LifeCycle $lifeCycle the life cycle for this class
