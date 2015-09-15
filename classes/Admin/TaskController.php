@@ -42,13 +42,13 @@ abstract class TaskController {
         $this->adminController = $adminController;
         $this->task = $task;
 
-        $this->setup();
+        $this->processRequest();
     }
 
     /**
      * override this to setup anything that needs to be done before
      */
-    public abstract function setup();
+    public abstract function processRequest();
 
     /**
      * @return string the content of the page to render

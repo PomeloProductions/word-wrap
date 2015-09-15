@@ -27,7 +27,7 @@ class AvailableTasks extends TaskController {
     /**
      * override this to setup anything that needs to be done before
      */
-    public function setup() {
+    public function processRequest() {
         $this->availableTask = $this->adminController->getCurrentPage()->Task;
         $this->pageSlug = $this->adminController->getCurrentPage()->getSlug();
     }
