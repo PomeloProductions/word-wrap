@@ -66,5 +66,6 @@ class Editor extends View {
         wp_editor($this->content, $this->editorId, $settings);
         $this->setTemplateVar("editor", ob_get_clean());
 
+        return parent::export();
     }
 }
