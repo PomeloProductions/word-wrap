@@ -29,6 +29,11 @@ class Editor extends View {
     private $title;
 
     /**
+     * @var null|int for the total height of the editor
+     */
+    private $height = null;
+
+    /**
      * @param LifeCycle $lifeCycle
      * @param null|string $editorId
      * @param string $content
@@ -44,10 +49,22 @@ class Editor extends View {
         $this->setTemplateVar("editor_id", $this->editorId);
         $this->setTemplateVar("title", $this->title);
 
+    }
+
+    public function setHeight($height) {
+        $this->height = $height;
+    }
+
+    public function export() {
+
+        $settings = [];
+
+        if($this->height)
+            $settings["editor_height"] = $this->height;
+
         ob_start();
-        wp_editor($this->content, $this->editorId);
+        wp_editor($this->content, $this->editorId, $settings);
         $this->setTemplateVar("editor", ob_get_clean());
 
     }
-
 }
