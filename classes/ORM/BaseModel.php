@@ -113,14 +113,23 @@ abstract class BaseModel implements ModelInterface {
      * @return array
      */
     public function flatten_props($props) {
+        $availableFields = static::get_fields();
+
+        $fieldNames = array_keys($availableFields);
+
         foreach ($props as $property => $value) {
-            if (is_object($value) && get_class($value) == 'DateTime') {
-                $props[$property] = $value->format('Y-m-d H:i:s');
-            } elseif (is_array($value)) {
-                $props[$property] = serialize($value);
-            } elseif ($value instanceof AbstractClass) {
-                $props[$property] = $value->primary_key();
+            if(in_array($property, $fieldNames)) {
+
+                if (is_object($value) && get_class($value) == 'DateTime') {
+                    $props[$property] = $value->format('Y-m-d H:i:s');
+                } elseif (is_array($value)) {
+                    $props[$property] = serialize($value);
+                } elseif ($value instanceof AbstractClass) {
+                    $props[$property] = $value->primary_key();
+                }
             }
+            else
+                unset($props[$property]);
         }
 
         return $props;
