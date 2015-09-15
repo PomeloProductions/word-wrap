@@ -30,8 +30,12 @@ abstract class Base {
                     $this->{$key} = new $className($value);
                 else {
                     $this->{$key} = [];
-                    foreach ($value as $obj)
-                        $this->{$key}[] = new $className($obj);
+                    foreach ($value as $obj) {
+                        if(is_array($obj))
+                            $this->{$key}[] = new $className($obj);
+                        else
+                            $this->{$key} = $obj;
+                    }
                 }
             }
             else {
