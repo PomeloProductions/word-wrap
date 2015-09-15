@@ -52,11 +52,16 @@ abstract class TaskController {
      * @return string the action the user is carrying out
      */
     private function checkAction() {
+        $action = null;
         if(isset($_POST["action"]))
-            return $_POST["action"];
+            $action = $_POST["action"];
         elseif(isset($_GET["action"]))
-            return $_GET["action"];
-        return null;
+            $action = $_GET["action"];
+
+        if($action && !in_array($action, $this->task->actions))
+            $action = null;
+
+        return $action;
     }
 
     /**
