@@ -42,13 +42,28 @@ abstract class TaskController {
         $this->adminController = $adminController;
         $this->task = $task;
 
-        $this->processRequest();
+        $action = $this->checkAction();
+
+        $this->processRequest($action);
+    }
+
+    /**
+     * Checks whether or not there is currently an action being carrying out
+     * @return string the action the user is carrying out
+     */
+    private function checkAction() {
+        if(isset($_POST["action"]))
+            return $_POST["action"];
+        elseif(isset($_GET["action"]))
+            return $_GET["action"];
+        return null;
     }
 
     /**
      * override this to setup anything that needs to be done before
+     * @param $action string the action the user is trying to complete
      */
-    public abstract function processRequest();
+    public abstract function processRequest($action = null);
 
     /**
      * @return string the content of the page to render
