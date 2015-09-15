@@ -165,7 +165,7 @@ abstract class BaseModel implements ModelInterface {
 
         foreach($props as $key => $value) {
             if($value === null)
-                $props[$value] = "'NULL'";
+                unset($props[$key]);
         }
 
         // Insert or update?
