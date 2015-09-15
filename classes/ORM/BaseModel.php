@@ -162,7 +162,7 @@ abstract class BaseModel implements ModelInterface {
         $props = $this->flatten_props($props);
 
         // Insert or update?
-        if (is_null($props[static::get_primary_key()])) {
+        if (is_null($this->{static::get_primary_key()})) {
             $wpdb->insert($this->get_table(), $props);
 
             $this->{static::get_primary_key()} = $wpdb->insert_id;
