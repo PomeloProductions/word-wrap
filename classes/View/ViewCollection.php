@@ -20,11 +20,12 @@ class ViewCollection extends View{
     protected $childViews;
 
     /**
-     * @param LifeCycle $lifeCycle
-     * @param string $templateName
+     * @param $lifeCycle LifeCycle the current running LifeCycle
+     * @param $templateName string the name of the template we are loading
+     * @param $templateType string the type of template we are using, defaults to HTML
      */
-    function __construct($lifeCycle, $templateName) {
-        parent::__construct($lifeCycle, $templateName);
+    function __construct($lifeCycle, $templateName, $templateType = "html") {
+        parent::__construct($lifeCycle, $templateName, $templateType);
         $this->childViews = [];
     }
 
@@ -40,10 +41,21 @@ class ViewCollection extends View{
     }
 
     /**
+     * @param $collection string the name of the collection we are adding to
+     * @param View[] $views a new child to add to the collection
+     */
+    public function addChildViews($collection, array $views) {
+        if(!isset($this->childViews[$collection]))
+            $this->childViews[$collection] = [];
+
+        $this->childViews[$collection] = array_merge($this->childViews[$collection], $views);
+    }
+
+    /**
      * @return string processes all child views into exported html
      */
     public function export() {
-        $processedContents = parent::export();
+        $processedContents = parent::export(false);
 
         foreach($this->childViews as $collection => $views) {
             $processedViews = "";
@@ -54,6 +66,8 @@ class ViewCollection extends View{
 
             $processedContents = str_replace("[[" . $collection . "]]", $processedViews, $processedContents);
         }
+
+        $processedContents = $this->stripEmptyBrackets($processedContents);
 
         return $processedContents;
     }

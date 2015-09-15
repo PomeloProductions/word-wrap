@@ -26,7 +26,13 @@ abstract class Base {
         foreach($data as $key => $value) {
             if(is_array($value)) {
                 $className = "WordWrap\\Configuration\\".$key;
-                $this->{$key} = new $className($value);
+                if(count(array_filter(array_keys($value), 'is_string')))
+                    $this->{$key} = new $className($value);
+                else {
+                    $this->{$key} = [];
+                    foreach ($value as $obj)
+                        $this->{$key}[] = new $className($obj);
+                }
             }
             else {
                 $this->{$key} = $value;

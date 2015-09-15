@@ -31,14 +31,17 @@ class View {
 
     /**
      * @param $lifeCycle LifeCycle the current running LifeCycle
-     * @param $templateName string the name of the template we are loading
+     * @param $templateName string|null the name of the template we are loading
+     * @param $templateType string the type of template we are using, defaults to HTML
      */
-    function __construct($lifeCycle, $templateName) {
+    function __construct($lifeCycle, $templateName = null, $templateType = "html") {
         $this->lifeCycle = $lifeCycle;
 
-        $this->lifeCycle->assetManager->loadAsset("html", $templateName);
+        if($templateName != null) {
+            $this->lifeCycle->assetManager->loadAsset($templateType, $templateName);
 
-        $this->template = $this->lifeCycle->assetManager->getAsset("html", $templateName);
+            $this->template = $this->lifeCycle->assetManager->getAsset($templateType, $templateName);
+        }
 
         $this->templateVars = [];
     }
@@ -52,14 +55,26 @@ class View {
     }
 
     /**
+     * @param bool @strip whether or not to strip out empty variables right away
      * @return string the exported view html
      */
-    public function export() {
+    public function export($strip = true) {
         $processedContents = $this->template->getAssetContents();
 
         foreach($this->templateVars as $key => $value)
             $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
 
+        if($strip)
+            $processedContents = $this->stripEmptyBrackets($processedContents);
+
         return $processedContents;
+    }
+
+    protected function stripEmptyBrackets($contents) {
+
+        $contents = preg_replace('/\[{2}.*\]{2}/', '', $contents);
+        $contents = preg_replace('/\{{2}.*\}{2}/', '', $contents);
+
+        return $contents;
     }
 }

@@ -12,10 +12,11 @@ namespace WordWrap\Configuration;
  * Class RootConfig the root of all info.json files
  * @package WordWrap\Configuration
  */
-class RootConfig extends Base{
+class RootConfig extends Base {
 
     /**
      * @var RootConfig
+     * @deprecated replace usages with instance reference in LifeCycle
      */
     public static $instance;
 
@@ -38,6 +39,11 @@ class RootConfig extends Base{
      * @var string the prefix for any options either tables or wp_options
      */
     public $optionsPrefix;
+
+    /**
+     * @var Admin the configuration for the admin section of the site
+     */
+    public $Admin;
 
 
 }
