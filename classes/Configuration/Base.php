@@ -34,7 +34,7 @@ abstract class Base {
                         if(is_array($obj))
                             $this->{$key}[] = new $className($obj);
                         else
-                            $this->{$key} = $obj;
+                            $this->{$key}[] = $obj;
                     }
                 }
             }
