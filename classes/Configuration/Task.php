@@ -22,6 +22,11 @@ class Task extends Base {
     public $className;
 
     /**
+     * @var string[] list of all available actions for this task
+     */
+    public $actions = [];
+
+    /**
      * @var bool whether or not to render the sidebar for this task defaults to false
      */
     public $sidebar = false;
