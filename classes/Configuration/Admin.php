@@ -17,8 +17,8 @@ class Admin extends Base {
     public $Page;
 
     /**
-     * @var AssetSet[] all assets needed for the admin
+     * @var AssetSet[]|null all assets needed for the admin or null if none where created
      */
-    public $AssetSet;
+    public $AssetSet = null;
 
 }
