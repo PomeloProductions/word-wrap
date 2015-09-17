@@ -51,10 +51,25 @@ class LifeCycle extends InstallIndicator {
         $this->rootConfig = $config;
         $this->pluginDirectory = $pluginDirectory;
 
-        $this->assetManager = new AssetManager();
+        $this->initAssets();
 
         if(is_admin())
             $this->adminController = new AdminController($this, $config->LifeCycle->Admin);
+    }
+
+    /**
+     * initializes the asset manager as well as any asset locations needed
+     */
+    private function initAssets() {
+
+        $this->assetManager = new AssetManager();
+
+        foreach($this->rootConfig->LifeCycle->AssetLocation as $assetLocation) {
+            $directory = $this->pluginDirectory . $assetLocation->location;
+
+            $this->assetManager->registerAssetType($assetLocation->type, $directory, $assetLocation->fileExtension);
+        }
+
     }
 
     public function install() {
