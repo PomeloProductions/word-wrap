@@ -9,7 +9,7 @@
 namespace WordWrap\Configuration;
 
 
-class RequiredAssets {
+class RequiredAssets extends Base{
 
     /**
      * @var string the type of asset this is
