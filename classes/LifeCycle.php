@@ -48,7 +48,7 @@ class LifeCycle extends InstallIndicator {
         $this->assetManager = new AssetManager();
 
         if(is_admin())
-            $this->adminController = new AdminController($this, $config->Admin);
+            $this->adminController = new AdminController($this, $config->LifeCycle->Admin);
     }
 
     public function install() {
@@ -164,7 +164,7 @@ class LifeCycle extends InstallIndicator {
      * (i.e. the page for setting options)
      */
     protected function getSettingsSlug() {
-        return urlencode(RootConfig::$instance->pluginName) . 'Settings';
+        return urlencode($this->rootConfig->pluginName) . ' Settings';
     }
 
     protected function addSettingsSubMenuPageToPluginsMenu() {
