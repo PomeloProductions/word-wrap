@@ -10,6 +10,7 @@
 namespace WordWrap\Admin;
 
 use WordWrap\Admin\Tasks\AvailableTasks;
+use WordWrap\Assets\StyleSheet\CSS;
 use WordWrap\Assets\View\View;
 use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\Page;
@@ -52,6 +53,14 @@ class AdminController {
      * Called from internal word press when we need to display the requested page
      */
     public function renderPage() {
+
+        foreach($this->admin->RequiredAssets as $requiredAsset) {
+            if($requiredAsset->type == "css") {
+                $asset = new CSS($this->lifeCycle, $requiredAsset->name);
+
+                echo $asset->export();
+            }
+        }
 
         $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../../assets/html/");
 
