@@ -16,4 +16,10 @@ class Admin extends Base {
      */
     public $Page;
 
+    /**
+     * @var RequiredAssets[] any required assets needed for this admin css assets will be dumped before html,
+     *                          js assets will be dumped after html
+     */
+    public $RequiredAssets = [];
+
 }
