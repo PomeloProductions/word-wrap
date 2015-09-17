@@ -25,4 +25,9 @@ class LifeCycle extends Base {
      * @var Admin the configuration for the admin section of the site
      */
     public $Admin;
+
+    /**
+     * @var AssetLocation[]|null an array of all asset locations that word wrap will initialize
+     */
+    public $AssetLocation;
 }
