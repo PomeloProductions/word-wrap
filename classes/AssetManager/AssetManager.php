@@ -86,10 +86,10 @@ class AssetManager {
      */
     public function getAsset($type, $name) {
         if(!isset($this->assetTypes[$type]))
-            throw new Exception("You must register and load your asset before you can get it.");
+            throw new Exception("You must register your asset before you can get it.");
 
         if(!isset($this->assets[$type][$name]))
-            throw new Exception("You must load your asset before you can get it.");
+            $this->loadAsset($type, $name);
 
         return $this->assets[$type][$name];
     }
