@@ -27,7 +27,7 @@ class LifeCycle extends Base {
     public $Admin;
 
     /**
-     * @var AssetLocation[]|null an array of all asset locations that word wrap will initialize
+     * @var AssetLocation[] an array of all asset locations that word wrap will initialize
      */
-    public $AssetLocation;
+    public $AssetLocation = [];
 }
