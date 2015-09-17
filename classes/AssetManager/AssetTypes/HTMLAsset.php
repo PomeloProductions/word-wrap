@@ -6,7 +6,7 @@
  * Time: 5:25 PM
  */
 
-namespace WordWrap\AssetManager;
+namespace WordWrap\AssetManager\AssetTypes;
 
 
 class HTMLAsset extends AssetType {

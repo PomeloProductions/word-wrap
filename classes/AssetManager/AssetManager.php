@@ -9,6 +9,9 @@
 namespace WordWrap\AssetManager;
 
 use \Exception;
+use WordWrap\AssetManager\AssetTypes\AssetType;
+use WordWrap\AssetManager\AssetTypes\CSSAsset;
+use WordWrap\AssetManager\AssetTypes\HTMLAsset;
 
 class AssetManager {
 

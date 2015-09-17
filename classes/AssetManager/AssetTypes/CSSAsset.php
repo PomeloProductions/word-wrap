@@ -6,7 +6,7 @@
  * Time: 9:17 PM
  */
 
-namespace WordWrap\AssetManager;
+namespace WordWrap\AssetManager\AssetTypes;
 
 
 class CSSAsset extends AssetType{

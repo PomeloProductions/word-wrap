@@ -6,7 +6,7 @@
  * Time: 6:21 PM
  */
 
-namespace WordWrap\AssetManager;
+namespace WordWrap\AssetManager\AssetTypes;
 
 
 abstract class AssetType {
