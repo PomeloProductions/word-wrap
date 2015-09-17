@@ -9,25 +9,10 @@
 namespace WordWrap\Assets\View;
 
 
-use WordWrap\AssetManager\Asset;
+use WordWrap\Assets\BaseAsset;
 use WordWrap\LifeCycle;
 
-class View {
-
-    /**
-     * @var LifeCycle the current running instance of the plugin
-     */
-    protected $lifeCycle;
-
-    /**
-     * @var Asset the template this view uses
-     */
-    private $template;
-
-    /**
-     * @var string[] all template variables this view will use
-     */
-    private $templateVars;
+class View extends BaseAsset {
 
     /**
      * @param $lifeCycle LifeCycle the current running LifeCycle
@@ -35,46 +20,7 @@ class View {
      * @param $templateType string the type of template we are using, defaults to HTML
      */
     function __construct($lifeCycle, $templateName = null, $templateType = "html") {
-        $this->lifeCycle = $lifeCycle;
-
-        if($templateName != null) {
-            $this->lifeCycle->assetManager->loadAsset($templateType, $templateName);
-
-            $this->template = $this->lifeCycle->assetManager->getAsset($templateType, $templateName);
-        }
-
-        $this->templateVars = [];
+        parent::__construct($lifeCycle, $templateName, $templateType);
     }
 
-    /**
-     * @param $key string the key for this particular variable
-     * @param $value string the value for this particular variable
-     */
-    public function setTemplateVar($key, $value) {
-        $this->templateVars[$key] = $value;
-    }
-
-    /**
-     * @param bool @strip whether or not to strip out empty variables right away
-     * @return string the exported view html
-     */
-    public function export($strip = true) {
-        $processedContents = $this->template->getAssetContents();
-
-        foreach($this->templateVars as $key => $value)
-            $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
-
-        if($strip)
-            $processedContents = $this->stripEmptyBrackets($processedContents);
-
-        return $processedContents;
-    }
-
-    protected function stripEmptyBrackets($contents) {
-
-        $contents = preg_replace('/\[{2}.*\]{2}/', '', $contents);
-        $contents = preg_replace('/\{{2}.*\}{2}/', '', $contents);
-
-        return $contents;
-    }
 }
