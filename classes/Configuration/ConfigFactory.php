@@ -19,15 +19,15 @@ class ConfigFactory {
 
 
     /**
-     * @param $pluginName string the name of the plugin that we are reading the configuration for
+     * @param $fullPath string the full path of this plugin from the root of the server
      * @throws Exception The json file should be located at the root of the plugin, and it should be named info.json
      *                      if it isn't then we have no idea what this plugin is about
      * @return RootConfig We will be constructing an instance of our Root configuration and returning it
      */
-    static function inflate($pluginName) {
-        $path = ABSPATH . "wp-content/plugins/" . $pluginName . "/info.json";
+    static function inflate($fullPath) {
+        $path = $fullPath. "/info.json";
         if(!file_exists($path))
-            throw new Exception("Unable to find plugin configuration. Please make sure that you have a info.json included in the root of your plugin");
+            throw new Exception("Unable to find plugin configuration. Please make sure that you have a info.json included in the root of your plugin at " . $fullPath);
 
         $fileContents = file_get_contents($path);
         $json = json_decode($fileContents, true);

@@ -66,6 +66,8 @@ class LifeCycle extends InstallIndicator {
 
         foreach($this->rootConfig->LifeCycle->AssetLocation as $assetLocation) {
             $directory = $this->pluginDirectory . $assetLocation->location;
+            if(!substr($directory, -1) !== '/')
+                $directory.= '/';
 
             $this->assetManager->registerAssetType($assetLocation->type, $directory, $assetLocation->fileExtension);
         }

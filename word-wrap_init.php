@@ -26,14 +26,14 @@ use WordWrap\Configuration\RootConfig;
 function WordWrap_init($pluginDirectory) {
 
 
-
-    $configInstance =  ConfigFactory::inflate($pluginDirectory);
+    $fullPath = ABSPATH . "wp-content/plugins/" . $pluginDirectory;
+    $configInstance =  ConfigFactory::inflate($fullPath);
     //TODO remove once variable is removed
     RootConfig::$instance = $configInstance;
 
     $lifeCycleClass = $configInstance->rootNameSpace. "\\" . $configInstance->LifeCycle->className;
 
-    $aPlugin = new $lifeCycleClass($pluginDirectory, $configInstance);
+    $aPlugin = new $lifeCycleClass($fullPath, $configInstance);
 
     // Install the plugin
     // NOTE: this file gets run each time you *activate* the plugin.
