@@ -1,9 +1,9 @@
 <?php
 namespace WordWrap\Admin\Tasks;
 use WordWrap\Admin\TaskController;
+use WordWrap\Assets\View\Anchor;
+use WordWrap\Assets\View\ViewCollection;
 use WordWrap\Configuration\Task;
-use WordWrap\View\Anchor;
-use WordWrap\View\ViewCollection;
 
 /**
  * Created by PhpStorm.
@@ -26,8 +26,9 @@ class AvailableTasks extends TaskController {
 
     /**
      * override this to setup anything that needs to be done before
+     * @param $action string|null
      */
-    public function processRequest() {
+    public function processRequest($action = null) {
         $this->availableTask = $this->adminController->getCurrentPage()->Task;
         $this->pageSlug = $this->adminController->getCurrentPage()->getSlug();
     }

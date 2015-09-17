@@ -10,10 +10,10 @@
 namespace WordWrap\Admin;
 
 use WordWrap\Admin\Tasks\AvailableTasks;
+use WordWrap\Assets\View\View;
 use WordWrap\Configuration\Admin;
 use WordWrap\Configuration\Page;
 use WordWrap\LifeCycle;
-use WordWrap\View\View;
 
 class AdminController {
 

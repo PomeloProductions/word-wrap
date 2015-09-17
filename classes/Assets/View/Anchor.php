@@ -6,7 +6,7 @@
  * Time: 9:15 PM
  */
 
-namespace WordWrap\View;
+namespace WordWrap\Assets\View;
 
 
 use WordWrap\LifeCycle;

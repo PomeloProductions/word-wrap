@@ -9,10 +9,10 @@
 namespace WordWrap\Admin;
 
 
+use WordWrap\Assets\View\View;
 use WordWrap\Configuration\Page;
 use WordWrap\Configuration\Task;
 use WordWrap\LifeCycle;
-use WordWrap\View\View;
 
 abstract class TaskController {
 
