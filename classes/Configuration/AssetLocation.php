@@ -9,7 +9,7 @@
 namespace WordWrap\Configuration;
 
 
-class AssetSet {
+class AssetLocation extends Base{
 
     /**
      * @var string the type of asset this is
