@@ -19,4 +19,5 @@ class CSS extends BaseAsset {
     public function __construct($lifeCycle, $assetName) {
         parent::__construct($lifeCycle, $assetName, "css");
     }
+
 }

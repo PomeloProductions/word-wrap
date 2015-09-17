@@ -9,9 +9,6 @@
 namespace WordWrap\AssetManager;
 
 use \Exception;
-use WordWrap\AssetManager\AssetTypes\AssetType;
-use WordWrap\AssetManager\AssetTypes\CSSAsset;
-use WordWrap\AssetManager\AssetTypes\HTMLAsset;
 
 class AssetManager {
 
@@ -42,26 +39,15 @@ class AssetManager {
      *
      * @param $assetType string what type of assets are located at this location
      * @param $assetLocation string the location where assets of this type will be located on the file system
-     * @param $assetTypeObject AssetType|null this can be used in the case of a custom asset type.
-     *                              Otherwise we will load some of the prebuilt asset types.
+     * @param $fileExtension string|null the file extension this asset type uses
      * @throws Exception if we could not find the asset type object
      */
-    public function registerAssetType($assetType, $assetLocation, AssetType $assetTypeObject = null) {
-        if($assetTypeObject == null) {
-            switch($assetType) {
-                case "css":
-                    $assetTypeObject = new CSSAsset($assetLocation);
-                    break;
-                case "html":
-                case "admin_html":
-                    $assetTypeObject = new HTMLAsset($assetLocation);
-                    break;
-                default:
-                    throw new Exception("Unable to register type. You must either use one of the predefined asset types or pass in your own asset type object");
-            }
-        }
+    public function registerAssetType($assetType, $assetLocation, $fileExtension = null) {
+        if($fileExtension == null)
+            $fileExtension = $assetType;
+
         $this->assets[$assetType] = [];
-        $this->assetTypes[$assetType] = $assetTypeObject;
+        $this->assetTypes[$assetType] = new AssetType($assetLocation, $fileExtension);
     }
 
     /**

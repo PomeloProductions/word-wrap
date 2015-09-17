@@ -6,10 +6,10 @@
  * Time: 6:21 PM
  */
 
-namespace WordWrap\AssetManager\AssetTypes;
+namespace WordWrap\AssetManager;
 
 
-abstract class AssetType {
+class AssetType {
 
     /**
      * @var string the location of all the assets of this asset type
@@ -42,15 +42,5 @@ abstract class AssetType {
     public function getFileExtension() {
         return $this->fileExtension;
     }
-
-    /**
-     * override this to do anything before we dump the assets to the client
-     */
-    public abstract function onPreDump();
-
-    /**
-     * override this to do anything after we dump the assets to the client
-     */
-    public abstract function onPostDump();
 
 }
