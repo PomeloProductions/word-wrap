@@ -10,7 +10,7 @@ use WordWrap\LifeCycle;
  * Date: 9/17/15
  * Time: 12:39 AM
  */
-class BaseAsset{
+abstract class BaseAsset{
 
     /**
      * @var LifeCycle the current running instance of the plugin
@@ -57,6 +57,9 @@ class BaseAsset{
      * @return string the exported view html
      */
     public function export($strip = true) {
+
+        $preExport = $this->onPreExport();
+
         $processedContents = $this->template->getAssetContents();
 
         foreach($this->templateVars as $key => $value)
@@ -65,9 +68,19 @@ class BaseAsset{
         if($strip)
             $processedContents = $this->stripEmptyBrackets($processedContents);
 
+        $postExport = $this->onPostExport();
+
+        $processedContents = (empty($preExport) ? '' : $preExport) . $processedContents .
+            (empty($postExport) ? '' : $postExport);
+
         return $processedContents;
     }
 
+    /**
+     * Removes empty brackets from exported content
+     * @param $contents
+     * @return mixed
+     */
     protected function stripEmptyBrackets($contents) {
 
         $contents = preg_replace('/\[{2}.*\]{2}/', '', $contents);
@@ -75,5 +88,15 @@ class BaseAsset{
 
         return $contents;
     }
+
+    /**
+     * @return string any content that needs to be echoed before export
+     */
+    public abstract function onPreExport();
+
+    /**
+     * @return string any content that needs to be echoed after export
+     */
+    public abstract function onPostExport();
 
 }

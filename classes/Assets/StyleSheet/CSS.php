@@ -20,4 +20,17 @@ class CSS extends BaseAsset {
         parent::__construct($lifeCycle, $assetName, "css");
     }
 
+    /**
+     * @return string any content that needs to be echoed before export
+     */
+    public function onPreExport() {
+        return '<style type="text/css">';
+    }
+
+    /**
+     * @return string any content that needs to be echoed after export
+     */
+    public function onPostExport() {
+        return '</style>';
+    }
 }

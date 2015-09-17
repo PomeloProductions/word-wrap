@@ -23,4 +23,13 @@ class View extends BaseAsset {
         parent::__construct($lifeCycle, $templateName, $templateType);
     }
 
+    /**
+     * @return string any content that needs to be echoed before export
+     */
+    public function onPreExport() { }
+
+    /**
+     * @return string any content that needs to be echoed after export
+     */
+    public function onPostExport() { }
 }
