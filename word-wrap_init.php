@@ -33,7 +33,7 @@ function WordWrap_init($pluginDirectory) {
 
     $lifeCycleClass = $configInstance->rootNameSpace. "\\" . $configInstance->LifeCycle->className;
 
-    $aPlugin = new $lifeCycleClass($configInstance);
+    $aPlugin = new $lifeCycleClass($pluginDirectory, $configInstance);
 
     // Install the plugin
     // NOTE: this file gets run each time you *activate* the plugin.

@@ -33,6 +33,11 @@ class LifeCycle extends InstallIndicator {
     public $assetManager;
 
     /**
+     * @var string the directory in which this directory exists
+     */
+    public $pluginDirectory;
+
+    /**
      * @var RootConfig the configuration for this plugin
      */
     public $rootConfig;
@@ -42,8 +47,9 @@ class LifeCycle extends InstallIndicator {
      */
     public $adminController;
 
-    final function __construct(RootConfig $config) {
+    final function __construct($pluginDirectory, RootConfig $config) {
         $this->rootConfig = $config;
+        $this->pluginDirectory = $pluginDirectory;
 
         $this->assetManager = new AssetManager();
 
