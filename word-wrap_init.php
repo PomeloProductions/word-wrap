@@ -31,7 +31,7 @@ function WordWrap_init($pluginDirectory) {
     //TODO remove once variable is removed
     RootConfig::$instance = $configInstance;
 
-    $lifeCycleClass = $configInstance->rootNameSpace. "\\" . RootConfig::$instance->LifeCycle->className;
+    $lifeCycleClass = $configInstance->rootNameSpace. "\\" . $configInstance->LifeCycle->className;
 
     $aPlugin = new $lifeCycleClass($configInstance);
 
