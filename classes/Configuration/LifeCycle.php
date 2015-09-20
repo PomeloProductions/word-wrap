@@ -22,9 +22,9 @@ class LifeCycle extends Base {
     public $optionsPrefix;
 
     /**
-     * @var Admin the configuration for the admin section of the site
+     * @var null|Admin the configuration for the admin section of the site or null if there is no admin
      */
-    public $Admin;
+    public $Admin = null;
 
     /**
      * @var AssetLocation[] an array of all asset locations that word wrap will initialize
