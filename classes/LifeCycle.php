@@ -53,7 +53,7 @@ class LifeCycle extends InstallIndicator {
 
         $this->initAssets();
 
-        if(is_admin())
+        if(is_admin() && $config->LifeCycle->Admin)
             $this->adminController = new AdminController($this, $config->LifeCycle->Admin);
     }
 
