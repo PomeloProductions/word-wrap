@@ -38,11 +38,6 @@ class LifeCycle extends InstallIndicator {
     public $pluginDirectory;
 
     /**
-     * @var RootConfig the configuration for this plugin
-     */
-    public $rootConfig;
-
-    /**
      * @var AdminController the controller that runs on admin pages
      */
     public $adminController;
