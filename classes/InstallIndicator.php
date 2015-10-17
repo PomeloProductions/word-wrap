@@ -20,16 +20,23 @@
 */
 namespace WordWrap;
 
+use WordWrap\Configuration\RootConfig;
+
 class InstallIndicator extends OptionsManager {
 
     const optionInstalled = '_installed';
     const optionVersion = '_version';
 
     /**
+     * @var RootConfig the configuration for this plugin
+     */
+    public $rootConfig;
+
+    /**
      * @return bool indicating if the plugin is installed already
      */
     public function isInstalled() {
-        return $this->getOption(self::optionInstalled) == true;
+        return $this->getOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionInstalled) == true;
     }
 
     /**
@@ -37,7 +44,7 @@ class InstallIndicator extends OptionsManager {
      * @return null
      */
     protected function markAsInstalled() {
-        return $this->updateOption(self::optionInstalled, true);
+        return $this->updateOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionInstalled, true);
     }
 
     /**
@@ -47,7 +54,7 @@ class InstallIndicator extends OptionsManager {
      * false implies it was not.
      */
     protected function markAsUnInstalled() {
-        return $this->deleteOption(self::optionInstalled);
+        return $this->deleteOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionInstalled);
     }
 
     /**
@@ -57,7 +64,7 @@ class InstallIndicator extends OptionsManager {
      * @return null
      */
     protected function getVersionSaved() {
-        return $this->getOption(self::optionVersion);
+        return $this->getOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionVersion);
     }
 
     /**
