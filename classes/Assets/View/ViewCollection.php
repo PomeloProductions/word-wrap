@@ -52,10 +52,11 @@ class ViewCollection extends View{
     }
 
     /**
+     * @param $strip bool defaults to false in order to keep with php7 standards
      * @return string processes all child views into exported html
      */
-    public function export() {
-        $processedContents = parent::export(false);
+    public function export($strip = false) {
+        $processedContents = parent::export($strip);
 
         foreach($this->childViews as $collection => $views) {
             $processedViews = "";
