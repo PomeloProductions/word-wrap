@@ -34,7 +34,7 @@ class MustacheTemplate extends BaseAsset {
         parent::__construct($lifeCycle, $assetName, "mustache");
 
         $this->dataObject = $dataObject;
-        
+
         $this->mustacheFactory = new MustacheFactory();
     }
 
@@ -42,7 +42,7 @@ class MustacheTemplate extends BaseAsset {
 
         $engine = $this->mustacheFactory->getMustacheEngine();
 
-        return $engine->render($this->getTemplateContent(), )
+        return $engine->render($this->getTemplateContent(), $this->dataObject);
     }
 
     /**
