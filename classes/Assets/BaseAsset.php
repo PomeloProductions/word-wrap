@@ -53,6 +53,16 @@ abstract class BaseAsset{
     }
 
     /**
+     * @return string the contents of this assets template
+     */
+    protected function getTemplateContent() {
+        if ($this->template != null)
+            return $this->template->getAssetContents();
+
+        return '';
+    }
+
+    /**
      * @param bool @strip whether or not to strip out empty variables right away
      * @return string the exported view html
      */
@@ -60,7 +70,7 @@ abstract class BaseAsset{
 
         $preExport = $this->onPreExport();
 
-        $processedContents = $this->template->getAssetContents();
+        $processedContents = $this->getTemplateContent();
 
         foreach($this->templateVars as $key => $value)
             $processedContents = str_replace('{{' . $key . '}}', $value, $processedContents);
