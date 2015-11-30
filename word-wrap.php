@@ -9,6 +9,7 @@
    License: GPLv3
   */
 
+require_once("vendor/autoload.php");
 
 /*
     "WordPress Plugin Template" Copyright (C) 2015 Michael Simpson  (email : michael.d.simpson@gmail.com)
