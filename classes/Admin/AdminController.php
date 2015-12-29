@@ -10,6 +10,7 @@
 namespace WordWrap\Admin;
 
 use WordWrap\Admin\Tasks\AvailableTasks;
+use WordWrap\Assets\Script\JavaScript;
 use WordWrap\Assets\StyleSheet\CSS;
 use WordWrap\Assets\View\View;
 use WordWrap\Configuration\Admin;
@@ -112,6 +113,14 @@ class AdminController {
 
         echo $pageContainer->export();
 
+
+        foreach($this->admin->RequiredAssets as $requiredAsset) {
+            if($requiredAsset->type == "js") {
+                $asset = new JavaScript($this->lifeCycle, $requiredAsset->name);
+
+                echo $asset->export();
+            }
+        }
     }
 
     /**
