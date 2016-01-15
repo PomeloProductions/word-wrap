@@ -30,8 +30,11 @@ class MustacheTemplate extends BaseAsset {
      * @param string $assetName the name of the asset we are loading
      * @param Object $dataObject the data for this template
      */
-    public function __construct($lifeCycle, $assetName, $dataObject) {
+    public function __construct($lifeCycle, $assetName, $dataObject = null) {
         parent::__construct($lifeCycle, $assetName, "mustache");
+
+        if (!$dataObject)
+            $dataObject = (object) [];
 
         $this->dataObject = $dataObject;
 
