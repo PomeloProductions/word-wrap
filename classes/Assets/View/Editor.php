@@ -29,7 +29,7 @@ class Editor extends View {
     private $title;
 
     /**
-     * @var null|int for the total height of the editor
+     * @var null|int for the total height of the editor in pixels
      */
     private $height = null;
 
@@ -51,6 +51,9 @@ class Editor extends View {
 
     }
 
+    /**
+     * @param $height int the height in pixels
+     */
     public function setHeight($height) {
         $this->height = $height;
     }
