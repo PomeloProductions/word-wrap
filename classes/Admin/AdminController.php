@@ -29,6 +29,11 @@ class AdminController {
     private $admin;
 
     /**
+     * @var TaskController the current task being ran
+     */
+    private $taskController = null;
+
+    /**
      * @var Page the current page that is being used
      */
     private $currentPage;
@@ -37,7 +42,49 @@ class AdminController {
         $this->lifeCycle = $lifeCycle;
         $this->admin = $admin;
 
+        add_action("init", [$this, "handleRequest"]);
+
         add_action( 'admin_menu', [$this, "addMenus"] );
+    }
+
+    /**
+     * checks for tasks being ran and creates the controllers for them
+     */
+    public function handleRequest() {
+
+        $page = $this->getCurrentPage();
+        if ($page) {
+
+
+            $defaultTask = null;
+            $currentTask = null;
+            $taskController = null;
+
+            $requestedTask = isset($_GET["task"]) ? $_GET["task"] : "";
+
+            foreach ($this->getCurrentPage()->Task as $task) {
+                if($task->default)
+                    $defaultTask = $task;
+                if($task->getSlug() == $requestedTask) {
+                    $currentTask = $task;
+                    break;
+                }
+            }
+
+            if($currentTask == null && $defaultTask != null)
+                $currentTask = $defaultTask;
+
+            if($currentTask == null) {
+                $this->taskController = new AvailableTasks($this->lifeCycle, $this);
+            }
+            else {
+                if(strpos($currentTask->className, "\\") === 0)
+                    $taskClass = $this->lifeCycle->rootConfig->rootNameSpace . $currentTask->className;
+                else
+                    $taskClass = $currentTask->className;
+                $this->taskController = new $taskClass($this->lifeCycle, $this, $currentTask);
+            }
+        }
     }
 
     /**
@@ -75,40 +122,13 @@ class AdminController {
         }
         else {
 
-            $defaultTask = null;
-            $currentTask = null;
-            $taskController = null;
-
-            $requestedTask = isset($_GET["task"]) ? $_GET["task"] : "";
-
 
             $pageContainer->setTemplateVar("page_title", $this->currentPage->name);
 
-            foreach ($this->getCurrentPage()->Task as $task) {
-                if($task->default)
-                    $defaultTask = $task;
-                if($task->getSlug() == $requestedTask) {
-                    $currentTask = $task;
-                    break;
-                }
-            }
 
-            if($currentTask == null && $defaultTask != null)
-                $currentTask = $defaultTask;
 
-            if($currentTask == null) {
-                $taskController = new AvailableTasks($this->lifeCycle, $this);
-            }
-            else {
-                if(strpos($currentTask->className, "\\") === 0)
-                    $taskClass = $this->lifeCycle->rootConfig->rootNameSpace . $currentTask->className;
-                else
-                    $taskClass = $currentTask->className;
-                $taskController = new $taskClass($this->lifeCycle, $this, $currentTask);
-            }
-
-            $pageContainer->setTemplateVar("task_title", $taskController->getTaskName());
-            $pageContainer->setTemplateVar("task_content", $taskController->renderPageContent());
+            $pageContainer->setTemplateVar("task_title", $this->taskController->getTaskName());
+            $pageContainer->setTemplateVar("task_content", $this->taskController->renderPageContent());
         }
 
         echo $pageContainer->export();
