@@ -182,7 +182,7 @@ abstract class BaseModel implements ModelInterface {
     /**
      * Create a new model from the given data.
      *
-     * @return self
+     * @return static
      */
     public static function create($properties) {
         return new static($properties);
@@ -205,7 +205,7 @@ abstract class BaseModel implements ModelInterface {
      *
      * @param  string $property
      * @param  string $value
-     * @return false|self
+     * @return false|static
      */
     public static function find_one_by($property, $value) {
         global $wpdb;
@@ -227,7 +227,7 @@ abstract class BaseModel implements ModelInterface {
      * Find a specific model by it's unique ID.
      *
      * @param  integer $id
-     * @return false|self
+     * @return false|static
      */
     public static function find_one($id) {
         return static::find_one_by(static::get_primary_key(), (int) $id);
@@ -249,7 +249,7 @@ abstract class BaseModel implements ModelInterface {
     /**
      * Return EVERY instance of this model from the database, with NO filtering.
      *
-     * @return array
+     * @return static[]
      */
     public static function all() {
         global $wpdb;
