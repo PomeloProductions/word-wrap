@@ -34,6 +34,11 @@ class Editor extends View {
     private $height = null;
 
     /**
+     * @var bool whether or not to show the media buttons defaults to true
+     */
+    private $mediaButtons = true;
+
+    /**
      * @param LifeCycle $lifeCycle
      * @param null|string $editorId
      * @param string $content
@@ -52,6 +57,13 @@ class Editor extends View {
     }
 
     /**
+     * turns off media buttons
+     */
+    public function disableMedia() {
+        $this->mediaButtons = false;
+    }
+
+    /**
      * @param $height int the height in pixels
      */
     public function setHeight($height) {
@@ -60,7 +72,9 @@ class Editor extends View {
 
     public function export() {
 
-        $settings = [];
+        $settings = [
+            "media_buttons" => $this->mediaButtons
+        ];
 
         if($this->height)
             $settings["editor_height"] = $this->height;
