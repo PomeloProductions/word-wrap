@@ -18,16 +18,16 @@ interface ModelInterface {
      * Overwrite this in your concrete class. Returns the table name used to
      * store models of this class.
      *
-     * @return string
+     * @return string the table name without a prefix
      */
-    public static function get_table();
+    public static function getTableName();
 
     /**
      * Get an array of fields to search during a search query.
      *
      * @return array
      */
-    public static function get_searchable_fields();
+    public static function getSearchableFields();
 
     /**
      * Get an array of all fields for this Model with a key and a value
@@ -35,5 +35,5 @@ interface ModelInterface {
      *
      * @return array
      */
-    public static function get_fields();
+    public static function getFields();
 }

@@ -23,21 +23,36 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return string
      */
-    public static function get_primary_key() {
+    public static function getPrimaryKey() {
         return 'id';
     }
 
     public static function install_table() {
-        $SQL = "CREATE TABLE IF NOT EXISTS `" .  static::get_table() . "` (";
-        $SQL.= "`" . static::get_primary_key() . "` int(11) unsigned NOT NULL AUTO_INCREMENT,";
-        foreach(static::get_fields() as $key => $value) {
+
+
+        $SQL = "CREATE TABLE IF NOT EXISTS `" .  static::getFullTableName() . "` (";
+        $SQL.= "`" . static::getPrimaryKey() . "` int(11) unsigned NOT NULL AUTO_INCREMENT,";
+        foreach(static::getFields() as $key => $value) {
             $SQL.= "`" . $key . "` " . $value. ",";
         }
-        $SQL.= "PRIMARY KEY (`" . static::get_primary_key(). "`)";
+        $SQL.= "PRIMARY KEY (`" . static::getPrimaryKey(). "`)";
         $SQL.= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
         global $wpdb;
         $wpdb->query($SQL);
+    }
+
+    protected static function getFullTableName() {
+        return static::getTablePrefix() . static::getTableName();
+    }
+
+    /**
+     * Return configured table prefix.
+     * @return string
+     */
+    public function getTablePrefix() {
+        global $wpdb;
+        return $wpdb->prefix;
     }
 
     /**
@@ -95,7 +110,7 @@ abstract class BaseModel implements ModelInterface {
      * @return integer
      */
     public function primary_key() {
-        return $this->{static::get_primary_key()};
+        return $this->{static::getPrimaryKey()};
     }
 
     /**
@@ -114,7 +129,7 @@ abstract class BaseModel implements ModelInterface {
      * @return array
      */
     public function flatten_props($props) {
-        $availableFields = static::get_fields();
+        $availableFields = static::getFields();
 
         $fieldNames = array_keys($availableFields);
 
@@ -168,12 +183,12 @@ abstract class BaseModel implements ModelInterface {
         }
 
         // Insert or update?
-        if (is_null($this->{static::get_primary_key()})) {
-            $wpdb->insert($this->get_table(), $props);
+        if (is_null($this->{static::getPrimaryKey()})) {
+            $wpdb->insert($this->getFullTableName(), $props);
 
-            $this->{static::get_primary_key()} = $wpdb->insert_id;
+            $this->{static::getPrimaryKey()} = $wpdb->insert_id;
         } else {
-            $wpdb->update(static::get_table(), $props, array(static::get_primary_key() => $this->{static::get_primary_key()}));
+            $wpdb->update(static::getFullTableName(), $props, array(static::getPrimaryKey() => $this->{static::getPrimaryKey()}));
         }
 
         return $this->id;
@@ -197,7 +212,7 @@ abstract class BaseModel implements ModelInterface {
     public function delete() {
         global $wpdb;
 
-        return $wpdb->delete(static::get_table(), array(static::get_primary_key() => $this->{static::get_primary_key()}));
+        return $wpdb->delete(static::getFullTableName(), array(static::getPrimaryKey() => $this->{static::getPrimaryKey()}));
     }
 
     /**
@@ -214,7 +229,7 @@ abstract class BaseModel implements ModelInterface {
         $value = esc_sql($value);
 
         // Get the table name
-        $table = static::get_table();
+        $table = static::getFullTableName();
 
         // Get the item
         $obj = $wpdb->get_row("SELECT * FROM `{$table}` WHERE `{$property}` = '{$value}'", ARRAY_A);
@@ -230,7 +245,7 @@ abstract class BaseModel implements ModelInterface {
      * @return false|static
      */
     public static function find_one($id) {
-        return static::find_one_by(static::get_primary_key(), (int) $id);
+        return static::find_one_by(static::getPrimaryKey(), (int) $id);
     }
 
     /**
@@ -240,8 +255,8 @@ abstract class BaseModel implements ModelInterface {
      */
     public static function query() {
         $query = new Query(get_called_class());
-        $query->set_searchable_fields(static::get_searchable_fields());
-        $query->set_primary_key(static::get_primary_key());
+        $query->set_searchable_fields(static::getSearchableFields());
+        $query->set_primary_key(static::getPrimaryKey());
 
         return $query;
     }
@@ -255,7 +270,7 @@ abstract class BaseModel implements ModelInterface {
         global $wpdb;
 
         // Get the table name
-        $table = static::get_table();
+        $table = static::getFullTableName();
 
         // Get the items
         $results = $wpdb->get_results("SELECT * FROM `{$table}`");
@@ -265,14 +280,5 @@ abstract class BaseModel implements ModelInterface {
         }
 
         return $results;
-    }
-
-    /**
-     * Return configured table prefix.
-     * @return string
-     */
-    public function get_table_prefix() {
-        global $wpdb;
-        return $wpdb->prefix;
     }
 }
