@@ -140,7 +140,7 @@ class User extends BaseModel {
      *
      * @return string
      */
-    public static function get_primary_key() {
+    public static function getPrimaryKey() {
         return 'ID';
     }
 
@@ -149,7 +149,7 @@ class User extends BaseModel {
      *
      * @return string
      */
-    public static function get_table() {
+    public static function getTableName() {
         global $wpdb;
 
         return $wpdb->users;
@@ -160,7 +160,7 @@ class User extends BaseModel {
      *
      * @return array
      */
-    public static function get_searchable_fields() {
+    public static function getSearchableFields() {
         return array('user_login', 'user_nicename', 'user_email', 'display_name');
     }
 
@@ -170,7 +170,7 @@ class User extends BaseModel {
      *
      * @return array
      */
-    public static function get_fields() {
+    public static function getFields() {
         // Not needed, build in word press table
     }
 }

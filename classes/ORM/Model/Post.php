@@ -217,7 +217,7 @@ class Post extends BaseModel {
      *
      * @return string
      */
-    public static function get_primary_key() {
+    public static function getPrimaryKey() {
         return 'ID';
     }
 
@@ -226,7 +226,7 @@ class Post extends BaseModel {
      *
      * @return string
      */
-    public static function get_table() {
+    public static function getTableName() {
         global $wpdb;
 
         return $wpdb->posts;
@@ -237,7 +237,7 @@ class Post extends BaseModel {
      *
      * @return array
      */
-    public static function get_searchable_fields() {
+    public static function getSearchableFields() {
         return array('post_title', 'post_content', 'post_excerpt');
     }
 
@@ -247,7 +247,7 @@ class Post extends BaseModel {
      *
      * @return array
      */
-    public static function get_fields() {
+    public static function getFields() {
         //Not needed built in table
     }
 }
