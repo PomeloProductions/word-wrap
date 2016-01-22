@@ -21,6 +21,7 @@
 
 namespace WordWrap;
 
+use Exception;
 use WordWrap\Admin\AdminController;
 use WordWrap\AssetManager\AssetManager;
 use WordWrap\Configuration\RootConfig;
@@ -122,6 +123,39 @@ class LifeCycle extends InstallIndicator {
     protected function initOptions() {
     }
 
+    /**
+     * creates any actions and hooks defined within configuration also runs hook for extended plugin
+     */
+    public final function initActionsAndFilters() {
+
+        $nameSpace = $this->rootConfig->rootNameSpace . "\\";
+        foreach ($this->rootConfig->LifeCycle->ShortCode as $shortCode) {
+
+            $fullClassName = $nameSpace . $shortCode->className;
+            $sc = new $fullClassName($this);
+
+            if (!is_subclass_of($sc, "WordWrap\\ShortCodeScriptLoader"))
+                throw new Exception("Your Short Codes Must extend ShortCodeScriptLoader");
+
+            $sc->register($shortCode->name);
+        }
+
+        $this->addActionsAndFilters();
+        $this->onInitActionsAndFilters();
+    }
+
+    /**
+     * allows a plugin to manually initialize actions and filters
+     */
+    public function onInitActionsAndFilters() {
+
+    }
+
+    /**
+     * allows a plugin to manually initialize actions and filters
+     *
+     * @deprecated use onInitActionsAndFilters instead this will be removed someday soon
+     */
     public function addActionsAndFilters() {
     }
 

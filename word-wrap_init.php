@@ -50,7 +50,7 @@ function WordWrap_init($pluginDirectory) {
     }
 
     // Add callbacks to hooks
-    $aPlugin->addActionsAndFilters();
+    $aPlugin->initActionsAndFilters();
 
     // Register the Plugin Activation Hook
     register_activation_hook(__FILE__, array(&$aPlugin, 'activate'));
