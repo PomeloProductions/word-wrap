@@ -32,7 +32,12 @@ class LifeCycle extends Base {
     public $AssetLocation = [];
 
     /**
-     * @var ShortCode[]
+     * @var ShortCode[] any short codes that have been defined in configuration
      */
     public $ShortCode = [];
+
+    /**
+     * @var Model[] any models defined inside of confugration
+     */
+    public $Model = [];
 }

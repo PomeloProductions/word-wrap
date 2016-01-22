@@ -9,7 +9,7 @@
 namespace WordWrap\Configuration;
 
 
-class ShortCode {
+class ShortCode extends Base{
 
     /**
      * @var string the name of this short code, which will be what the user puts into the editor as the short code
