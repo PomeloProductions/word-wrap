@@ -2,7 +2,7 @@
 /*
    Plugin Name: Word Wrap
    Plugin URI: http://wordpress.org/extend/plugins/word-wrap/
-   Version: 0.8.0-dev
+   Version: 0.8.0
    Author: Axolotl Interactive
    Description: 
    Text Domain: word-wrap
