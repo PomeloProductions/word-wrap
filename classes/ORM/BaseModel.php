@@ -19,6 +19,11 @@ use DateTime;
 abstract class BaseModel implements ModelInterface {
 
     /**
+     * @var DateTime the time at which this model was deleted
+     */
+    public $deleted_at = null;
+
+    /**
      * Get the column used as the primary key, defaults to 'id'.
      *
      * @return string
@@ -35,6 +40,9 @@ abstract class BaseModel implements ModelInterface {
         foreach(static::getFields() as $key => $value) {
             $SQL.= "`" . $key . "` " . $value. ",";
         }
+
+        $SQL.= "`deleted_at` DATETIME,";
+
         $SQL.= "PRIMARY KEY (`" . static::getPrimaryKey(). "`)";
         $SQL.= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
@@ -64,6 +72,8 @@ abstract class BaseModel implements ModelInterface {
     public function __construct(array $properties = array(), array $datetimeFields = array()) {
         $model_props = $this->properties();
         $properties  = array_intersect_key($properties, $model_props);
+
+        $datetimeFields[] = "deleted_at";
 
         foreach ($properties as $property => $value) {
             if($value != null) {
@@ -209,10 +219,19 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return boolean
      */
-    public function delete() {
+    public function destroy() {
         global $wpdb;
 
         return $wpdb->delete(static::getFullTableName(), array(static::getPrimaryKey() => $this->{static::getPrimaryKey()}));
+    }
+
+    /**
+     * sets the models deleted at time to be now
+     */
+    public function delete() {
+        $this->deleted_at = new DateTime();
+
+        $this->save();
     }
 
     /**
