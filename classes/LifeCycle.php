@@ -75,19 +75,14 @@ class LifeCycle extends InstallIndicator {
      */
     public function install() {
 
-        // Initialize Plugin Options
         $this->initOptions();
 
-        // Initialize DB Tables used by the plugin
-        $this->installDatabaseTables();
+        $this->installDatabase();
 
-        // Other Plugin initialization - for the plugin writer to override as needed
         $this->onInstall();
 
-        // Record the installed version
         $this->saveInstalledVersion();
 
-        // To avoid running install() more then once
         $this->markAsInstalled();
     }
 
@@ -163,12 +158,32 @@ class LifeCycle extends InstallIndicator {
     }
 
     /**
+     * runs the creation of any defined database tables within configuration as well as triggering additional hooks
+     */
+    public function installDatabase() {
+
+        //todo install database tables from config
+
+        $this->onInstallDatabase();
+        $this->installDatabaseTables();
+    }
+
+    /**
+     * runs directly after the database is installed. Run any seeds needed here
+     */
+    protected function onInstallDatabase() {
+
+    }
+
+    /**
      * See: http://plugin.michael-simpson.com/?page_id=101
      * Called by install() to create any database tables if needed.
      * Best Practice:
      * (1) Prefix all table names with $wpdb->prefix
      * (2) make table names lower case only
      * @return void
+     *
+     * @deprecated use onInstallDatabase instead this will soon be removed
      */
     protected function installDatabaseTables() {
     }
