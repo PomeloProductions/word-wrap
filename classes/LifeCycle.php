@@ -79,7 +79,7 @@ class LifeCycle extends InstallIndicator {
         $this->installDatabaseTables();
 
         // Other Plugin initialization - for the plugin writer to override as needed
-        $this->otherInstall();
+        $this->onInstall();
 
         // Record the installed version
         $this->saveInstalledVersion();
@@ -183,7 +183,7 @@ class LifeCycle extends InstallIndicator {
      * See: http://plugin.michael-simpson.com/?page_id=33
      * @return void
      */
-    protected function otherInstall() {
+    protected function onInstall() {
     }
 
     /**
