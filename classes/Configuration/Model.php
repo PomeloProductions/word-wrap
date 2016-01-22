@@ -11,4 +11,8 @@ namespace WordWrap\Configuration;
 
 class Model extends Base {
 
+    /**
+     * @var string the class name of this madel starting at the root name space
+     */
+    public $className;
 }
