@@ -32,7 +32,7 @@ abstract class BaseModel implements ModelInterface {
         return 'id';
     }
 
-    public static function install_table() {
+    public static function installTable() {
 
 
         $SQL = "CREATE TABLE IF NOT EXISTS `" .  static::getFullTableName() . "` (";
