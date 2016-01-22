@@ -14,7 +14,7 @@ class LifeCycle extends Base {
     /**
      * @var string the class name of this plugins LifeCycle
      */
-    public $className;
+    public $className = null;
 
     /**
      * @var string the prefix for any options either tables or wp_options

@@ -22,40 +22,48 @@
 
 use WordWrap\Configuration\ConfigFactory;
 use WordWrap\Configuration\RootConfig;
+use WordWrap\LifeCycle;
 
-function WordWrap_init($pluginDirectory) {
+class WordWrap {
+
+    public static function init($pluginDirectory) {
 
 
-    $fullPath = ABSPATH . "wp-content/plugins/" . $pluginDirectory;
-    $configInstance =  ConfigFactory::inflate($fullPath);
-    //TODO remove once variable is removed
-    RootConfig::$instance = $configInstance;
+        $fullPath = ABSPATH . "wp-content/plugins/" . $pluginDirectory;
+        $configInstance = ConfigFactory::inflate($fullPath);
+        //TODO remove once variable is removed
+        RootConfig::$instance = $configInstance;
 
-    $lifeCycleClass = $configInstance->rootNameSpace. "\\" . $configInstance->LifeCycle->className;
+        if ($configInstance->LifeCycle->className) {
+            $lifeCycleClass = $configInstance->rootNameSpace . "\\" . $configInstance->LifeCycle->className;
 
-    $aPlugin = new $lifeCycleClass($fullPath, $configInstance);
+            $aPlugin = new $lifeCycleClass($fullPath, $configInstance);
+        }
+        else {
+            $aPlugin = new LifeCycle($fullPath, $configInstance);
+        }
 
-    // Install the plugin
-    // NOTE: this file gets run each time you *activate* the plugin.
-    // So in WP when you "install" the plugin, all that does it dump its files in the plugin-templates directory
-    // but it does not call any of its code.
-    // So here, the plugin tracks whether or not it has run its install operation, and we ensure it is run only once
-    // on the first activation
-    if (!$aPlugin->isInstalled()) {
-        $aPlugin->install();
+        // Install the plugin
+        // NOTE: this file gets run each time you *activate* the plugin.
+        // So in WP when you "install" the plugin, all that does it dump its files in the plugin-templates directory
+        // but it does not call any of its code.
+        // So here, the plugin tracks whether or not it has run its install operation, and we ensure it is run only once
+        // on the first activation
+        if (!$aPlugin->isInstalled()) {
+            $aPlugin->install();
+        } else {
+            // Perform any version-upgrade activities prior to activation (e.g. database changes)
+            $aPlugin->upgrade();
+        }
+
+        // Add callbacks to hooks
+        $aPlugin->initActionsAndFilters();
+
+        // Register the Plugin Activation Hook
+        register_activation_hook(__FILE__, array(&$aPlugin, 'activate'));
+
+
+        // Register the Plugin Deactivation Hook
+        register_deactivation_hook(__FILE__, array(&$aPlugin, 'deactivate'));
     }
-    else {
-        // Perform any version-upgrade activities prior to activation (e.g. database changes)
-        $aPlugin->upgrade();
-    }
-
-    // Add callbacks to hooks
-    $aPlugin->initActionsAndFilters();
-
-    // Register the Plugin Activation Hook
-    register_activation_hook(__FILE__, array(&$aPlugin, 'activate'));
-
-
-    // Register the Plugin Deactivation Hook
-    register_deactivation_hook(__FILE__, array(&$aPlugin, 'deactivate'));
 }
