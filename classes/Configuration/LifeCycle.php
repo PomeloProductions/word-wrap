@@ -30,4 +30,9 @@ class LifeCycle extends Base {
      * @var AssetLocation[] an array of all asset locations that word wrap will initialize
      */
     public $AssetLocation = [];
+
+    /**
+     * @var ShortCode[]
+     */
+    public $ShortCode = [];
 }
