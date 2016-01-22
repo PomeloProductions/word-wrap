@@ -37,7 +37,7 @@ class LifeCycle extends Base {
     public $ShortCode = [];
 
     /**
-     * @var Model[] any models defined inside of confugration
+     * @var Model[] any models defined inside of configuration
      */
     public $Model = [];
 }

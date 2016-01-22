@@ -162,7 +162,13 @@ class LifeCycle extends InstallIndicator {
      */
     public function installDatabase() {
 
-        //todo install database tables from config
+        $nameSpace = $this->rootConfig->rootNameSpace . "\\";
+
+        foreach ($this->rootConfig->LifeCycle->Model as $model) {
+            $fullClassName = $nameSpace . $model->className;
+
+            $fullClassName::installTable();
+        }
 
         $this->onInstallDatabase();
         $this->installDatabaseTables();
