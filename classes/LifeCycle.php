@@ -70,6 +70,9 @@ class LifeCycle extends InstallIndicator {
 
     }
 
+    /**
+     * called the first time the plugin is activated. Runs a number of install helpers
+     */
     public function install() {
 
         // Initialize Plugin Options
@@ -89,7 +92,7 @@ class LifeCycle extends InstallIndicator {
     }
 
     public function uninstall() {
-        $this->otherUninstall();
+        $this->onUninstall();
         $this->unInstallDatabaseTables();
         $this->deleteSavedOptions();
         $this->markAsUnInstalled();
@@ -191,7 +194,7 @@ class LifeCycle extends InstallIndicator {
      * See: http://plugin.michael-simpson.com/?page_id=33
      * @return void
      */
-    protected function otherUninstall() {
+    protected function onUninstall() {
     }
 
     /**
