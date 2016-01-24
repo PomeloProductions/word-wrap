@@ -9,6 +9,7 @@
 namespace WordWrap\ORM;
 
 use DateTime;
+use Exception;
 
 
 /**
@@ -278,6 +279,35 @@ abstract class BaseModel implements ModelInterface {
         $query->set_primary_key(static::getPrimaryKey());
 
         return $query;
+    }
+
+    /**
+     *
+     * @param array $whereArgs all where arguments to use
+     * @return static[] array of objects of called class
+     * todo allow arrays to be arguments for escaping strings
+     * todo allow deleted at override
+     * @throws Exception if there where no where arguments passed in
+     */
+    public static function fetchWhere($whereArgs) {
+
+        if (!count($whereArgs))
+            throw new Exception("You must pass in at least one where argument");
+
+        global $wpdb;
+        $results = [];
+
+        $table = static::getFullTableName();
+        $whereStatement = implode(" AND ", $whereArgs);
+
+        $SQL = "SELECT * FROM `" . $table . "` WHERE `deleted_at` IS NULL AND " . $whereStatement;
+
+        $rows = $wpdb->get_results($SQL);
+
+        foreach ($rows as $row)
+            $results[] = static::create((array) $row);
+
+        return $results;
     }
 
     /**
