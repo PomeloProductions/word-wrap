@@ -324,7 +324,7 @@ abstract class BaseModel implements ModelInterface {
 
         $table = static::getFullTableName();
 
-        $SQL = "SELECT * FROM `" . $table . "` WHERE `deleted_at` IS NULL ORDER BY " . $field . " " . $direction;
+        $SQL = "SELECT * FROM `" . $table . "` WHERE `deleted_at` IS NULL ORDER BY `" . $field . "` " . $direction;
 
         $rows = $wpdb->get_results($SQL);
 
