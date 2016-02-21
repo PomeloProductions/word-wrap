@@ -20,6 +20,11 @@ use Exception;
 abstract class BaseModel implements ModelInterface {
 
     /**
+     * @var int the default primary key
+     */
+    public $id;
+
+    /**
      * @var DateTime the time at which this model was deleted
      */
     public $deleted_at = null;
