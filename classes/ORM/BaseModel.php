@@ -316,6 +316,23 @@ abstract class BaseModel implements ModelInterface {
     }
 
     /**
+     * @param $SQL string the query to run
+     * @return static[] array of results as objects
+     */
+    protected static function executeFetch($SQL) {
+
+        global $wpdb;
+        $results = [];
+
+        $rows = $wpdb->get_results($SQL);
+
+        foreach ($rows as $row)
+            $results[] = static::create((array) $row);
+
+        return $results;
+    }
+
+    /**
      *
      * @param $field string the field that we are ordering by
      * @param $direction string the direction of the field
