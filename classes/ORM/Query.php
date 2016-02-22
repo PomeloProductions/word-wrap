@@ -367,7 +367,7 @@ class Query {
      */
     public function compose_query($only_count = false) {
         $model  = $this->model;
-        $table  = $model::get_table();
+        $table  = "wp_" . $model::getTableName();
         $where  = '';
         $order  = '';
         $limit  = '';
