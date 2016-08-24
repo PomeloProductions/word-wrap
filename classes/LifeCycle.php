@@ -73,7 +73,7 @@ class LifeCycle extends InstallIndicator {
     /**
      * called the first time the plugin is activated. Runs a number of install helpers
      */
-    public function install() {
+    public final function install() {
 
         $this->initOptions();
 
@@ -86,6 +86,9 @@ class LifeCycle extends InstallIndicator {
         $this->markAsInstalled();
     }
 
+    /**
+     * Removes anything that needs to be removed for this plugin
+     */
     public function uninstall() {
         $this->onUninstall();
         $this->unInstallDatabaseTables();
@@ -97,7 +100,23 @@ class LifeCycle extends InstallIndicator {
      * Perform any version-upgrade activities prior to activation (e.g. database changes)
      * @return void
      */
-    public function upgrade() {
+    public final function upgrade() {
+
+        $oldVersion = $this->getVersionSaved();
+
+        $this->onUpgrade($oldVersion);
+
+        $this->saveInstalledVersion();
+
+    }
+
+    /**
+     * Called whenever an update happens wih the version we are upgrading from
+     *
+     * @param $oldVersion
+     */
+    public function onUpgrade($oldVersion) {
+
     }
 
     /**
