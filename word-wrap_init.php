@@ -51,7 +51,7 @@ class WordWrap {
         // on the first activation
         if (!$aPlugin->isInstalled()) {
             $aPlugin->install();
-        } else {
+        } else if ($aPlugin->isInstalledCodeAnUpgrade()) {
             // Perform any version-upgrade activities prior to activation (e.g. database changes)
             $aPlugin->upgrade();
         }
