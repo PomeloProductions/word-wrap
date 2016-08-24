@@ -2,8 +2,8 @@
 /*
    Plugin Name: Word Wrap
    Plugin URI: http://wordpress.org/extend/plugins/word-wrap/
-   Version: 0.8.3
-   Author: Axolotl Interactive
+   Version: 0.9.0
+   Author: Pomelo Productions
    Description: 
    Text Domain: word-wrap
    License: GPLv3
