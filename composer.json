@@ -1,7 +1,7 @@
 {
   "require": {
-    "mustache/mustache": "2.9.*",
-    "mashape/unirest-php": "2.*"
+    "mustache/mustache": "2.*",
+    "mashape/unirest-php": "3.*"
   },
   "autoload": {
     "psr-4": {"WordWrap\\": "classes/"}
