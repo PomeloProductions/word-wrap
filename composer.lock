@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "mashape/unirest-php",
-            "version": "v2.6.5",
+            "version": "v2.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mashape/unirest-php.git",
-                "reference": "4a480b156b6223f123c9c12704e1f3c7ddb4c12c"
+                "reference": "73c2d903232bb5a125396e606b67314a87b8b21c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/4a480b156b6223f123c9c12704e1f3c7ddb4c12c",
-                "reference": "4a480b156b6223f123c9c12704e1f3c7ddb4c12c",
+                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/73c2d903232bb5a125396e606b67314a87b8b21c",
+                "reference": "73c2d903232bb5a125396e606b67314a87b8b21c",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "https",
                 "rest"
             ],
-            "time": "2016-01-20 19:41:35"
+            "time": "2016-02-16 16:45:52"
         },
         {
             "name": "mustache/mustache",
