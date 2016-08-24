@@ -75,7 +75,7 @@ class InstallIndicator extends OptionsManager {
      * @return null
      */
     protected function setVersionSaved($version) {
-        return $this->updateOption(self::optionVersion, $version);
+        return $this->updateOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionVersion, $version);
     }
 
     /**
