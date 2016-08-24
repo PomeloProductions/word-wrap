@@ -138,7 +138,6 @@ class LifeCycle extends InstallIndicator {
             $sc->register($shortCode->name);
         }
 
-        $this->addActionsAndFilters();
         $this->onInitActionsAndFilters();
     }
 
@@ -147,14 +146,6 @@ class LifeCycle extends InstallIndicator {
      */
     public function onInitActionsAndFilters() {
 
-    }
-
-    /**
-     * allows a plugin to manually initialize actions and filters
-     *
-     * @deprecated use onInitActionsAndFilters instead this will be removed someday soon
-     */
-    public function addActionsAndFilters() {
     }
 
     /**
@@ -171,7 +162,6 @@ class LifeCycle extends InstallIndicator {
         }
 
         $this->onInstallDatabase();
-        $this->installDatabaseTables();
     }
 
     /**
@@ -179,19 +169,6 @@ class LifeCycle extends InstallIndicator {
      */
     protected function onInstallDatabase() {
 
-    }
-
-    /**
-     * See: http://plugin.michael-simpson.com/?page_id=101
-     * Called by install() to create any database tables if needed.
-     * Best Practice:
-     * (1) Prefix all table names with $wpdb->prefix
-     * (2) make table names lower case only
-     * @return void
-     *
-     * @deprecated use onInstallDatabase instead this will soon be removed
-     */
-    protected function installDatabaseTables() {
     }
 
     /**
