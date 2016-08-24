@@ -38,6 +38,9 @@ abstract class BaseModel implements ModelInterface {
         return 'id';
     }
 
+    /**
+     * Runs the create syntax for this table
+     */
     public static function installTable() {
 
 
@@ -56,6 +59,11 @@ abstract class BaseModel implements ModelInterface {
         $wpdb->query($SQL);
     }
 
+    /**
+     * Returns the full table name for this table
+     *
+     * @return string
+     */
     protected static function getFullTableName() {
         return static::getTablePrefix() . static::getTableName();
     }
