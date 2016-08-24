@@ -60,6 +60,38 @@ abstract class BaseModel implements ModelInterface {
     }
 
     /**
+     * Updates the table from the old plugin version to the new plugin version
+     *
+     * @param $oldVersion
+     */
+    public static function updateTable($oldVersion) {
+
+        $newFields = static::getUpdateFields($oldVersion);
+
+        if (count($newFields)) {
+
+            $SQL = "ALTER TABLE `" . static::getFullTableName() . "` ";
+
+            foreach ($newFields as $key => $value) {
+                $SQL.= "ADD `" . $key . "` `" . $value;
+            }
+
+            global $wpdb;
+            $wpdb->query($SQL);
+        }
+    }
+
+    /**
+     * Returns any new fields needed on an update
+     *
+     * @param $oldVersion
+     * @return array
+     */
+    protected static function getUpdateFields($oldVersion) {
+        return [];
+    }
+
+    /**
      * Returns the full table name for this table
      *
      * @return string
