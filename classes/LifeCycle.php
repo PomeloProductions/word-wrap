@@ -115,7 +115,7 @@ class LifeCycle extends InstallIndicator {
      *
      * @param $oldVersion
      */
-    public function onUpgrade($oldVersion) {
+    protected function onUpgrade($oldVersion) {
 
     }
 
