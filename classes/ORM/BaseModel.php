@@ -73,7 +73,7 @@ abstract class BaseModel implements ModelInterface {
             $SQL = "ALTER TABLE `" . static::getFullTableName() . "` ";
 
             foreach ($newFields as $key => $value) {
-                $SQL.= "ADD `" . $key . "` `" . $value;
+                $SQL.= "ADD `" . $key . "` " . $value;
             }
 
             global $wpdb;
