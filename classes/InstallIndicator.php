@@ -95,7 +95,7 @@ class InstallIndicator extends OptionsManager {
     public function getPluginHeaderValue($key) {
         // Read the string from the comment header of the main plugin file
 
-        $data = file_get_contents(dirname(__FILE__).'/..');
+        $data = file_get_contents(basename(dirname(__FILE__).'/..'));
         $match = array();
         preg_match('/' . $key . ':\s*(\S+)/', $data, $match);
         if (count($match) >= 1) {
