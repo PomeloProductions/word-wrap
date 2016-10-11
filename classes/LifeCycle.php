@@ -74,7 +74,6 @@ class LifeCycle extends InstallIndicator {
      * called the first time the plugin is activated. Runs a number of install helpers
      */
     public final function install() {
-
         $this->initOptions();
 
         $this->installDatabase();
@@ -151,8 +150,8 @@ class LifeCycle extends InstallIndicator {
             $fullClassName = $nameSpace . $shortCode->className;
             $sc = new $fullClassName($this);
 
-            if (!is_subclass_of($sc, "WordWrap\\ShortCodeScriptLoader"))
-                throw new Exception("Your Short Codes Must extend ShortCodeScriptLoader");
+            if (!is_subclass_of($sc, "WordWrap\\ShortCodeLoader"))
+                throw new Exception("Your Short Codes Must extend ShortCodeLoader");
 
             $sc->register($shortCode->name);
         }
@@ -171,12 +170,10 @@ class LifeCycle extends InstallIndicator {
      * runs the creation of any defined database tables within configuration as well as triggering additional hooks
      */
     public function installDatabase() {
-
         $nameSpace = $this->rootConfig->rootNameSpace . "\\";
 
         foreach ($this->rootConfig->LifeCycle->Model as $model) {
             $fullClassName = $nameSpace . $model->className;
-
             $fullClassName::installTable();
         }
 

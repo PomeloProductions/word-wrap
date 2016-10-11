@@ -56,6 +56,7 @@ class AssetManager {
      * @throws Exception if we are attempting to load an asset before the asset type is loaded.
      */
     public function loadAsset($assetType, $assetName) {
+
         if(!isset($this->assetTypes[$assetType]))
             throw new Exception("You must register your asset type before you can begin loading assets of that type.");
 

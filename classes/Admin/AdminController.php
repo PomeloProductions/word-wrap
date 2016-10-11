@@ -126,13 +126,12 @@ class AdminController {
             $pageContainer->setTemplateVar("page_title", $this->currentPage->name);
 
 
-
             $pageContainer->setTemplateVar("task_title", $this->taskController->getTaskName());
+
             $pageContainer->setTemplateVar("task_content", $this->taskController->renderPageContent());
         }
 
         echo $pageContainer->export();
-
 
         foreach($this->admin->RequiredAssets as $requiredAsset) {
             if($requiredAsset->type == "js") {
