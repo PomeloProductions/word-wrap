@@ -62,7 +62,7 @@ abstract class ShortCodeLoader {
         try{
             $handleShortCode = $this->handleShortcode($atts);
             if($handleShortCode != null) {
-                return $this->handleShortcode($atts);
+                return $handleShortCode;
             }
 
             return $this->onShortcode($atts);
@@ -80,7 +80,7 @@ abstract class ShortCodeLoader {
         return null;
     }
 
-    public abstract function onShortcode();
+    public abstract function onShortcode($atts);
     public abstract function addScript();
 
 }
