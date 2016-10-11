@@ -23,14 +23,29 @@ namespace WordWrap;
 abstract class ShortCodeLoader {
 
     /**
+     * @var LifeCycle the lifecycle of the plugin
+     */
+    var $lifeCycle;
+
+    /**
+     * @param LifeCycle $lifeCycle the current running plugin lifecycle
+     */
+    public function __construct(LifeCycle $lifeCycle) {
+        $this->lifeCycle = $lifeCycle;
+    }
+
+    /**
      * @param  $shortcodeName mixed either string name of the shortcode
      * (as it would appear in a post, e.g. [shortcodeName])
-     * or an array of such names in case you want to have more than one name
-     * for the same shortcode
+     *
      * @return void
      */
     public function register($shortcodeName) {
-        $this->registerShortcodeToFunction($shortcodeName, 'handleShortcode');
+//        $this->registerShortcodeToFunction($shortcodeName, 'handleShortcode');
+
+            add_shortcode($shortcodeName, array($this, $functionName));
+
+        add_action('wp_footer', array($this, 'addScriptWrapper'));
     }
 
     /**
@@ -43,14 +58,7 @@ abstract class ShortCodeLoader {
      * @return void
      */
     protected function registerShortcodeToFunction($shortcodeName, $functionName) {
-        if (is_array($shortcodeName)) {
-            foreach ($shortcodeName as $aName) {
-                add_shortcode($aName, array($this, $functionName));
-            }
-        }
-        else {
-            add_shortcode($shortcodeName, array($this, $functionName));
-        }
+
     }
 
     /**
@@ -60,4 +68,5 @@ abstract class ShortCodeLoader {
      */
     public abstract function handleShortcode($atts);
 
+    public abstract function addScript();
 }

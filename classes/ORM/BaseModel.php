@@ -43,7 +43,6 @@ abstract class BaseModel implements ModelInterface {
      */
     public static function installTable() {
 
-
         $SQL = "CREATE TABLE IF NOT EXISTS `" .  static::getFullTableName() . "` (";
         $SQL.= "`" . static::getPrimaryKey() . "` int(11) unsigned NOT NULL AUTO_INCREMENT,";
         foreach(static::getFields() as $key => $value) {
@@ -408,7 +407,7 @@ abstract class BaseModel implements ModelInterface {
         $table = static::getFullTableName();
 
         // Get the items
-        $results = $wpdb->get_results("SELECT * FROM `{$table}`");
+        $results = $wpdb->get_results("SELECT * FROM `{$table}` WHERE `deleted_at` IS NULL");
 
         foreach ($results as $index => $result) {
             $results[$index] = static::create((array) $result);
