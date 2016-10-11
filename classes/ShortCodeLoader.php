@@ -20,6 +20,8 @@
 */
 namespace WordWrap;
 
+use Exception;
+
 abstract class ShortCodeLoader {
 
     /**
@@ -43,30 +45,42 @@ abstract class ShortCodeLoader {
     public function register($shortcodeName) {
 //        $this->registerShortcodeToFunction($shortcodeName, 'handleShortcode');
 
-            add_shortcode($shortcodeName, array($this, $functionName));
+        add_shortcode($shortcodeName, array($this, 'handleShortCodeWrapper'));
 
         add_action('wp_footer', array($this, 'addScriptWrapper'));
     }
 
     /**
-     * @param  $shortcodeName mixed either string name of the shortcode
-     * (as it would appear in a post, e.g. [shortcodeName])
-     * or an array of such names in case you want to have more than one name
-     * for the same shortcode
-     * @param  $functionName string name of public function in this class to call as the
-     * shortcode handler
-     * @return void
+     * takes the attributes for the shortcode and sends them to depricated handleShortCode function to see if it returns
+     * null, if it returns null then plugin is NOT using deprecated function, so we then call onShortcode. Return which
+     * ever has a value. If exception is thrown in plugin, it will end up in catch statement.
+     *
+     * @param $atts
+     * @return string
      */
-    protected function registerShortcodeToFunction($shortcodeName, $functionName) {
+    public final function handleShortcodeWrapper($atts){
+        try{
+            $handleShortCode = $this->handleShortcode($atts);
+            if($handleShortCode != null) {
+                return $this->handleShortcode($atts);
+            }
 
+            return $this->onShortcode($atts);
+
+        }catch(Exception $e){
+            exit($e->getMessage());
+        }
     }
-
     /**
-     * @abstract Override this function and add actual shortcode handling here
+     * @deprecated Override this function and add actual shortcode handling here
      * @param  $atts array shortcode inputs
      * @return string shortcode content
      */
-    public abstract function handleShortcode($atts);
+    public function handleShortcode($atts){
+        return null;
+    }
 
+    public abstract function onShortcode();
     public abstract function addScript();
+
 }
