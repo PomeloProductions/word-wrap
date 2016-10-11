@@ -43,7 +43,6 @@ abstract class ShortCodeLoader {
      * @return void
      */
     public function register($shortcodeName) {
-//        $this->registerShortcodeToFunction($shortcodeName, 'handleShortcode');
 
         add_shortcode($shortcodeName, array($this, 'handleShortCodeWrapper'));
 
