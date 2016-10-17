@@ -34,6 +34,12 @@ abstract class BaseModel implements ModelInterface {
      *
      * @return string
      */
+
+    /**
+     * @var array $dateTimeEntries - all DateTimes for a specific class (will be overridden in plugin)
+     */
+    protected $datetimeEntries = [];
+
     public static function getPrimaryKey() {
         return 'id';
     }
@@ -112,17 +118,19 @@ abstract class BaseModel implements ModelInterface {
      * Constructor.
      *
      * @param array $properties
-     * @param array $datetimeFields all the fields that will need to be auto converted to DateTime
+     * @deprecated array|bool $datetimeFields all the fields that will need to be auto converted to DateTime
      */
-    public function __construct(array $properties = array(), array $datetimeFields = array()) {
+    public function __construct(array $properties = array(), $datetimeFields = false) {
         $model_props = $this->properties();
         $properties  = array_intersect_key($properties, $model_props);
-
-        $datetimeFields[] = "deleted_at";
+        if($datetimeFields){
+            $this->datetimeFields = $datetimeFields;
+        }
+        $this->datetimeFields[] = "deleted_at";
 
         foreach ($properties as $property => $value) {
             if($value != null) {
-                if (!in_array($property, $datetimeFields))
+                if (!in_array($property, $this->datetimeFields))
                     $this->{$property} = maybe_unserialize($value);
                 elseif ($value)
                     $this->{$property} = new DateTime($value);
