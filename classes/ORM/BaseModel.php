@@ -36,9 +36,9 @@ abstract class BaseModel implements ModelInterface {
      */
 
     /**
-     * @var array $dateTimeFields - all DateTimes for a specific class (will be overridden in plugin)
+     * @var array $datetimeFields - all DateTimes for a specific class (will be overridden in plugin)
      */
-    protected $dateTimeFields = [];
+    protected $datetimeFields = [];
 
     public static function getPrimaryKey() {
         return 'id';
@@ -118,7 +118,7 @@ abstract class BaseModel implements ModelInterface {
      * Constructor.
      *
      * @param array $properties
-     * @deprecated array|bool $datetimeFields all the fields that will need to be auto converted to DateTime
+     * @param array|bool $datetimeFields @deprecated all the fields that will need to be auto converted to DateTime
      */
     public function __construct(array $properties = array(), $datetimeFields = false) {
         $model_props = $this->properties();
