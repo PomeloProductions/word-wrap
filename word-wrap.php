@@ -2,7 +2,7 @@
 /*
    Plugin Name: Word Wrap
    Plugin URI: http://wordpress.org/extend/plugins/word-wrap/
-   Version: 0.10.0
+   Version: 0.11.0
    Author: Pomelo Productions
    Description: 
    Text Domain: word-wrap
