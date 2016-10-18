@@ -36,9 +36,9 @@ abstract class BaseModel implements ModelInterface {
      */
 
     /**
-     * @var array $dateTimeEntries - all DateTimes for a specific class (will be overridden in plugin)
+     * @var array $dateTimeFields - all DateTimes for a specific class (will be overridden in plugin)
      */
-    protected $datetimeEntries = [];
+    protected $dateTimeFields = [];
 
     public static function getPrimaryKey() {
         return 'id';
