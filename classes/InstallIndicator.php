@@ -77,7 +77,7 @@ class InstallIndicator extends OptionsManager {
      * "Plugin Name", "Version", "Description", "Text Domain", etc.
      */
     protected function getMainPluginFileName() {
-        return basename(dirname(__FILE__)) . 'php';
+        return $this->rootConfig->pluginName . '.php';
     }
 
     /**
@@ -88,23 +88,13 @@ class InstallIndicator extends OptionsManager {
      */
     public function getPluginHeaderValue($key) {
         // Read the string from the comment header of the main plugin file
-        $data = file_get_contents($this->getPluginDir() . DIRECTORY_SEPARATOR . $this->getMainPluginFileName());
+        $data = file_get_contents($this->pluginDirectory . DIRECTORY_SEPARATOR . $this->getMainPluginFileName());
         $match = array();
         preg_match('/' . $key . ':\s*(\S+)/', $data, $match);
         if (count($match) >= 1) {
             return $match[1];
         }
         return null;
-    }
-
-    /**
-     * If your subclass of this class lives in a different directory,
-     * override this method with the exact same code. Since __FILE__ will
-     * be different, you will then get the right dir returned.
-     * @return string
-     */
-    protected function getPluginDir() {
-        return dirname(__FILE__);
     }
 
     /**
