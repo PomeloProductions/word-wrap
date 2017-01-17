@@ -21,7 +21,6 @@
 
 
 use WordWrap\Configuration\ConfigFactory;
-use WordWrap\Configuration\RootConfig;
 use WordWrap\LifeCycle;
 
 class WordWrap {
