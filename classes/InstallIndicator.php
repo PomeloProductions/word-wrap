@@ -20,17 +20,11 @@
 */
 namespace WordWrap;
 
-use WordWrap\Configuration\RootConfig;
 
 class InstallIndicator extends OptionsManager {
 
     const optionInstalled = '_installed';
     const optionVersion = '_version';
-
-    /**
-     * @var RootConfig the configuration for this plugin
-     */
-    public $rootConfig;
 
     /**
      * @return bool indicating if the plugin is installed already

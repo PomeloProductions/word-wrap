@@ -24,8 +24,35 @@ use WordWrap\Configuration\RootConfig;
 
 class OptionsManager {
 
+    /**
+     * @var RootConfig the configuration for this plugin
+     */
+    public $rootConfig;
+
+    /**
+     * @var string the directory in which this directory exists
+     */
+    public $pluginDirectory;
+
+
+    /**
+     * OptionsManager constructor.
+     *
+     * @param RootConfig $rootConfig
+     * @param $pluginDirectory
+     */
+    public function __construct(RootConfig $rootConfig, $pluginDirectory) {
+        $this->rootConfig = $rootConfig;
+        $this->pluginDirectory = $pluginDirectory;
+    }
+
+    /**
+     * Retrieves The options prefix
+     *
+     * @return string
+     */
     public function getOptionNamePrefix() {
-        return RootConfig::$instance->optionsPrefix;
+        return $this->rootConfig->LifeCycle->optionsPrefix;
     }
 
 

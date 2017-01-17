@@ -14,11 +14,6 @@ namespace WordWrap\Configuration;
  */
 class RootConfig extends Base {
 
-    /**
-     * @var RootConfig
-     * @deprecated replace usages with instance reference in LifeCycle
-     */
-    public static $instance;
 
     /**
      * @var string the name of this plugin

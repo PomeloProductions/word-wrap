@@ -31,16 +31,14 @@ class WordWrap {
 
         $fullPath = ABSPATH . "wp-content/plugins/" . $pluginDirectory;
         $configInstance = ConfigFactory::inflate($fullPath);
-        //TODO remove once variable is removed
-        RootConfig::$instance = $configInstance;
 
         if ($configInstance->LifeCycle->className) {
             $lifeCycleClass = $configInstance->rootNameSpace . "\\" . $configInstance->LifeCycle->className;
 
-            $aPlugin = new $lifeCycleClass($fullPath, $configInstance);
+            $aPlugin = new $lifeCycleClass($configInstance, $fullPath);
         }
         else {
-            $aPlugin = new LifeCycle($fullPath, $configInstance);
+            $aPlugin = new LifeCycle($configInstance, $fullPath);
         }
 
         // Install the plugin
