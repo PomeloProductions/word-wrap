@@ -26,6 +26,11 @@ class RootConfig extends Base {
     public $rootNameSpace;
 
     /**
+     * @var string the name that the user sees when interacting with this plugin
+     */
+    public $displayName;
+
+    /**
      * @var string the minimum php version that this plugin requires to run
      */
     public $minPHPVersion;
