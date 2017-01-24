@@ -80,7 +80,7 @@ class WordWrap {
 
             add_action('admin_notices', function() use ($config) {
 
-                deactivate_plugins( $config->pluginName );
+                deactivate_plugins( $config->pluginName . '/' . $config->pluginName . '.php');
                 echo '<div class="error">' .
                     __('Error: plugin "' . $config->displayName . '" requires a newer version of PHP to run.',  $config->pluginName).
                     '<br/>' . __('Minimal version of PHP required: ', $config->pluginName) . '<strong>' . $config->minPHPVersion . '</strong>' .
