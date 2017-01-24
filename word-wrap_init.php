@@ -67,18 +67,21 @@ class WordWrap {
 
         // Register the Plugin Deactivation Hook
         register_deactivation_hook(__FILE__, array(&$aPlugin, 'deactivate'));
+
+        return true;
     }
 
     /**
      * @param RootConfig $config
      * @return bool Whether or not the installed version of PHP is greater than the minimum defined in the config
      */
-    private static function verifyPHPVersion(RootConfig $config) {
+    public static function verifyPHPVersion(RootConfig $config) {
         if (version_compare(phpversion(), $config->minPHPVersion) < 0) {
 
-            deactivate_plugins( $config->pluginName );
             add_action('admin_notices', function() use ($config) {
-                echo '<div class="updated fade">' .
+
+                deactivate_plugins( $config->pluginName );
+                echo '<div class="error">' .
                     __('Error: plugin "' . $config->displayName . '" requires a newer version of PHP to run.',  $config->pluginName).
                     '<br/>' . __('Minimal version of PHP required: ', $config->pluginName) . '<strong>' . $config->minPHPVersion . '</strong>' .
                     '<br/>' . __('Your server\'s PHP version: ', $config->pluginName) . '<strong>' . phpversion() . '</strong>' .
