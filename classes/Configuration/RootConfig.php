@@ -26,6 +26,11 @@ class RootConfig extends Base {
     public $rootNameSpace;
 
     /**
+     * @var string the minimum php version that this plugin requires to run
+     */
+    public $minPHPVersion;
+
+    /**
      * @var LifeCycle the configuration that details the lifecycle declaration of this plugin
      */
     public $LifeCycle;
