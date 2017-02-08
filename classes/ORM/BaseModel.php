@@ -20,6 +20,11 @@ use Exception;
 abstract class BaseModel implements ModelInterface {
 
     /**
+     * @var string The database namespace for this model
+     */
+    static $pluginDBNameSpace;
+
+    /**
      * @var int the default primary key
      */
     public $id;
@@ -102,7 +107,7 @@ abstract class BaseModel implements ModelInterface {
      * @return string
      */
     protected static function getFullTableName() {
-        return static::getTablePrefix() . static::getTableName();
+        return static::getTablePrefix() . static::$pluginDBNameSpace . '_' . static::getTableName();
     }
 
     /**

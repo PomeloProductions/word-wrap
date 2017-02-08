@@ -44,6 +44,24 @@ class OptionsManager {
     public function __construct(RootConfig $rootConfig, $pluginDirectory) {
         $this->rootConfig = $rootConfig;
         $this->pluginDirectory = $pluginDirectory;
+
+        $this->setupDatabase();
+    }
+
+    /**
+     * Sets up this plugins database to run
+     *
+     * @todo this all needs to be reworked into a model factory interface
+     */
+    public function setupDatabase () {
+
+        $nameSpace = $this->rootConfig->rootNameSpace . "\\";
+
+        foreach ($this->rootConfig->LifeCycle->Model as $model) {
+            $fullClassName = $nameSpace . $model->className;
+            $fullClassName::$pluginDBNameSpace =
+                $this->rootConfig->LifeCycle->databaseNameSpace;
+        }
     }
 
     /**
