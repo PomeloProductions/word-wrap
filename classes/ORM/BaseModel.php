@@ -383,17 +383,18 @@ abstract class BaseModel implements ModelInterface {
      *
      * @param $field string the field that we are ordering by
      * @param $direction string the direction of the field
+     * @param string $where Any additional where that we want
      * @return static[] array of objects of called class
      * todo allow deleted at override
      */
-    public static function fetchOrderedBy($field, $direction) {
+    public static function fetchOrderedBy($field, $direction, $where = '') {
 
         global $wpdb;
         $results = [];
 
         $table = static::getFullTableName();
 
-        $SQL = "SELECT * FROM `" . $table . "` WHERE `deleted_at` IS NULL ORDER BY `" . $field . "` " . $direction;
+        $SQL = "SELECT * FROM `" . $table . "` WHERE `deleted_at` IS NULL " . $where . " ORDER BY `" . $field . "` " . $direction;
 
         $rows = $wpdb->get_results($SQL);
 
