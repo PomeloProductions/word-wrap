@@ -52,7 +52,7 @@ class OptionsManager {
      * @return string
      */
     public function getOptionNamePrefix() {
-        return $this->rootConfig->LifeCycle->optionsPrefix;
+        return $this->rootConfig->LifeCycle->databaseNameSpace;
     }
 
 

@@ -17,7 +17,9 @@ class LifeCycle extends Base {
     public $className = null;
 
     /**
-     * @var string the prefix for any options either tables or wp_options
+     * @var string|null The optional database name space that will be used as a prefix
+     *                  between the global WordPress prefix, and the individual tables of this plugin.
+     *                  This will also be used to name space options
      */
     public $databaseNameSpace;
 

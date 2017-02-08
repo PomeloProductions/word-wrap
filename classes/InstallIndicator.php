@@ -30,7 +30,7 @@ class InstallIndicator extends OptionsManager {
      * @return bool indicating if the plugin is installed already
      */
     public function isInstalled() {
-        return $this->getOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionInstalled) == true;
+        return $this->getOption($this->rootConfig->LifeCycle->databaseNameSpace . self::optionInstalled) == true;
     }
 
     /**
@@ -38,7 +38,7 @@ class InstallIndicator extends OptionsManager {
      * @return null
      */
     protected function markAsInstalled() {
-        return $this->updateOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionInstalled, true);
+        return $this->updateOption($this->rootConfig->LifeCycle->databaseNameSpace . self::optionInstalled, true);
     }
 
     /**
@@ -48,7 +48,7 @@ class InstallIndicator extends OptionsManager {
      * false implies it was not.
      */
     protected function markAsUnInstalled() {
-        return $this->deleteOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionInstalled);
+        return $this->deleteOption($this->rootConfig->LifeCycle->databaseNameSpace . self::optionInstalled);
     }
 
     /**
@@ -58,7 +58,7 @@ class InstallIndicator extends OptionsManager {
      * @return null
      */
     protected function getVersionSaved() {
-        return $this->getOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionVersion);
+        return $this->getOption($this->rootConfig->LifeCycle->databaseNameSpace . self::optionVersion);
     }
 
     /**
@@ -69,7 +69,7 @@ class InstallIndicator extends OptionsManager {
      * @return null
      */
     protected function setVersionSaved($version) {
-        return $this->updateOption($this->rootConfig->LifeCycle->optionsPrefix . self::optionVersion, $version);
+        return $this->updateOption($this->rootConfig->LifeCycle->databaseNameSpace . self::optionVersion, $version);
     }
 
     /**
