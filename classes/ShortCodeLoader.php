@@ -79,6 +79,11 @@ abstract class ShortCodeLoader {
         return null;
     }
 
+    /**
+     * Override this function and add actual shortcode handling here
+     * @param  $atts array shortcode inputs
+     * @return string shortcode content
+     */
     public abstract function onShortcode($atts);
     public abstract function addScript();
 
