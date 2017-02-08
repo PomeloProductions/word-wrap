@@ -19,7 +19,7 @@ class LifeCycle extends Base {
     /**
      * @var string the prefix for any options either tables or wp_options
      */
-    public $optionsPrefix;
+    public $databaseNameSpace;
 
     /**
      * @var null|Admin the configuration for the admin section of the site or null if there is no admin
