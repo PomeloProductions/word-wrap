@@ -103,6 +103,8 @@ class LifeCycle extends InstallIndicator {
 
         $oldVersion = $this->getVersionSaved();
 
+        $this->installTables();
+
         $this->onUpgrade($oldVersion);
 
         $this->saveInstalledVersion();
@@ -167,15 +169,23 @@ class LifeCycle extends InstallIndicator {
     }
 
     /**
-     * runs the creation of any defined database tables within configuration as well as triggering additional hooks
+     * Installs the tables for the plugin
      */
-    public function installDatabase() {
+    private function installTables () {
         $nameSpace = $this->rootConfig->rootNameSpace . "\\";
 
         foreach ($this->rootConfig->LifeCycle->Model as $model) {
             $fullClassName = $nameSpace . $model->className;
             $fullClassName::installTable();
         }
+    }
+
+    /**
+     * runs the creation of any defined database tables within configuration as well as triggering additional hooks
+     */
+    public function installDatabase() {
+
+        $this->installTables();
 
         $this->onInstallDatabase();
     }
