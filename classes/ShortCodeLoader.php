@@ -46,7 +46,7 @@ abstract class ShortCodeLoader {
 
         add_shortcode($shortcodeName, array($this, 'handleShortCodeWrapper'));
 
-        add_action('wp_footer', array($this, 'addScriptWrapper'));
+        add_action('wp_footer', array($this, 'addScript'));
     }
 
     /**
