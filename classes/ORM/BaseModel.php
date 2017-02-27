@@ -9,6 +9,7 @@
 namespace WordWrap\ORM;
 
 use DateTime;
+use ElegantSlider\Model\Image;
 use Exception;
 
 
@@ -193,6 +194,8 @@ abstract class BaseModel implements ModelInterface {
      */
     public function flatten_props($props) {
         $availableFields = static::getFields();
+
+        $availableFields['deleted_at'] = 'DATETIME';
 
         $fieldNames = array_keys($availableFields);
 
