@@ -442,6 +442,6 @@ abstract class BaseModel implements ModelInterface {
 
         $results = $wpdb->get_results("SELECT count(`$key`) as `count` FROM `{$table}` WHERE `deleted_at` IS NULL");
 
-        return count($results) ? $results[0]['count'] : 0;
+        return count($results) ? $results[0]->count : 0;
     }
 }
