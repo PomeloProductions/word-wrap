@@ -427,4 +427,21 @@ abstract class BaseModel implements ModelInterface {
 
         return $results;
     }
+
+    /**
+     * Gets the total count of records for this table
+     *
+     * @return int
+     */
+    public static function countRows () {
+        global $wpdb;
+
+        $table = static::getFullTableName();
+        $key = static::getPrimaryKey();
+
+
+        $results = $wpdb->get_results("SELECT count(`$key`) as `count` FROM `{$table}` WHERE `deleted_at` IS NULL");
+
+        return count($results) ? $results[0]['count'] : 0;
+    }
 }
