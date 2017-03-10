@@ -92,7 +92,7 @@ class CrudIndex extends TaskController
 
             $rowData = [
                 'column_width' => $this->columnWidth,
-                'id' => $modelClass->{$primaryKey},
+                'id' => $model->{$primaryKey},
                 'admin_page' => $this->adminController->getCurrentPage()->getSlug(),
                 'view_task' => $this->task->CrudIndex->viewTask,
                 'values' => ''
