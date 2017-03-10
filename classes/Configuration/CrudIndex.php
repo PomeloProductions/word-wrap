@@ -18,7 +18,7 @@ class CrudIndex extends Base
     public $modelClass;
 
     /**
-     * @var string[] the columns to display on the main index
+     * @var CrudColumn[] the columns to display on the main index
      */
-    public $displayColumns;
+    public $CrudColumn;
 }
