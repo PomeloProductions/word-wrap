@@ -1,0 +1,24 @@
+<table id="admin-view_all_orders" class="wp-list-table widefat fixed pages">
+    <thead>
+    <tr>
+        {{{columns}}}
+        <th scope="col" class="details" style="width:40px">Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#orders}}
+        <tr>
+            <td class="id">{{id}}</td>
+            <td class="name">{{name}}</td>
+            <td class="shipped">{{shipped_message}}</td>
+            <td class="details"><a href="?page=easy_products&task=view_order&id={{id}}">Details</a></td>
+        </tr>
+    {{/orders}}
+    </tbody>
+</table>
+
+<ul id="orders_pages">
+    <li><a class="previous" {{#first_page}}disabled{{/first_page}} {{^first_page}}href="?page=easy_products&task=view_all&p={{previous_page}}"{{/first_page}}>&lt;</a></li>
+    {{{page_links}}}
+    <li><a class="next" {{#last_page}}disabled{{/last_page}} {{^last_page}}href="?page=easy_products&task=view_all&p={{next_page}}"{{/last_page}}>&gt;</a></li>
+</ul>
