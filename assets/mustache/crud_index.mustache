@@ -6,14 +6,7 @@
     </tr>
     </thead>
     <tbody>
-    {{#orders}}
-        <tr>
-            <td class="id">{{id}}</td>
-            <td class="name">{{name}}</td>
-            <td class="shipped">{{shipped_message}}</td>
-            <td class="details"><a href="?page=easy_products&task=view_order&id={{id}}">Details</a></td>
-        </tr>
-    {{/orders}}
+        {{{rows}}}
     </tbody>
 </table>
 

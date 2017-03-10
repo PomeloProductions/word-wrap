@@ -42,7 +42,7 @@ class CrudIndex extends TaskController
 
         $modelClass = $this->task->CrudIndex->modelClass;
 
-        $this->orders = $modelClass::fetchPage($this->page);
+        $this->models = $modelClass::fetchPage($this->page);
 
         $this->totalPages = ceil($modelClass::countRows() / 20);
     }
@@ -114,12 +114,12 @@ class CrudIndex extends TaskController
         while ($i < $this->totalPages) {
 
             $i++;
-            $data = [
+            $pageLinkData = [
                 'page' => $i,
                 'active' => $i == $this->page
             ];
 
-            $template = new MustacheTemplate($this->lifeCycle, "crud_page_link", $data, 'admin_mustache');
+            $template = new MustacheTemplate($this->lifeCycle, "crud_page_link", $pageLinkData, 'admin_mustache');
 
             $data['page_links'].= $template->export();
 
