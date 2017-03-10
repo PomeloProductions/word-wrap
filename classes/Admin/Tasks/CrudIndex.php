@@ -66,6 +66,7 @@ class CrudIndex extends TaskController
 
         $data = [
             "page_links" => '',
+            "model_name" => $this->task->CrudIndex->displayName,
             "first_page" => $this->page == 0,
             "previous_page" => $this->page,
             "last_page" => $this->page == $this->totalPages - 1,
@@ -73,6 +74,10 @@ class CrudIndex extends TaskController
             "columns" => '',
             "rows" => ''
         ];
+
+        if ($this->task->CrudIndex->createAction) {
+            $data['create_action'] = $this->task->CrudIndex->createAction;
+        }
 
         foreach ($this->task->CrudIndex->CrudColumn as $column) {
 
