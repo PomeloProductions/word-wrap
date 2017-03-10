@@ -103,7 +103,10 @@ class CrudIndex extends TaskController
                     'class_name' => $column->name,
                 ];
 
-                if ($column->trueValue && $column->falseValue) {
+                if ($column->isImage) {
+                    $rowEntryData['value'] = '<img style="max-width:150px; max-height: 150px" src="' . $model->{$column->name} . '"/>';
+                }
+                elseif ($column->trueValue && $column->falseValue) {
                     $rowEntryData['value'] = $model->{$column->name} ? $column->trueValue : $column->falseValue;
                 }
                 else {
