@@ -43,6 +43,10 @@ class AdminController {
         $this->lifeCycle = $lifeCycle;
         $this->admin = $admin;
 
+        $this->lifeCycle->assetManager->registerAssetType("admin_mustache", __DIR__ . "/../../assets/mustache/", "mustache");
+        $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../../assets/html/", "html");
+
+
         add_action("init", [$this, "handleRequest"]);
 
         add_action( 'admin_menu', [$this, "addMenus"] );
@@ -112,6 +116,7 @@ class AdminController {
      */
     public function renderPage() {
 
+
         foreach($this->admin->RequiredAssets as $requiredAsset) {
             if($requiredAsset->type == "css") {
                 $asset = new CSS($this->lifeCycle, $requiredAsset->name);
@@ -120,8 +125,6 @@ class AdminController {
             }
         }
 
-        $this->lifeCycle->assetManager->registerAssetType("admin_mustache", __DIR__ . "/../../assets/mustache/", "mustache");
-        $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../../assets/html/", "html");
 
         $pageContainer = new View($this->lifeCycle, "admin_container", "admin_html");
 
