@@ -29,9 +29,10 @@ class MustacheTemplate extends BaseAsset {
      * @param LifeCycle $lifeCycle current life cycle instance
      * @param string $assetName the name of the asset we are loading
      * @param Object $dataObject the data for this template
+     * @param string $assetType allowed override of registered asset type
      */
-    public function __construct($lifeCycle, $assetName, $dataObject = null) {
-        parent::__construct($lifeCycle, $assetName, "mustache");
+    public function __construct($lifeCycle, $assetName, $dataObject = null, $assetType = "mustache") {
+        parent::__construct($lifeCycle, $assetName, $assetType);
 
         if (!$dataObject)
             $dataObject = (object) [];
