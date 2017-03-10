@@ -37,6 +37,11 @@ class Task extends Base {
     public $default = false;
 
     /**
+     * @var CrudIndex|null Whether or not this task is a crud index
+     */
+    public $CrudIndex = null;
+
+    /**
      * @return string the slug for this menu
      */
     public function getSlug() {
