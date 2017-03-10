@@ -23,6 +23,16 @@ class CrudIndex extends Base
     public $viewTask;
 
     /**
+     * @var string The display name of the model
+     */
+    public $displayName;
+
+    /**
+     * @var string\bool The action for creation, or false if none is allowed
+     */
+    public $createAction = false;
+
+    /**
      * @var CrudColumn[] the columns to display on the main index
      */
     public $CrudColumn;
