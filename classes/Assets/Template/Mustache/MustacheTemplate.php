@@ -42,7 +42,7 @@ class MustacheTemplate extends BaseAsset {
         $this->mustacheFactory = new MustacheFactory();
     }
 
-    public function export() {
+    public function export($strip = true) {
 
         $engine = $this->mustacheFactory->getMustacheEngine();
 
