@@ -10,6 +10,7 @@
 namespace WordWrap\Admin;
 
 use WordWrap\Admin\Tasks\AvailableTasks;
+use WordWrap\Admin\Tasks\CrudIndex;
 use WordWrap\Assets\Script\JavaScript;
 use WordWrap\Assets\StyleSheet\CSS;
 use WordWrap\Assets\View\View;
@@ -78,11 +79,20 @@ class AdminController {
                 $this->taskController = new AvailableTasks($this->lifeCycle, $this);
             }
             else {
-                if(strpos($currentTask->className, "\\") === 0)
-                    $taskClass = $this->lifeCycle->rootConfig->rootNameSpace . $currentTask->className;
-                else
-                    $taskClass = $currentTask->className;
-                $this->taskController = new $taskClass($this->lifeCycle, $this, $currentTask);
+
+                if ($currentTask->CrudIndex) {
+                    $this->taskController = new CrudIndex($this->lifeCycle, $this, $currentTask);
+                }
+                else {
+                    if(strpos($currentTask->className, "\\") === 0) {
+                        $taskClass = $this->lifeCycle->rootConfig->rootNameSpace . $currentTask->className;
+                    }
+                    else {
+                        $taskClass = $currentTask->className;
+                    }
+                    $this->taskController = new $taskClass($this->lifeCycle, $this, $currentTask);
+
+                }
             }
         }
     }
