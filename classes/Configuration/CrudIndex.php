@@ -30,7 +30,7 @@ class CrudIndex extends Base
     /**
      * @var string\bool The action for creation, or false if none is allowed
      */
-    public $createAction = false;
+    public $createTask = false;
 
     /**
      * @var CrudColumn[] the columns to display on the main index

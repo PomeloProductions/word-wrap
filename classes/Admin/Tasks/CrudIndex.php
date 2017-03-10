@@ -61,11 +61,14 @@ class CrudIndex extends TaskController
     {
 
         $modelClass = $this->task->CrudIndex->modelClass;
+        $pageSlug = $this->adminController->getCurrentPage()->getSlug();
 
         $primaryKey = $modelClass::getPrimaryKey();
 
         $data = [
             "page_links" => '',
+            "page_name" => $pageSlug,
+            "crud_task" => $this->task->name,
             "model_name" => $this->task->CrudIndex->displayName,
             "first_page" => $this->page == 0,
             "previous_page" => $this->page,
@@ -75,8 +78,8 @@ class CrudIndex extends TaskController
             "rows" => ''
         ];
 
-        if ($this->task->CrudIndex->createAction) {
-            $data['create_action'] = $this->task->CrudIndex->createAction;
+        if ($this->task->CrudIndex->createTask) {
+            $data['create_task'] = $this->task->CrudIndex->createTask;
         }
 
         foreach ($this->task->CrudIndex->CrudColumn as $column) {
@@ -98,7 +101,7 @@ class CrudIndex extends TaskController
             $rowData = [
                 'column_width' => $this->columnWidth,
                 'id' => $model->{$primaryKey},
-                'admin_page' => $this->adminController->getCurrentPage()->getSlug(),
+                'admin_page' => $pageSlug,
                 'view_task' => $this->task->CrudIndex->viewTask,
                 'values' => ''
             ];

@@ -1,3 +1,9 @@
+{{#create_task}}
+    <div style="margin: 0 0 20px;">
+        <a class="button" href="?page={{page_name}}&task={{create_task}}">Create New {{model_name}}</a>
+    </div>
+{{/create_task}}
+
 <table id="admin-view_all_orders" class="wp-list-table widefat fixed pages">
     <thead>
     <tr>
@@ -11,7 +17,7 @@
 </table>
 
 <ul id="orders_pages">
-    <li><a class="previous" {{#first_page}}disabled{{/first_page}} {{^first_page}}href="?page=easy_products&task=view_all&p={{previous_page}}"{{/first_page}}>&lt;</a></li>
+    <li><a class="previous" {{#first_page}}disabled{{/first_page}} {{^first_page}}href="?page={{page_name}}&task=view_all&p={{previous_page}}"{{/first_page}}>&lt;</a></li>
     {{{page_links}}}
-    <li><a class="next" {{#last_page}}disabled{{/last_page}} {{^last_page}}href="?page=easy_products&task=view_all&p={{next_page}}"{{/last_page}}>&gt;</a></li>
+    <li><a class="next" {{#last_page}}disabled{{/last_page}} {{^last_page}}href="?page={{page_name}}&task={{crud_task}}&p={{next_page}}"{{/last_page}}>&gt;</a></li>
 </ul>
