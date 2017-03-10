@@ -32,6 +32,11 @@ class CrudIndex extends TaskController
     private $totalPages;
 
     /**
+     * @var float the width of each column in this index
+     */
+    private $columnWidth;
+
+    /**
      * override this to setup anything that needs to be done before
      * @param $action string the action the user is trying to complete
      */
@@ -45,6 +50,8 @@ class CrudIndex extends TaskController
         $this->models = $modelClass::fetchPage($this->page);
 
         $this->totalPages = ceil($modelClass::countRows() / 20);
+
+        $this->columnWidth = (1 / (count($this->task->CrudIndex->CrudColumn) + 1) * 100);
     }
 
     /**
@@ -71,6 +78,7 @@ class CrudIndex extends TaskController
 
             $columnTitle = str_replace('_', ' ', $column->name);
             $headerData = [
+                'column_width' => $this->columnWidth,
                 'class_name' => $column->name,
                 'display_name' => ucwords($columnTitle)
             ];
@@ -83,6 +91,7 @@ class CrudIndex extends TaskController
         foreach ($this->models as $model) {
 
             $rowData = [
+                'column_width' => $this->columnWidth,
                 'id' => $modelClass->{$primaryKey},
                 'values' => ''
             ];
@@ -90,6 +99,7 @@ class CrudIndex extends TaskController
             foreach ($this->task->CrudIndex->CrudColumn as $column) {
 
                 $rowEntryData = [
+                    'column_width' => $this->columnWidth,
                     'class_name' => $column->name,
                 ];
 
