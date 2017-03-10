@@ -454,6 +454,6 @@ abstract class BaseModel implements ModelInterface {
      */
     public static function fetchPage ($page = 0, $limit = 20) {
 
-        return static::fetchOrderedBy('id', 'DESC LIMIT '. $limit . ' OFFSET ' . $limit * $page);
+        return static::fetchOrderedBy(static::getPrimaryKey(), 'DESC LIMIT '. $limit . ' OFFSET ' . $limit * $page);
     }
 }
