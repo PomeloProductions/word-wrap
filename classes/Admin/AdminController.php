@@ -43,8 +43,8 @@ class AdminController {
         $this->lifeCycle = $lifeCycle;
         $this->admin = $admin;
 
-        $this->lifeCycle->assetManager->registerAssetType("admin_mustache", __DIR__ . "/../../assets/mustache/", "mustache");
-        $this->lifeCycle->assetManager->registerAssetType("admin_html", __DIR__ . "/../../assets/html/", "html");
+        $this->lifeCycle->assetManager->registerAssetType("admin_mustache", "assets/mustache", __DIR__ . "/../../assets/mustache/", "mustache");
+        $this->lifeCycle->assetManager->registerAssetType("admin_html", "assets/html", __DIR__ . "/../../assets/html/", "html");
 
 
         add_action("init", [$this, "handleRequest"]);

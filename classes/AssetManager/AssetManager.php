@@ -38,16 +38,16 @@ class AssetManager {
      * Registers a new type of asset that can be loaded
      *
      * @param $assetType string what type of assets are located at this location
-     * @param $assetLocation string the location where assets of this type will be located on the file system
+     * @param $pluginLocation string the location where assets of this type will be located in the plugin
+     * @param $serverLocation string the location where assets of this type will be located on the file system
      * @param $fileExtension string|null the file extension this asset type uses
-     * @throws Exception if we could not find the asset type object
      */
-    public function registerAssetType($assetType, $assetLocation, $fileExtension = null) {
+    public function registerAssetType($assetType, $pluginLocation, $serverLocation, $fileExtension = null) {
         if($fileExtension == null)
             $fileExtension = $assetType;
 
         $this->assets[$assetType] = [];
-        $this->assetTypes[$assetType] = new AssetType($assetLocation, $fileExtension);
+        $this->assetTypes[$assetType] = new AssetType($pluginLocation, $serverLocation, $fileExtension);
     }
 
     /**
@@ -64,7 +64,7 @@ class AssetManager {
             return;
 
         $assetTypeObject = $this->assetTypes[$assetType];
-        $assetPath = $assetTypeObject->getAssetLocation() . $assetName . "." . $assetTypeObject->getFileExtension();
+        $assetPath = $assetTypeObject->getServerLocation() . $assetName . "." . $assetTypeObject->getFileExtension();
         $this->assets[$assetType][$assetName] = new Asset($assetPath);
     }
 
