@@ -57,13 +57,11 @@ class AssetManager {
      */
     public function loadAsset($assetType, $assetName) {
 
-        if(!isset($this->assetTypes[$assetType]))
-            throw new Exception("You must register your asset type before you can begin loading assets of that type.");
+        $assetTypeObject = $this->getAssetType($assetType);
 
         if(isset($this->assets[$assetType][$assetName]))
             return;
 
-        $assetTypeObject = $this->assetTypes[$assetType];
         $assetPath = $assetTypeObject->getServerLocation() . $assetName . "." . $assetTypeObject->getFileExtension();
         $this->assets[$assetType][$assetName] = new Asset($assetPath);
     }
@@ -82,5 +80,21 @@ class AssetManager {
             $this->loadAsset($type, $name);
 
         return $this->assets[$type][$name];
+    }
+
+    /**
+     * Retrieves an asset type object from the manager
+     *
+     * @param $type
+     * @return AssetType
+     * @throws Exception
+     */
+    public function getAssetType ($type) {
+
+        if (!isset($this->assetTypes[$type])) {
+            throw new Exception("You must register your asset before you can get it.");
+        }
+
+        return $this->assetTypes[$type];
     }
 }
