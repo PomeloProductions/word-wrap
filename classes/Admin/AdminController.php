@@ -50,30 +50,6 @@ class AdminController {
         add_action("init", [$this, "handleRequest"]);
 
         add_action( 'admin_menu', [$this, "addMenus"] );
-
-        foreach($this->admin->RequiredAssets as $requiredAsset) {
-            if (!$requiredAsset->outputOnPage) {
-
-                $pluginName = $this->lifeCycle->rootConfig->pluginName;
-                $assetType = $this->lifeCycle->assetManager->getAssetType($requiredAsset->type);
-
-                $assetName = $pluginName . $requiredAsset->name;
-
-                $path = plugin_dir_url($pluginName);
-                $path.= $pluginName . '/' . $assetType->getPluginDirectory() . '/';
-                $path.= $requiredAsset->name. '.' . $requiredAsset->type;
-
-                switch($requiredAsset->type) {
-                    case 'js':
-                        wp_enqueue_script($assetName, $path);
-                        break;
-                    case 'css':
-                        wp_enqueue_style($assetName, $path);
-                        break;
-
-                }
-            }
-        }
     }
 
     /**
@@ -84,6 +60,31 @@ class AdminController {
         $page = $this->getCurrentPage();
         if ($page) {
 
+
+
+            foreach($this->admin->RequiredAssets as $requiredAsset) {
+                if (!$requiredAsset->outputOnPage) {
+
+                    $pluginName = $this->lifeCycle->rootConfig->pluginName;
+                    $assetType = $this->lifeCycle->assetManager->getAssetType($requiredAsset->type);
+
+                    $assetName = $pluginName . $requiredAsset->name;
+
+                    $path = plugin_dir_url($pluginName);
+                    $path.= $pluginName . '/' . $assetType->getPluginDirectory() . '/';
+                    $path.= $requiredAsset->name. '.' . $requiredAsset->type;
+
+                    switch($requiredAsset->type) {
+                        case 'js':
+                            wp_enqueue_script($assetName, $path);
+                            break;
+                        case 'css':
+                            wp_enqueue_style($assetName, $path);
+                            break;
+
+                    }
+                }
+            }
 
             $defaultTask = null;
             $currentTask = null;
