@@ -118,7 +118,7 @@ class AdminController {
 
 
         foreach($this->admin->RequiredAssets as $requiredAsset) {
-            if($requiredAsset->type == "css") {
+            if($requiredAsset->outputOnPage && $requiredAsset->type == "css") {
                 $asset = new CSS($this->lifeCycle, $requiredAsset->name);
 
                 echo $asset->export();
@@ -148,7 +148,7 @@ class AdminController {
         echo $pageContainer->export();
 
         foreach($this->admin->RequiredAssets as $requiredAsset) {
-            if($requiredAsset->type == "js") {
+            if($requiredAsset->outputOnPage && $requiredAsset->type == "js") {
                 $asset = new JavaScript($this->lifeCycle, $requiredAsset->name);
 
                 echo $asset->export();

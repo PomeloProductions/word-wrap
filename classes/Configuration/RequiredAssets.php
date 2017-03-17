@@ -21,4 +21,9 @@ class RequiredAssets extends Base{
      */
     public $name;
 
+    /**
+     * @var bool Whether or not to include this directly on the page, or use the built in enque functionality
+     */
+    public $outputOnPage = false;
+
 }
