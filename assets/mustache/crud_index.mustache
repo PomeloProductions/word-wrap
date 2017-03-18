@@ -4,7 +4,7 @@
     </div>
 {{/create_task}}
 
-<table id="admin-view_all_orders" class="wp-list-table widefat fixed pages">
+<table id="admin-wordwrap_crud" class="wp-list-table widefat fixed pages">
     <thead>
     <tr>
         {{{columns}}}
@@ -16,7 +16,7 @@
     </tbody>
 </table>
 
-<ul id="orders_pages">
+<ul id="pages">
     <li><a class="previous" {{#first_page}}disabled{{/first_page}} {{^first_page}}href="?page={{page_name}}&task=view_all&p={{previous_page}}"{{/first_page}}>&lt;</a></li>
     {{{page_links}}}
     <li><a class="next" {{#last_page}}disabled{{/last_page}} {{^last_page}}href="?page={{page_name}}&task={{crud_task}}&p={{next_page}}"{{/last_page}}>&gt;</a></li>
